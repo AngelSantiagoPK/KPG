@@ -9,6 +9,7 @@ Team Members:
 PkNinja
 TheStormAI
 Alainfigue
+Marcotriesdev 
 
 // TheStormAI initial story proposal:
 "While [the] original idea was a 4-6 hour story campaign, thats probably not reasonable for a 2 week timeframe, but I also haven't fully written the story down yet. But I have written down the complete tutorial.
