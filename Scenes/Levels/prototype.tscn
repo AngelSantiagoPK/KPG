@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dys3v30m52x67"]
+[gd_scene load_steps=42 format=3 uid="uid://dys3v30m52x67"]
 
 [ext_resource type="Texture2D" uid="uid://dfijrhi1a1x40" path="res://Textures/Tiles/Ground.png" id="1_m83gm"]
 [ext_resource type="Texture2D" uid="uid://dtgfhxea5ctv7" path="res://Textures/Tiles/Waterfall.png" id="1_p228c"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dh70tt12v5kly" path="res://Textures/Tiles/Cave Ceiling.png" id="6_sne1g"]
 [ext_resource type="Script" path="res://Scripts/Components/Camera2D.gd" id="8_4rwra"]
 [ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="10_1b5sh"]
+[ext_resource type="PackedScene" uid="uid://3vqa0cl8knwk" path="res://Scenes/Characters/drone.tscn" id="10_oa8tn"]
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="14_p7fqh"]
 [ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="15_1wrpn"]
 [ext_resource type="Texture2D" uid="uid://b2y0y38ayncla" path="res://Textures/Props/Checkpoint.png" id="18_jwh8p"]
@@ -967,6 +968,9 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_jx8cg")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_yjb65")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6dbr0")
 text = "Main Menu"
+
+[node name="Drone" parent="." instance=ExtResource("10_oa8tn")]
+position = Vector2(209, 114)
 
 [connection signal="body_entered" from="Borders/Border" to="." method="_on_border_body_entered"]
 [connection signal="body_entered" from="Borders/Border2" to="." method="_on_border_body_entered"]
