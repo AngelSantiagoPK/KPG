@@ -368,6 +368,8 @@ libraries = {
 }
 autoplay = "Normal"
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 
 [editable path="Hurtbox"]

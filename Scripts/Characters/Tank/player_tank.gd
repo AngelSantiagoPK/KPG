@@ -35,7 +35,6 @@ var overheated: bool = false
 
 func _ready():
 	stats.health = stats.max_health
-	active_camera(true)
 	
 func _physics_process(delta):
 	apply_gravity(delta)

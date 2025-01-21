@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj21w4yegpyrc"]
+
+[ext_resource type="Script" path="res://Scripts/Props/printer.gd" id="1_y1w2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_finox"]
+size = Vector2(74, 126)
+
+[node name="Printer" type="Area2D"]
+scale = Vector2(0.3, 0.3)
+collision_mask = 2
+script = ExtResource("1_y1w2s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, -63)
+shape = SubResource("RectangleShape2D_finox")
+
+[node name="PrinterPoly" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-31, -126, 36, -126, 44, -117, 44, 0, -31, 0)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="PrinterPoly"]
+color = Color(0.203922, 1, 1, 1)
+polygon = PackedVector2Array(-23, -114, 30, -114, 34, -109, 34, -73, -23, -74)
+
+[node name="Polygon2D2" type="Polygon2D" parent="PrinterPoly"]
+color = Color(0.676879, 0.676879, 0.676879, 1)
+polygon = PackedVector2Array(-31, -62, -68, -62, -78, -51, -78, 0, -31, 0)
+
+[node name="PrinterSpawnMarker" type="Marker2D" parent="."]
+position = Vector2(-84, -82)
+
+[node name="UI Container" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -127.0
+offset_right = 168.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Name" type="Label" parent="UI Container"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "3D Printer"
+
+[node name="Form01" type="Button" parent="UI Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Agility Form"
+alignment = 0
+
+[node name="Form02" type="Button" parent="UI Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Balanced Form"
+alignment = 0
+
+[node name="Form03" type="Button" parent="UI Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Heavy Form"
+alignment = 0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="pressed" from="UI Container/Form01" to="." method="_on_form_01_pressed"]
+[connection signal="pressed" from="UI Container/Form02" to="." method="_on_form_02_pressed"]
+[connection signal="pressed" from="UI Container/Form03" to="." method="_on_form_03_pressed"]

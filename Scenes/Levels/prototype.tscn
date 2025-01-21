@@ -1,10 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://dys3v30m52x67"]
+[gd_scene load_steps=43 format=3 uid="uid://dys3v30m52x67"]
 
 [ext_resource type="Texture2D" uid="uid://dfijrhi1a1x40" path="res://Textures/Tiles/Ground.png" id="1_m83gm"]
 [ext_resource type="Texture2D" uid="uid://dtgfhxea5ctv7" path="res://Textures/Tiles/Waterfall.png" id="1_p228c"]
 [ext_resource type="Script" path="res://Scripts/Levels/prototype.gd" id="1_rt60y"]
 [ext_resource type="Texture2D" uid="uid://51injiymv7tk" path="res://Textures/Tiles/Nature Props.png" id="2_8fny1"]
 [ext_resource type="Texture2D" uid="uid://dw6rcuunjyiya" path="res://Textures/Tiles/Cloud.png" id="2_usyrd"]
+[ext_resource type="PackedScene" uid="uid://dvjodc5t5wxm1" path="res://Scenes/Characters/player.tscn" id="3_6w6er"]
 [ext_resource type="PackedScene" uid="uid://daotvtptr6kby" path="res://Scenes/Characters/bat.tscn" id="4_mrihv"]
 [ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="5_cyf1f"]
 [ext_resource type="Texture2D" uid="uid://tjcbe8yuu2sc" path="res://Textures/Tiles/Cave.png" id="5_n36lt"]
@@ -14,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="10_1b5sh"]
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="14_p7fqh"]
 [ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="15_1wrpn"]
-[ext_resource type="PackedScene" uid="uid://bjhsifphtlmrq" path="res://Scenes/Characters/player_tank.tscn" id="18_hr4sg"]
+[ext_resource type="PackedScene" uid="uid://bj21w4yegpyrc" path="res://Scenes/Props/printer.tscn" id="18_h3mis"]
 [ext_resource type="Texture2D" uid="uid://b2y0y38ayncla" path="res://Textures/Props/Checkpoint.png" id="18_jwh8p"]
 [ext_resource type="PackedScene" uid="uid://bd5hdyqs2eiwd" path="res://Scenes/Props/destructible.tscn" id="19_fb7k4"]
 
@@ -961,9 +962,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_yjb65")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6dbr0")
 text = "Main Menu"
 
-[node name="PlayerTank" parent="." instance=ExtResource("18_hr4sg")]
-position = Vector2(688, 192)
-
 [node name="Destructibles" type="Node2D" parent="."]
 
 [node name="Destructible" parent="Destructibles" instance=ExtResource("19_fb7k4")]
@@ -983,6 +981,12 @@ position = Vector2(942, 197)
 
 [node name="Destructible6" parent="Destructibles" instance=ExtResource("19_fb7k4")]
 position = Vector2(952, 170)
+
+[node name="Printer" parent="." instance=ExtResource("18_h3mis")]
+position = Vector2(781, 224)
+
+[node name="Player" parent="." instance=ExtResource("3_6w6er")]
+position = Vector2(698, 214)
 
 [connection signal="body_entered" from="Borders/Border" to="." method="_on_border_body_entered"]
 [connection signal="body_entered" from="Borders/Border2" to="." method="_on_border_body_entered"]

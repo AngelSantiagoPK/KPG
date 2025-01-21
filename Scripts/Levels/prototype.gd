@@ -7,10 +7,12 @@ const MOUSE_OFFSET : Vector2 = Vector2(0, 0)
 #Refrences
 @onready var main_menu_button : Button = $UI/MainMenu
 @onready var chromatic_abberation : ColorRect = $UI/ChromaticAbberation
+@onready var player: CharacterBody2D = $Player
 
 func _ready():
 	EventManager.player_died.connect(player_died)
 	EventManager.frame_freeze.connect(frame_freeze)
+	player.active_camera(true)
 
 func player_died():
 	main_menu_button.visible = true
