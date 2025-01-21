@@ -43,7 +43,7 @@ color_ramp = SubResource("GradientTexture1D_ihv35")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bca47"]
 size = Vector2(4, 1)
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=["Bullet"]]
 collision_mask = 5
 script = ExtResource("1_r7pj2")
 

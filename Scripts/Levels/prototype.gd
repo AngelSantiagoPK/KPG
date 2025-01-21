@@ -7,20 +7,14 @@ const MOUSE_OFFSET : Vector2 = Vector2(0, 0)
 #Refrences
 @onready var main_menu_button : Button = $UI/MainMenu
 @onready var chromatic_abberation : ColorRect = $UI/ChromaticAbberation
-@onready var drone: Drone = $Drone
 
 func _ready():
 	EventManager.player_died.connect(player_died)
 	EventManager.frame_freeze.connect(frame_freeze)
-	drone.drone_exit.connect(drone_exited)
-	drone.destroyed.connect(drone_exited)
 
 func player_died():
 	main_menu_button.visible = true
 	DisplayServer.cursor_set_custom_image(MOUSE, DisplayServer.CURSOR_ARROW, MOUSE_OFFSET)
-
-func drone_exited():
-	get_tree().get_first_node_in_group("Player").active = true
 
 func _on_main_menu_button_up():
 	AudioManager.play_sound(AudioManager.MENU_CLICK)

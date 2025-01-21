@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd5hdyqs2eiwd"]
+
+[ext_resource type="Script" path="res://Scripts/Components/destructible.gd" id="1_vfcnw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xim8"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbgln"]
+size = Vector2(18, 26.5)
+
+[node name="Destructible" type="RigidBody2D"]
+collision_mask = 9
+script = ExtResource("1_vfcnw")
+
+[node name="BarrelPoly" type="Polygon2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(3, 3.25)
+offset = Vector2(-1, -5)
+polygon = PackedVector2Array(-2, -2, 4, -2, 4, 6, -2, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_6xim8")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -12.75)
+shape = SubResource("RectangleShape2D_dbgln")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
