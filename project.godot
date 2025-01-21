@@ -32,6 +32,10 @@ window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://Textures/UI/Mouse.png"
 
+[global_group]
+
+Player=""
+
 [input]
 
 move_left={

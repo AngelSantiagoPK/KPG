@@ -8,7 +8,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su20v"]
 size = Vector2(44, 24)
 
-[node name="PlayerTank" type="CharacterBody2D"]
+[node name="PlayerTank" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
 script = ExtResource("1_xrgca")
 movement_data = ExtResource("2_1wjft")
 stats = ExtResource("3_1jh5n")

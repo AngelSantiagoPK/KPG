@@ -6,6 +6,8 @@ var bullets_amount : int = 30
 @export var movement_data : MovementData
 @export var stats : Stats
 @export var active: bool = true
+@export var camera : Camera2D
+@onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
 
 #Refrences
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D
@@ -14,8 +16,7 @@ var bullets_amount : int = 30
 @onready var hand : Node2D = $Hand
 @onready var pistol : Sprite2D = $Hand/Pivot/Pistol
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
-
-@export var camera : Camera2D
+@onready var remote: RemoteTransform2D = $RemoteTransform2D
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -125,3 +126,10 @@ func die():
 	get_tree().current_scene.add_child(death_particle)
 	EventManager.player_died.emit()
 	queue_free()
+
+func active_camera(activation: bool) -> void:
+	if activation:
+		remote.remote_path = camera_ref
+		camera = get_tree().get_first_node_in_group("Camera")
+	else:
+		remote.remote_path = ""
