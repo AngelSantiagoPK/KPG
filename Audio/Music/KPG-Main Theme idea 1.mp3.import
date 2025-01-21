@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://mnxbw85i6jht"
+path="res://.godot/imported/KPG-Main Theme idea 1.mp3-c1a3e84016970e2d9e337f5c95e8b7a2.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/KPG-Main Theme idea 1.mp3"
+dest_files=["res://.godot/imported/KPG-Main Theme idea 1.mp3-c1a3e84016970e2d9e337f5c95e8b7a2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

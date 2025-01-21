@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://e7mb2pjdc27o" path="res://Textures/UI/Bat Health Bar.png" id="6_cuwue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jce5w"]
-size = Vector2(58, 7)
+size = Vector2(20, 7)
 
 [sub_resource type="Animation" id="Animation_sy7c1"]
 length = 0.001
@@ -71,10 +71,11 @@ radius = 34.0
 script = ExtResource("1_eohl6")
 movement_data = ExtResource("2_v7eu0")
 stats = ExtResource("3_jeffn")
-energy = 200.0
+energy = 9999.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(5.96046e-08, -4)
+position = Vector2(-2.58287e-07, -3.02045)
+scale = Vector2(0.333333, 0.2782)
 offset = Vector2(0.999999, 10.8571)
 polygon = PackedVector2Array(-31, -19, -1.00028, -19, 29, -19, 29, 0, -31, 0)
 
@@ -107,5 +108,7 @@ value = 10.0
 nine_patch_stretch = true
 texture_under = ExtResource("5_52e0i")
 texture_progress = ExtResource("6_cuwue")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
 [connection signal="body_entered" from="ActivationArea" to="." method="_on_activation_area_body_entered"]

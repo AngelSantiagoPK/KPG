@@ -5,7 +5,7 @@ var bullets_amount : int = 30
 
 @export var movement_data : MovementData
 @export var stats : Stats
-var active: bool = true
+@export var active: bool = true
 
 #Refrences
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D
@@ -30,7 +30,9 @@ func _ready():
 func _physics_process(delta):
 	apply_gravity(delta)
 
-	if not active: 
+	if not active:
+		velocity.x = 0
+		move_and_slide()
 		return
 	
 	var input_vector = Input.get_axis("move_left","move_right")

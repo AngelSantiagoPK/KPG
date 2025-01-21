@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjhsifphtlmrq"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_xrgca"]
+[ext_resource type="Resource" uid="uid://7g1r3pabyaj1" path="res://Data/Movement Data/Tank Movement Data.tres" id="2_1wjft"]
+[ext_resource type="Resource" uid="uid://dvb3gjwjg75ht" path="res://Data/Stats/Tank_Stats.tres" id="3_1jh5n"]
+[ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uh75p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_su20v"]
+size = Vector2(44, 24)
+
+[node name="PlayerTank" type="CharacterBody2D"]
+script = ExtResource("1_xrgca")
+movement_data = ExtResource("2_1wjft")
+stats = ExtResource("3_1jh5n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_su20v")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(2.2, 1.9)
+polygon = PackedVector2Array(-5, -8.94737, 4.09091, -8.94737, 10, -4.21053, 10, 5.26316, 5.90909, 8.42105, -5, 8.42105, -10, 5.26316, -10, -3.15789)
+
+[node name="Hurtbox" parent="." groups=["Tank"] instance=ExtResource("4_uh75p")]
+
+[node name="Gun" type="Node2D" parent="."]
+
+[node name="Pivot" type="Node2D" parent="Gun"]
+
+[node name="Barrel" type="Polygon2D" parent="Gun/Pivot"]
+polygon = PackedVector2Array(10, -3, 36, -3, 36, 1, 10, 1)
+
+[node name="TankBulletMarker" type="Marker2D" parent="Gun/Pivot/Barrel"]
+position = Vector2(36, -1)
+
+[node name="Launcher" type="Node2D" parent="."]
+
+[node name="DroneLaunchMarker" type="Marker2D" parent="Launcher"]
+position = Vector2(0, -20)
+
+[node name="GunDelay" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="GunCooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="DroneCooldown" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+update_rotation = false
+update_scale = false
+
+[node name="Status" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = -38.0
+offset_right = 24.0
+offset_bottom = -15.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 8
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]
+[connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]
+[connection signal="timeout" from="DroneCooldown" to="." method="_on_drone_cooldown_timeout"]
