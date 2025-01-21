@@ -11,7 +11,7 @@ signal drone_exit
 @export var movement_data: MovementData
 @export var stats: Stats
 @export var energy: float = 100.0
-var active: float = false
+@export var active: bool = false
 
 # Constants
 const EXPLOSION = preload("res://Scenes/Components/explosion_area.tscn")
@@ -19,6 +19,8 @@ const EXPLOSION = preload("res://Scenes/Components/explosion_area.tscn")
 # References
 @onready var fly_animator: AnimationPlayer = %FlyAnimator
 @onready var health_bar: TextureProgressBar = $HealthBar
+@onready var remote: RemoteTransform2D = $RemoteTransform2D
+@onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
 
 # Functions
 func _ready() -> void:
@@ -61,6 +63,12 @@ func explode() -> void:
 	get_tree().root.add_child(explosion)
 	destroyed.emit()
 	queue_free()
+
+func active_camera(activation: bool) -> void:
+	if activation:
+		remote.remote_path = camera_ref
+	else:
+		remote.remote_path = ""
 
 func _on_activation_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
