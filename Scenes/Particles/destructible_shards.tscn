@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://co8u8mylvd6h5"]
+
+[ext_resource type="Script" path="res://Scripts/Particles/muzzle.gd" id="1_t3xud"]
+
+[sub_resource type="Gradient" id="Gradient_8nhog"]
+colors = PackedColorArray(1, 1, 1, 1, 0.364706, 0.364706, 0.364706, 0.298039)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bqb2m"]
+gradient = SubResource("Gradient_8nhog")
+
+[sub_resource type="Curve" id="Curve_83otl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.304636, 0.706049), 0.0, 0.0, 0, 0, Vector2(0.728477, 0.897117), 0.0, 0.0, 0, 0, Vector2(1, 0.290842), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_j2cu3"]
+curve = SubResource("Curve_83otl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gault"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(6, 10, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -240.0
+angle_max = 120.0
+inherit_velocity_ratio = 45.0
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 107.53
+initial_velocity_max = 615.59
+gravity = Vector3(0, 800, 0)
+damping_max = 72.043
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_j2cu3")
+color_ramp = SubResource("GradientTexture1D_bqb2m")
+
+[node name="DestructibleShards" type="GPUParticles2D"]
+emitting = false
+amount = 20
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_gault")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+script = ExtResource("1_t3xud")
+
+[node name="Timer" type="Timer" parent="."]
