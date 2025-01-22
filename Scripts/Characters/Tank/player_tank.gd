@@ -26,6 +26,10 @@ var overheated: bool = false
 @onready var remote: RemoteTransform2D = $RemoteTransform2D
 @onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
 @onready var status: Label = $Status
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_stream_sync: AudioStreamSynchronized = audio_stream_player.stream as AudioStreamSynchronized
+
+
 
 # Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -47,8 +51,12 @@ func _physics_process(delta):
 	var input_vector = Input.get_axis("move_left","move_right")
 	if input_vector != 0:
 		apply_acceleration(input_vector, delta)
+		# Increasing volume of tank move sfx layer
+		audio_stream_sync.set_sync_stream_volume(1 ,-10)
 	else:
 		apply_friction(delta)
+		# Lower the volume of the movement layer
+		audio_stream_sync.set_sync_stream_volume(1, -80)  # Mute or reduce volume
 		
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()

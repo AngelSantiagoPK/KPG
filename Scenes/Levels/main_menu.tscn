@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://1nwvmn6wghcv"]
+[gd_scene load_steps=13 format=3 uid="uid://1nwvmn6wghcv"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/main_menu.gd" id="1_1h8h1"]
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="1_ycleq"]
 [ext_resource type="Texture2D" uid="uid://bxb8fv3cum5cb" path="res://Textures/UI/Menu Background.png" id="2_b7f37"]
 [ext_resource type="Texture2D" uid="uid://c8swcohbmlu7u" path="res://Textures/UI/Menu Head.png" id="3_ocyqh"]
+[ext_resource type="AudioStream" uid="uid://cer7kk1h5m3kk" path="res://Audio/Music/KPG-Main Theme.ogg" id="5_f37pt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1smoh"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -181,6 +182,11 @@ libraries = {
 "": SubResource("AnimationLibrary_awv7d")
 }
 autoplay = "Transition"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_f37pt")
+autoplay = true
+bus = &"Music"
 
 [connection signal="button_up" from="VBoxContainer/Start" to="." method="_on_start_button_up"]
 [connection signal="mouse_entered" from="VBoxContainer/Start" to="." method="_on_start_mouse_entered"]

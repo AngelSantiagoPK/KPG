@@ -1,12 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjhsifphtlmrq"]
+[gd_scene load_steps=9 format=3 uid="uid://bjhsifphtlmrq"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_xrgca"]
 [ext_resource type="Resource" uid="uid://7g1r3pabyaj1" path="res://Data/Movement Data/Tank Movement Data.tres" id="2_1wjft"]
 [ext_resource type="Resource" uid="uid://dvb3gjwjg75ht" path="res://Data/Stats/Tank_Stats.tres" id="3_1jh5n"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uh75p"]
+[ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="5_os4sa"]
+[ext_resource type="AudioStream" uid="uid://dxwi3v4rp7roj" path="res://Audio/Sounds/sx_int_tank_move.ogg" id="6_0s3k3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su20v"]
 size = Vector2(44, 24)
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_lsmpd"]
+stream_count = 2
+stream_0/stream = ExtResource("5_os4sa")
+stream_0/volume = -6.0
+stream_1/stream = ExtResource("6_0s3k3")
+stream_1/volume = -60.0
 
 [node name="PlayerTank" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
@@ -66,6 +75,11 @@ offset_bottom = -15.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 8
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamSynchronized_lsmpd")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]
