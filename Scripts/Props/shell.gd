@@ -1,3 +1,4 @@
+class_name Shell
 extends Area2D
 
 #Data

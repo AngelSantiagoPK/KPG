@@ -27,7 +27,7 @@ func _ready() -> void:
 	health_bar.value = energy
 	health_bar.max_value = energy
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
 
@@ -48,7 +48,7 @@ func get_input():
 	if Input.is_action_just_pressed("shoot"):
 		explode()
 	
-	if Input.is_action_just_pressed("exit_drone"):
+	if Input.is_action_just_pressed("interact"):
 		drone_exit.emit()
 		active = false
 		

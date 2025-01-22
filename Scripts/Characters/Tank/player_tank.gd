@@ -1,6 +1,6 @@
 # Author: AngelSantiagoPK aka PKNinja
 # Date: January 20, 2025
-class_name Tank
+class_name Form_03
 extends CharacterBody2D
 
 # Signals
@@ -27,8 +27,6 @@ var overheated: bool = false
 @onready var status: Label = $Status
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var audio_stream_sync: AudioStreamSynchronized = audio_stream_player.stream as AudioStreamSynchronized
-
-
 
 # Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -79,7 +77,7 @@ func _physics_process(delta):
 			deploy_drone()
 	
 	move_and_slide()
-	animate(input_vector)
+	animate()
 
 func apply_acceleration(input_vector, delta):
 	velocity.x = move_toward(velocity.x, movement_data.max_speed * input_vector, movement_data.acceleration * delta)
@@ -98,7 +96,7 @@ func jump():
 	velocity.y = -movement_data.jump_strength
 	AudioManager.play_sound(AudioManager.JUMP)
 
-func animate(input_vector):
+func animate():
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
 	gun.rotation = mouse_position.angle()
 	if gun.scale.y == 1 and mouse_position.x < 0:
