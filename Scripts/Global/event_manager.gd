@@ -8,3 +8,4 @@ signal frame_freeze
 
 #Data
 var bullets_amount : int
+var shells_amount : int

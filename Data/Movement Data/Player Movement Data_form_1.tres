@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MovementData" load_steps=2 format=3 uid="uid://c3rimvfa8b25k"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/movement_data.gd" id="1_de8sj"]
+
+[resource]
+script = ExtResource("1_de8sj")
+max_speed = 200
+acceleration = 800
+friction = 800
+gravity_scale = 0.8
+jump_strength = 350
+knockback_force = 250

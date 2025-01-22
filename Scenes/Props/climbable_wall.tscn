@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://uwu0x7jon2r3"]
+
+[ext_resource type="Script" path="res://Scripts/Props/climbable_wall.gd" id="1_4f831"]
+[ext_resource type="Texture2D" uid="uid://dh70tt12v5kly" path="res://Textures/Tiles/Cave Ceiling.png" id="1_135ft"]
+[ext_resource type="AudioStream" uid="uid://bpufhajw3d337" path="res://Audio/Sounds/wallclimb.wav" id="3_kpsdt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agj68"]
+size = Vector2(14, 16)
+
+[node name="climbableWall" type="Area2D" groups=["Climbable"]]
+script = ExtResource("1_4f831")
+
+[node name="wallSprite" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("1_135ft")
+region_enabled = true
+region_rect = Rect2(1.62698, -0.233692, 14.1241, 8.13933)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_agj68")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kpsdt")
+volume_db = 8.914
