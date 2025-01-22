@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://bkc4vhmxili37"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="1_djisa"]
+
+[resource]
+script = ExtResource("1_djisa")
+max_health = 10
