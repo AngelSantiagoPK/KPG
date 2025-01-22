@@ -23,7 +23,6 @@ var overheated: bool = false
 @onready var gun_delay: Timer = $GunDelay
 @onready var gun_cooldown: Timer = $GunCooldown
 @onready var drone_cooldown: Timer = $DroneCooldown
-@onready var remote: RemoteTransform2D = $RemoteTransform2D
 @onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
 @onready var status: Label = $Status
 
@@ -32,6 +31,7 @@ var overheated: bool = false
 @onready var bullet_load : PackedScene = preload("res://Scenes/Props/bullet.tscn")
 @onready var death_particle_load : PackedScene = preload("res://Scenes/Particles/player_death_particle.tscn")
 @onready var drone_load: PackedScene = preload("res://Scenes/Characters/drone.tscn")
+@onready var remote: RemoteTransform2D = $RemoteTransform2D
 
 func _ready():
 	stats.health = stats.max_health
