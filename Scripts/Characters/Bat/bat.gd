@@ -30,7 +30,7 @@ func knockback(vector):
 func _on_hurtbox_area_entered(area):
 	if not area.is_in_group("Bat"):
 		knockback(area.knockback_vector)
-		hit_animator.play("Hit")
+		hit_animator.set_deferred("play", "Hit")
 		update_health_bar()
 		if stats.health <= 0:
 			state_machine.call_deferred("transition_to", "Death")

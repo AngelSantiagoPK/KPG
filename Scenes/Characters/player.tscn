@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player.gd" id="1_dpnq5"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="2_5qatb"]
-[ext_resource type="Resource" uid="uid://bvast80iosmev" path="res://Data/Movement Data/Player Movement Data.tres" id="2_spjjl"]
-[ext_resource type="Resource" uid="uid://c0qawwsbk0ym4" path="res://Data/Stats/Player Stats.tres" id="3_oteuq"]
+[ext_resource type="Resource" uid="uid://bvast80iosmev" path="res://Data/Movement Data/template_player.tres" id="2_spjjl"]
+[ext_resource type="Resource" uid="uid://c0qawwsbk0ym4" path="res://Data/Stats/template_player_stats.tres" id="3_oteuq"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_c6p70"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_e3hcv"]
 

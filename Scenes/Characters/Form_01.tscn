@@ -1,46 +1,47 @@
-[gd_scene load_steps=29 format=3 uid="uid://cywb36cd3dsqb"]
+[gd_scene load_steps=29 format=3 uid="uid://0v7oppt2d3q4"]
 
-[ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
-[ext_resource type="Resource" uid="uid://bpqco137xcy6p" path="res://Data/Movement Data/Player Movement Data_form_2.tres" id="2_oau2w"]
-[ext_resource type="Resource" uid="uid://bkc4vhmxili37" path="res://Data/Stats/Player Stats_form_2.tres" id="3_o40tt"]
-[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
-[ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]
-[ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_tvf5k"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_1.gd" id="1_p8eyj"]
+[ext_resource type="Resource" uid="uid://c3rimvfa8b25k" path="res://Data/Movement Data/Form_1.tres" id="2_s5ise"]
+[ext_resource type="Resource" uid="uid://bhj5x1p368ng5" path="res://Data/Stats/Form_1_Stats.tres" id="3_alqre"]
+[ext_resource type="PackedScene" path="res://Scenes/Components/wallclimb_box.tscn" id="4_ownlq"]
+[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="5_kg6ca"]
+[ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="6_dyw3d"]
+[ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="7_u2pat"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nbr8w"]
-shader = ExtResource("4_dt6bj")
+shader = ExtResource("5_kg6ca")
 shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbpyb"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(96, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xxga"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ov8p"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8v5i"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o5aqw"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(48, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8arge"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6vrm8"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86cm7"]
-atlas = ExtResource("5_j0pni")
+atlas = ExtResource("6_dyw3d")
 region = Rect2(0, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bx4yl"]
@@ -101,7 +102,7 @@ radius = 3.0
 height = 24.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dbnn4"]
-shader = ExtResource("4_dt6bj")
+shader = ExtResource("5_kg6ca")
 shader_parameter/active = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gpe5m"]
@@ -153,37 +154,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_orwht"]
-resource_name = "Shoot_shell"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand/Pivot/Pistol:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(10, -4), Vector2(4, -4), Vector2(10, -4)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"shoot_shell"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_8vmw1"]
 resource_name = "normal"
 length = 0.1
@@ -204,7 +174,6 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_mlu16"),
 "Shoot": SubResource("Animation_creca"),
-"Shoot_shell": SubResource("Animation_orwht"),
 "normal": SubResource("Animation_8vmw1")
 }
 
@@ -334,12 +303,14 @@ _data = {
 "RESET": SubResource("Animation_ubivd")
 }
 
-[node name="Player_f2" type="CharacterBody2D" groups=["Player"]]
+[node name="Form_01" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("1_i8duy")
-movement_data = ExtResource("2_oau2w")
-stats = ExtResource("3_o40tt")
+script = ExtResource("1_p8eyj")
+movement_data = ExtResource("2_s5ise")
+stats = ExtResource("3_alqre")
+
+[node name="wallclimb_box" parent="." instance=ExtResource("4_ownlq")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_nbr8w")
@@ -358,7 +329,7 @@ shape = SubResource("CapsuleShape2D_k161k")
 [node name="Pistol" type="Sprite2D" parent="Hand/Pivot"]
 material = SubResource("ShaderMaterial_dbnn4")
 position = Vector2(10, -4)
-texture = ExtResource("5_j0pni")
+texture = ExtResource("6_dyw3d")
 region_enabled = true
 region_rect = Rect2(160, 64, 16, 16)
 
@@ -367,7 +338,7 @@ visible = false
 position = Vector2(6, -2)
 gizmo_extents = 2.0
 
-[node name="Hurtbox" parent="." instance=ExtResource("6_tvf5k")]
+[node name="Hurtbox" parent="." instance=ExtResource("7_u2pat")]
 monitoring = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -392,7 +363,7 @@ offset_top = -25.0
 offset_right = 58.0
 offset_bottom = -2.0
 scale = Vector2(0.678104, 0.690917)
-text = "Form 2"
+text = "Form 1"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false

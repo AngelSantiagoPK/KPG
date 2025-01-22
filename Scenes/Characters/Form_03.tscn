@@ -1,27 +1,27 @@
 [gd_scene load_steps=9 format=3 uid="uid://bjhsifphtlmrq"]
 
-[ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_xrgca"]
-[ext_resource type="Resource" uid="uid://7g1r3pabyaj1" path="res://Data/Movement Data/Tank Movement Data.tres" id="2_1wjft"]
-[ext_resource type="Resource" uid="uid://dvb3gjwjg75ht" path="res://Data/Stats/Tank_Stats.tres" id="3_1jh5n"]
-[ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uh75p"]
-[ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="5_os4sa"]
-[ext_resource type="AudioStream" uid="uid://dxwi3v4rp7roj" path="res://Audio/Sounds/sx_int_tank_move.ogg" id="6_0s3k3"]
+[ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_r56uj"]
+[ext_resource type="Resource" uid="uid://7g1r3pabyaj1" path="res://Data/Movement Data/Form_3.tres" id="2_pq5n8"]
+[ext_resource type="Resource" uid="uid://dvb3gjwjg75ht" path="res://Data/Stats/Form_3_Stats.tres" id="3_xl8j4"]
+[ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uk43i"]
+[ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="5_oesr5"]
+[ext_resource type="AudioStream" uid="uid://dxwi3v4rp7roj" path="res://Audio/Sounds/sx_int_tank_move.ogg" id="6_aliae"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su20v"]
 size = Vector2(44, 24)
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_lsmpd"]
 stream_count = 2
-stream_0/stream = ExtResource("5_os4sa")
+stream_0/stream = ExtResource("5_oesr5")
 stream_0/volume = -6.0
-stream_1/stream = ExtResource("6_0s3k3")
+stream_1/stream = ExtResource("6_aliae")
 stream_1/volume = -60.0
 
-[node name="PlayerTank" type="CharacterBody2D" groups=["Player"]]
+[node name="Form_03" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
-script = ExtResource("1_xrgca")
-movement_data = ExtResource("2_1wjft")
-stats = ExtResource("3_1jh5n")
+script = ExtResource("1_r56uj")
+movement_data = ExtResource("2_pq5n8")
+stats = ExtResource("3_xl8j4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -31,7 +31,7 @@ shape = SubResource("RectangleShape2D_su20v")
 scale = Vector2(2.2, 1.9)
 polygon = PackedVector2Array(-5, -8.94737, 4.09091, -8.94737, 10, -4.21053, 10, 5.26316, 5.90909, 8.42105, -5, 8.42105, -10, 5.26316, -10, -3.15789)
 
-[node name="Hurtbox" parent="." groups=["Tank"] instance=ExtResource("4_uh75p")]
+[node name="Hurtbox" parent="." groups=["Tank"] instance=ExtResource("4_uk43i")]
 
 [node name="Gun" type="Node2D" parent="."]
 
@@ -79,7 +79,6 @@ metadata/_edit_use_anchors_ = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_lsmpd")
 autoplay = true
-bus = &"SFX"
 
 [connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]

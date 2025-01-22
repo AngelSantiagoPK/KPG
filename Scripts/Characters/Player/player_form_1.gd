@@ -1,22 +1,23 @@
+class_name Form_01
 extends CharacterBody2D
 
 #Data
 var bullets_amount : int = 30
-
 @export var movement_data : MovementData
 @export var stats : Stats
+
+# Variables
 var active: bool = true
 var wallclimb: bool = false
+@export var camera : Camera2D
 
-#Refrences
+# Refrences
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D
 @onready var guns_animator : AnimationPlayer = $ShootingAnimationPlayer
 @onready var hit_animator : AnimationPlayer = $HitAnimationPlayer
 @onready var hand : Node2D = $Hand
 @onready var pistol : Sprite2D = $Hand/Pivot/Pistol
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
-
-@export var camera : Camera2D
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -48,7 +49,6 @@ func _physics_process(delta):
 		jump()
 		
 	if Input.is_action_just_pressed("jump") and wallclimb:
-		print("wall climbed!")
 		jump()
 	
 	if Input.is_action_just_pressed("shoot"):

@@ -1,19 +1,18 @@
+class_name Form_02
 extends CharacterBody2D
 
 #Data
-enum Weapons{
-	Rifle = 1,
-	Shotgun = 2	
-}
-
-@export var currentWeapon = Weapons.Rifle
-
 var bullets_amount : int = 50
 var shells_amount : int = 20
 
 @export var movement_data : MovementData
 @export var stats : Stats
 var active: bool = true
+var can_shoot: bool = true
+
+@export_group("Shotgun Props")
+@export var shot_size: int = 6
+@export var shot_spread_in_deg: float = 30
 
 
 #Refrences
@@ -23,6 +22,7 @@ var active: bool = true
 @onready var hand : Node2D = $Hand
 @onready var pistol : Sprite2D = $Hand/Pivot/Pistol
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
+@onready var rifle_delay: Timer = $RifleDelay
 
 #@export var camera : Camera2D
 
@@ -43,11 +43,7 @@ func _ready():
 	EventManager.update_bullet_ui.emit()
 
 func _physics_process(delta):
-	
 	apply_gravity(delta)
-	
-	change_weapon_debug()
-	_label_text()
 
 	if not active: 
 		return
@@ -62,22 +58,25 @@ func _physics_process(delta):
 		jump()
 		
 	
-	if Input.is_action_just_pressed("shoot"):
-		if currentWeapon == Weapons.Rifle:
-			if bullets_amount > 0:
-				guns_animator.play("Shoot")
-		elif currentWeapon == Weapons.Shotgun:
-			if shells_amount > 0:
-				guns_animator.play("Shoot_shell")
+	if Input.is_action_pressed("shoot"):
+		if bullets_amount > 0 and can_shoot:
+			can_shoot = false
+			rifle_delay.start()
+			guns_animator.play("Shoot")
 	
+	if Input.is_action_just_pressed("secondary_weapon"):
+		if shells_amount > 0:
+			guns_animator.play("Shoot_shell")
+	
+	if Input.is_action_just_pressed("interact"):
+		bullets_amount = 30
+		shells_amount = 50
+		EventManager.bullets_amount = bullets_amount
+		EventManager.shells_amount = shells_amount
+		EventManager.update_bullet_ui.emit()
+
 	move_and_slide()
 	animate(input_vector)
-
-func _label_text():
-	if currentWeapon == Weapons.Rifle:
-		$provisional_id_label.text = "form 2" + " with Rifle"
-	if currentWeapon == Weapons.Shotgun:
-		$provisional_id_label.text = "form 2" + "with Shotgun"
 
 func apply_acceleration(input_vector, delta):
 	velocity.x = move_toward(velocity.x, movement_data.max_speed * input_vector, movement_data.acceleration * delta)
@@ -110,13 +109,6 @@ func shoot():
 	get_tree().current_scene.add_child(bullet)
 	AudioManager.play_sound(AudioManager.SHOOT)
 
-func create_pellets(shell,muzzle,mouse_position,offset_angle):
-	
-	pistol_bullet_marker.add_child(muzzle)
-	shell.global_position = pistol_bullet_marker.global_position
-	shell.target_vector = mouse_position + Vector2(offset_angle,offset_angle)
-	get_tree().current_scene.add_child(shell)
-	
 
 func shoot_shell():
 	shells_amount -= 1
@@ -124,31 +116,21 @@ func shoot_shell():
 	EventManager.update_bullet_ui.emit()
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
 	var muzzle = muzzle_load.instantiate()
+	muzzle.global_position = pistol_bullet_marker.global_position
+	pistol_bullet_marker.add_child(muzzle)
 	
-	var shell1 = shell_load.instantiate()
-	var shell2 = shell_load.instantiate()
-	var shell3 = shell_load.instantiate()
-	var shell4 = shell_load.instantiate()
-	var shell5 = shell_load.instantiate()
+	var shells: Array[Shell] = []
+	for i in shot_size:
+		var shell: Shell = shell_load.instantiate()
+		var offset = (i - (shot_size / 2)) * (shot_spread_in_deg / shot_size)
+		shell.global_position = pistol_bullet_marker.global_position
+		shell.target_vector = mouse_position.rotated(deg_to_rad(offset))
+		shells.append(shell)
 	
-	create_pellets(shell1,muzzle,mouse_position,0)
-	create_pellets(shell2,muzzle,mouse_position,0.1)
-	create_pellets(shell3,muzzle,mouse_position,-0.1)
-	create_pellets(shell4,muzzle,mouse_position,0.2)
-	create_pellets(shell5,muzzle,mouse_position,-0.2)
+	for i in shells:
+		get_tree().current_scene.add_child(i)
 	
 	AudioManager.play_sound(AudioManager.SHOOT)
-
-
-
-func change_weapon_debug():
-	if Input.is_action_just_pressed("more_ammo"):
-		shells_amount = 50
-		EventManager.shells_amount = shells_amount
-	if Input.is_action_just_pressed("one"):
-		currentWeapon = Weapons.Rifle
-	elif Input.is_action_just_pressed("two"):
-		currentWeapon = Weapons.Shotgun
 
 #func small_shake():
 #	camera.small_shake()
@@ -199,3 +181,7 @@ func die():
 	get_tree().current_scene.add_child(death_particle)
 	EventManager.player_died.emit()
 	queue_free()
+
+
+func _on_rifle_delay_timeout() -> void:
+	can_shoot = true

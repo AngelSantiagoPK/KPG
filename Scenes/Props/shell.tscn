@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bncigqohdy43c"]
+[gd_scene load_steps=11 format=3 uid="uid://cy8iosx0y0j3s"]
 
-[ext_resource type="Script" path="res://Scripts/Props/bullet.gd" id="1_j5nm4"]
+[ext_resource type="Script" path="res://Scripts/Props/shell.gd" id="1_wt15w"]
 [ext_resource type="Texture2D" uid="uid://bjg5fygfb0yvm" path="res://Textures/Props/Bullet.png" id="2_g1jtw"]
 [ext_resource type="PackedScene" uid="uid://bkp0gna2taagk" path="res://Scenes/Components/hitbox.tscn" id="3_8ejjf"]
 
@@ -45,7 +45,7 @@ size = Vector2(2, 1)
 
 [node name="Shell" type="Area2D"]
 collision_mask = 5
-script = ExtResource("1_j5nm4")
+script = ExtResource("1_wt15w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 1)

@@ -3,9 +3,9 @@ extends Area2D
 
 var interactible: bool = false
 var object: Node2D = null
-var form_01_loaded: PackedScene = preload("res://Scenes/Characters/player_form_1.tscn")
-var form_02_loaded: PackedScene = preload("res://Scenes/Characters/player_form_2.tscn")
-var form_03_loaded: PackedScene = preload("res://Scenes/Characters/player_tank.tscn")
+var form_01_loaded: PackedScene = preload("res://Scenes/Characters/Form_01.tscn")
+var form_02_loaded: PackedScene = preload("res://Scenes/Characters/Form_02.tscn")
+var form_03_loaded: PackedScene = preload("res://Scenes/Characters/Form_03.tscn")
 @onready var ui_container: VBoxContainer = $"UI Container"
 @onready var printer_spawn_marker: Marker2D = $PrinterSpawnMarker
 
@@ -30,7 +30,6 @@ func print_form(form_number: int) -> void:
 	match form_number:
 		1:
 			form = form_01_loaded.instantiate()
-			
 		2:
 			form = form_02_loaded.instantiate()
 		3:

@@ -895,10 +895,6 @@ script = ExtResource("8_4rwra")
 position = Vector2(128, -10)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Border"]
-position = Vector2(239, 0)
-shape = SubResource("RectangleShape2D_g3y1q")
-
 [node name="Border2" type="Area2D" parent="Borders"]
 position = Vector2(128, 314)
 collision_mask = 2
@@ -982,8 +978,16 @@ position = Vector2(942, 197)
 [node name="Destructible6" parent="Destructibles" instance=ExtResource("19_fb7k4")]
 position = Vector2(952, 170)
 
-[node name="Printer" parent="." instance=ExtResource("18_h3mis")]
+[node name="Printers" type="Node2D" parent="."]
 position = Vector2(781, 224)
+scale = Vector2(0.3, 0.3)
+
+[node name="Printer" parent="Printers" instance=ExtResource("18_h3mis")]
+scale = Vector2(1, 1)
+
+[node name="Printer2" parent="Printers" instance=ExtResource("18_h3mis")]
+position = Vector2(-2843.33, -213.333)
+scale = Vector2(1, 1)
 
 [node name="Player" parent="." instance=ExtResource("3_6w6er")]
 position = Vector2(698, 214)
