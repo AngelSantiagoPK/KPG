@@ -166,7 +166,7 @@ func active_camera(activation: bool) -> void:
 		remote.remote_path = ""
 
 func _on_hurtbox_area_entered(_area):
-	hit_animator.play("Hit")
+	hit_animator.set_deferred("play", "Hit")
 	EventManager.update_health_ui.emit()
 	if stats.health <= 0:
 		die()

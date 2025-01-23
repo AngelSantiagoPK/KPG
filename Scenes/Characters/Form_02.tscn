@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://cywb36cd3dsqb"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
-[ext_resource type="Resource" uid="uid://bpqco137xcy6p" path="res://Data/Movement Data/Form_2.tres" id="2_oau2w"]
+[ext_resource type="Resource" uid="uid://bpqco137xcy6p" path="res://Data/Movement Data/NPC_Movement_Data.tres" id="2_oau2w"]
 [ext_resource type="Resource" uid="uid://bkc4vhmxili37" path="res://Data/Stats/Form_2_Stats.tres" id="3_o40tt"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]

@@ -1,0 +1,370 @@
+[gd_scene load_steps=37 format=3 uid="uid://c5cckeifafyhy"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/npc.gd" id="1_2pthx"]
+[ext_resource type="Resource" uid="uid://bpqco137xcy6p" path="res://Data/Movement Data/NPC_Movement_Data.tres" id="2_ncj6b"]
+[ext_resource type="Resource" uid="uid://di8hrfibjt4t2" path="res://Data/Stats/NPC_Stats.tres" id="3_h060f"]
+[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_csr7g"]
+[ext_resource type="Texture2D" uid="uid://c55u7w2c5tqcb" path="res://Textures/Characters/Bat.png" id="5_533go"]
+[ext_resource type="Texture2D" uid="uid://ck6k0r0tymmak" path="res://Textures/UI/Emote.png" id="6_tvidh"]
+[ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="7_g5exc"]
+[ext_resource type="PackedScene" uid="uid://bkp0gna2taagk" path="res://Scenes/Components/hitbox.tscn" id="8_8nuhm"]
+[ext_resource type="PackedScene" uid="uid://ivuenv50bi35" path="res://Scenes/Components/player_detection_zone.tscn" id="9_lo4tl"]
+[ext_resource type="Texture2D" uid="uid://6jebehbxdvj3" path="res://Textures/UI/Bat Health Bar Empty.png" id="10_urbue"]
+[ext_resource type="Texture2D" uid="uid://e7mb2pjdc27o" path="res://Textures/UI/Bat Health Bar.png" id="11_q56f7"]
+[ext_resource type="Script" path="res://Scripts/Components/state_machine.gd" id="12_l3v10"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_idle.gd" id="13_cmjk1"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_wander.gd" id="14_jtsd4"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_attack.gd" id="15_lledl"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_death.gd" id="16_ti3h8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajkoe"]
+shader = ExtResource("4_csr7g")
+shader_parameter/active = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iihv3"]
+resource_local_to_scene = true
+shader = ExtResource("4_csr7g")
+shader_parameter/active = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ampsm"]
+atlas = ExtResource("5_533go")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6ir2"]
+atlas = ExtResource("5_533go")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb3hx"]
+atlas = ExtResource("5_533go")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_680j6"]
+atlas = ExtResource("5_533go")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2pd1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ampsm")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6ir2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wb3hx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_680j6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wb3hx")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ptrb"]
+size = Vector2(19, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bv6k"]
+size = Vector2(8, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oh2mm"]
+size = Vector2(8, 19)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wr5v4"]
+radius = 41.0
+
+[sub_resource type="Gradient" id="Gradient_s1rbn"]
+colors = PackedColorArray(0.0742188, 0.0742188, 0.0742188, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_av3g5"]
+gradient = SubResource("Gradient_s1rbn")
+
+[sub_resource type="Curve" id="Curve_7ixp1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0843374, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yo8a2"]
+curve = SubResource("Curve_7ixp1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_acofj"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_yo8a2")
+color_ramp = SubResource("GradientTexture1D_av3g5")
+
+[sub_resource type="Animation" id="Animation_wvfhd"]
+resource_name = "Hit"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpritePoly:material:shader_parameter/active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_grxi7"]
+resource_name = "Normal"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gaykw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpritePoly:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hurtbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ox1nt"]
+_data = {
+"Hit": SubResource("Animation_wvfhd"),
+"Normal": SubResource("Animation_grxi7"),
+"RESET": SubResource("Animation_gaykw")
+}
+
+[node name="NPC" type="CharacterBody2D" groups=["Bat", "Enemy", "NPC"]]
+collision_layer = 4
+script = ExtResource("1_2pthx")
+movement_data = ExtResource("2_ncj6b")
+stats = ExtResource("3_h060f")
+
+[node name="SpritePoly" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_ajkoe")
+
+[node name="Suit" type="Polygon2D" parent="SpritePoly"]
+position = Vector2(-1, 0)
+color = Color(1, 0, 0.113725, 1)
+polygon = PackedVector2Array(1, -22, -6, 0, 8, 0)
+
+[node name="Mask" type="Polygon2D" parent="SpritePoly"]
+position = Vector2(0, 11)
+scale = Vector2(0.9375, 1.0625)
+polygon = PackedVector2Array(0, -28, -3, -27, -4, -24, -3, -21, 0, -20, 3, -21, 4, -24, 3, -27)
+
+[node name="Eyes" type="Polygon2D" parent="SpritePoly"]
+position = Vector2(2, 1)
+scale = Vector2(1.25, 1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, -16, 1, -16, 0, -15, -2.2, -15)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_iihv3")
+position = Vector2(1, -17)
+sprite_frames = SubResource("SpriteFrames_d2pd1")
+animation = &"Fly"
+autoplay = "Fly"
+
+[node name="Emote" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-3.55271e-15, -25)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_tvidh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(9.73536e-08, -9.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_4ptrb")
+
+[node name="Hurtbox" parent="." instance=ExtResource("7_g5exc")]
+monitoring = false
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+visible = false
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_3bv6k")
+
+[node name="Hitbox" parent="." groups=["Bat"] instance=ExtResource("8_8nuhm")]
+damage = 1
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
+position = Vector2(-1, -9.5)
+shape = SubResource("RectangleShape2D_oh2mm")
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource("9_lo4tl")]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+visible = false
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_wr5v4")
+
+[node name="BlackDeathParticle" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_acofj")
+one_shot = true
+explosiveness = 1.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 36.0
+offset_bottom = 32.0
+max_value = 3.0
+value = 3.0
+texture_under = ExtResource("10_urbue")
+texture_progress = ExtResource("11_q56f7")
+
+[node name="HealthBarTimer" type="Timer" parent="HealthBar"]
+process_callback = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("12_l3v10")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("13_cmjk1")
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="Wander" type="Node" parent="StateMachine"]
+script = ExtResource("14_jtsd4")
+
+[node name="Timer" type="Timer" parent="StateMachine/Wander"]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("15_lledl")
+
+[node name="Timer" type="Timer" parent="StateMachine/Attack"]
+process_callback = 0
+one_shot = true
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("black_death_particle")]
+script = ExtResource("16_ti3h8")
+black_death_particle = NodePath("../../BlackDeathParticle")
+
+[node name="Timer" type="Timer" parent="StateMachine/Death"]
+process_callback = 0
+one_shot = true
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ox1nt")
+}
+autoplay = "Normal"
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="HealthBar/HealthBarTimer" to="." method="_on_health_bar_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Wander/Timer" to="StateMachine/Wander" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Attack/Timer" to="StateMachine/Attack" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Death/Timer" to="StateMachine/Death" method="_on_timer_timeout"]
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]
+[editable path="PlayerDetectionZone"]
