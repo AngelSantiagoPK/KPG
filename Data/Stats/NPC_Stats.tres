@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://di8hrfibjt4t2"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="1_xtwjb"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_xtwjb")
+max_health = 15

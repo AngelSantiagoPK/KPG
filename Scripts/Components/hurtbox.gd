@@ -19,3 +19,7 @@ func _on_area_entered(area):
 		if area.is_in_group("Bar"):
 			owner.stats.health -= area.damage
 		pass
+
+	if owner.is_in_group("Enemy"):
+		if not area.is_in_group("Enemy"):
+			owner.stats.health -= area.damage

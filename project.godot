@@ -35,6 +35,7 @@ mouse_cursor/custom_image="res://Textures/UI/Mouse.png"
 [global_group]
 
 Player=""
+Enemy=""
 
 [input]
 
