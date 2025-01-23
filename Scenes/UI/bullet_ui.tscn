@@ -18,11 +18,11 @@ script = ExtResource("1_uk8y2")
 [node name="Slot" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-offset_left = 46.25
-offset_top = 1.25
-offset_right = 70.25
-offset_bottom = 25.25
-scale = Vector2(0.5, 0.5)
+offset_left = 96.25
+offset_top = 2.5
+offset_right = 120.25
+offset_bottom = 26.5
+scale = Vector2(0.706598, 0.706598)
 stretch_mode = 4
 
 [node name="Bullet" type="TextureRect" parent="Slot"]

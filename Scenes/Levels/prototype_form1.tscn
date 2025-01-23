@@ -15,9 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="14_5a6lm"]
 [ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="15_txhjn"]
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="16_p7wx6"]
-[ext_resource type="PackedScene" uid="uid://3vqa0cl8knwk" path="res://Scenes/Characters/drone.tscn" id="17_0epg2"]
 [ext_resource type="PackedScene" uid="uid://cywb36cd3dsqb" path="res://Scenes/Characters/player_form_2.tscn" id="18_blvfr"]
 [ext_resource type="PackedScene" uid="uid://uwu0x7jon2r3" path="res://Scenes/Props/climbable_wall.tscn" id="18_ufc77"]
+[ext_resource type="PackedScene" uid="uid://da0mvmx244qbx" path="res://Scenes/Props/filament_pickup.tscn" id="19_l852b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkdbp"]
 atlas = ExtResource("2_gecio")
@@ -963,17 +963,27 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_yjb65")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6dbr0")
 text = "Main Menu"
 
-[node name="Drone" parent="." instance=ExtResource("17_0epg2")]
-position = Vector2(209, 114)
-
 [node name="ClimbableWalls" type="Node2D" parent="."]
 
 [node name="climbableWall" parent="ClimbableWalls" instance=ExtResource("18_ufc77")]
 position = Vector2(8, 50)
 
-[node name="Player_f2" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("18_blvfr")]
+[node name="Player_f2" parent="." instance=ExtResource("18_blvfr")]
 position = Vector2(62, 97)
-camera = NodePath("../Camera2D")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Filament_pickup" parent="Node2D" instance=ExtResource("19_l852b")]
+position = Vector2(-73, 149)
+
+[node name="Filament_pickup2" parent="Node2D" instance=ExtResource("19_l852b")]
+position = Vector2(-40, 149)
+
+[node name="Filament_pickup3" parent="Node2D" instance=ExtResource("19_l852b")]
+position = Vector2(-107, 149)
+
+[node name="Filament_pickup4" parent="Node2D" instance=ExtResource("19_l852b")]
+position = Vector2(-143, 149)
 
 [connection signal="body_entered" from="Borders/Border" to="." method="_on_border_body_entered"]
 [connection signal="body_entered" from="Borders/Border2" to="." method="_on_border_body_entered"]

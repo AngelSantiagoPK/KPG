@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://da0mvmx244qbx"]
+
+[ext_resource type="Script" path="res://Scripts/Props/filament_pickup.gd" id="1_1h2ry"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmuja"]
+size = Vector2(17.5, 18)
+
+[node name="Filament_pickup" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_1h2ry")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.38419e-07, 1)
+scale = Vector2(0.768702, 0.793125)
+shape = SubResource("RectangleShape2D_lmuja")
+
+[node name="polygons" type="Node2D" parent="."]
+scale = Vector2(0.585204, 0.585596)
+
+[node name="Polygon2D2" type="Polygon2D" parent="polygons"]
+position = Vector2(-1.27693, 1.2169)
+scale = Vector2(0.631859, 0.64929)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-20.05, -0.0526308, -11.85, 12.5789, 0.438276, 19.6878, 13.775, 13.6316, 21.0125, 0, 14.8, -12.6842, 0, -18.8158, -11.85, -12.6842)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="polygons"]
+scale = Vector2(0.571089, 0.584615)
+color = Color(0.0705882, 0.309804, 1, 1)
+polygon = PackedVector2Array(-20.05, -0.0526308, -11.85, 12.5789, 0, 20.5263, 13.775, 13.6316, 21.0125, 0, 14.8, -12.6842, 0, -18.8158, -11.85, -12.6842)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D3" type="Polygon2D" parent="polygons"]
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(0.361872, 0.360073)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-20.05, -0.0526308, -11.85, 12.5789, 0.438276, 19.6878, 13.775, 13.6316, 21.0125, 0, 14.8, -12.6842, 0, -18.8158, -11.85, -12.6842)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D4" type="Polygon2D" parent="polygons"]
+position = Vector2(4.44089e-16, 0)
+scale = Vector2(0.27996, 0.290399)
+color = Color(0.0705882, 0.309804, 1, 1)
+polygon = PackedVector2Array(-20.05, -0.0526308, -11.85, 12.5789, 0.438276, 19.6878, 13.775, 13.6316, 21.0125, 0, 14.8, -12.6842, 0, -18.8158, -11.85, -12.6842)
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

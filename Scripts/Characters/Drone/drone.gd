@@ -20,7 +20,7 @@ const EXPLOSION = preload("res://Scenes/Components/explosion_area.tscn")
 @onready var fly_animator: AnimationPlayer = %FlyAnimator
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var remote: RemoteTransform2D = $RemoteTransform2D
-@onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
+@onready var camera_ref: String = get_tree().get_first_node_in_group("Camera2D").get_path()
 
 # Functions
 func _ready() -> void:

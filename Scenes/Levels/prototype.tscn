@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dys3v30m52x67"]
+[gd_scene load_steps=36 format=3 uid="uid://dys3v30m52x67"]
 
 [ext_resource type="Texture2D" uid="uid://dfijrhi1a1x40" path="res://Textures/Tiles/Ground.png" id="1_m83gm"]
 [ext_resource type="Texture2D" uid="uid://dtgfhxea5ctv7" path="res://Textures/Tiles/Waterfall.png" id="1_p228c"]
@@ -9,14 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://daotvtptr6kby" path="res://Scenes/Characters/bat.tscn" id="4_mrihv"]
 [ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="5_cyf1f"]
 [ext_resource type="Texture2D" uid="uid://tjcbe8yuu2sc" path="res://Textures/Tiles/Cave.png" id="5_n36lt"]
-[ext_resource type="PackedScene" uid="uid://2b2xfq1mesyu" path="res://Scenes/UI/bullet_ui.tscn" id="6_0pre2"]
 [ext_resource type="Texture2D" uid="uid://dh70tt12v5kly" path="res://Textures/Tiles/Cave Ceiling.png" id="6_sne1g"]
 [ext_resource type="Script" path="res://Scripts/Components/Camera2D.gd" id="8_4rwra"]
-[ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="10_1b5sh"]
-[ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="14_p7fqh"]
-[ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="15_1wrpn"]
+[ext_resource type="PackedScene" uid="uid://g6ua55ckmage" path="res://Scenes/UI/ui_prototype.tscn" id="12_h28hu"]
 [ext_resource type="PackedScene" uid="uid://bj21w4yegpyrc" path="res://Scenes/Props/printer.tscn" id="18_h3mis"]
 [ext_resource type="Texture2D" uid="uid://b2y0y38ayncla" path="res://Textures/Props/Checkpoint.png" id="18_jwh8p"]
+[ext_resource type="PackedScene" uid="uid://da0mvmx244qbx" path="res://Scenes/Props/filament_pickup.tscn" id="19_bqn50"]
 [ext_resource type="PackedScene" uid="uid://bd5hdyqs2eiwd" path="res://Scenes/Props/destructible.tscn" id="19_fb7k4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkdbp"]
@@ -691,35 +689,6 @@ max_health = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3y1q"]
 size = Vector2(1438, 20)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyct"]
-shader = ExtResource("15_1wrpn")
-shader_parameter/r_displacement = Vector2(6, 0)
-shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(-6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ox8l"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx8cg"]
-bg_color = Color(0.6, 0.6, 0.6, 0.627451)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjb65"]
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6dbr0"]
-bg_color = Color(0.6, 0.6, 0.6, 0.313726)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
 [node name="Prototype" type="Node2D"]
 script = ExtResource("1_rt60y")
 
@@ -924,43 +893,8 @@ collision_mask = 2
 position = Vector2(6.99826, -482)
 shape = SubResource("RectangleShape2D_g3y1q")
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="BulletUI" parent="UI" instance=ExtResource("6_0pre2")]
-
-[node name="HealthBar" parent="UI" instance=ExtResource("10_1b5sh")]
-
-[node name="ChromaticAbberation" type="ColorRect" parent="UI"]
+[node name="UI" parent="." instance=ExtResource("12_h28hu")]
 visible = false
-material = SubResource("ShaderMaterial_xqyct")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MainMenu" type="Button" parent="UI"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -20.0
-offset_right = 175.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-mouse_filter = 1
-theme_override_fonts/font = ExtResource("14_p7fqh")
-theme_override_font_sizes/font_size = 46
-theme_override_styles/focus = SubResource("StyleBoxFlat_0ox8l")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jx8cg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_yjb65")
-theme_override_styles/normal = SubResource("StyleBoxFlat_6dbr0")
-text = "Main Menu"
 
 [node name="Destructibles" type="Node2D" parent="."]
 
@@ -988,9 +922,23 @@ position = Vector2(781, 224)
 [node name="Player" parent="." instance=ExtResource("3_6w6er")]
 position = Vector2(698, 214)
 
+[node name="Test_Filaments" type="Node2D" parent="."]
+
+[node name="Filament_pickup" parent="Test_Filaments" instance=ExtResource("19_bqn50")]
+position = Vector2(556, 214)
+
+[node name="Filament_pickup2" parent="Test_Filaments" instance=ExtResource("19_bqn50")]
+position = Vector2(584, 214)
+
+[node name="Filament_pickup3" parent="Test_Filaments" instance=ExtResource("19_bqn50")]
+position = Vector2(1025, 212)
+
+[node name="Filament_pickup4" parent="Test_Filaments" instance=ExtResource("19_bqn50")]
+position = Vector2(1053, 212)
+
+[node name="UI2" parent="." instance=ExtResource("12_h28hu")]
+
 [connection signal="body_entered" from="Borders/Border" to="." method="_on_border_body_entered"]
 [connection signal="body_entered" from="Borders/Border2" to="." method="_on_border_body_entered"]
 [connection signal="body_entered" from="Borders/Border3" to="." method="_on_border_body_entered"]
 [connection signal="body_entered" from="Borders/Border4" to="." method="_on_border_body_entered"]
-[connection signal="button_up" from="UI/MainMenu" to="." method="_on_main_menu_button_up"]
-[connection signal="mouse_entered" from="UI/MainMenu" to="." method="_on_main_menu_mouse_entered"]

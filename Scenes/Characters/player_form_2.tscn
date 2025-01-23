@@ -367,7 +367,7 @@ visible = false
 position = Vector2(6, -2)
 gizmo_extents = 2.0
 
-[node name="Hurtbox" parent="." instance=ExtResource("6_tvf5k")]
+[node name="Hurtbox" parent="." groups=["Player"] instance=ExtResource("6_tvf5k")]
 monitoring = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
