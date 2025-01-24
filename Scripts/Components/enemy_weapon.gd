@@ -10,7 +10,6 @@ enum Types {
 	}
 
 @export var type = Types.Nothing
-var data_list = []
 var weapon_data : WeaponStats
 
 func load_data():
@@ -28,13 +27,15 @@ func load_data():
 			weapon_data = load("res://Data/Enemy Weapon Data/Shouldergun_data.tres")
 		5:
 			weapon_data = load("res://Data/Enemy Weapon Data/Fireblaster_data.tres")
-			
+		
 			
 func _ready() -> void:
 	load_data()
+	$Pivot/Pistol.texture = weapon_data.sprite
 	$Label.text = weapon_data.debug_name
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+	
