@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://dgari2735jno4"]
+
+[ext_resource type="PackedScene" uid="uid://c6dl8ag8yhskq" path="res://Scenes/Props/bullet.tscn" id="1_tdhds"]
+[ext_resource type="Script" path="res://Scripts/Resources/weapon_stats.gd" id="2_anf4t"]
+
+[resource]
+script = ExtResource("2_anf4t")
+projectile_damage = 5
+rate_of_fire = 10
+clip_size = 5
+bullet_type = ExtResource("1_tdhds")
+debug_name = "Fireblaster"

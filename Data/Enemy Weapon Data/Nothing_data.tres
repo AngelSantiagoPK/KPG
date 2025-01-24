@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://coy4i313k3lmc"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/weapon_stats.gd" id="2_72p6r"]
+
+[resource]
+script = ExtResource("2_72p6r")
+projectile_damage = 0
+rate_of_fire = 0
+clip_size = 0
+debug_name = "Nothing"

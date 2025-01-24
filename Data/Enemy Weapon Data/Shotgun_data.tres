@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://brhkg8dikssev"]
+
+[ext_resource type="PackedScene" uid="uid://c6dl8ag8yhskq" path="res://Scenes/Props/bullet.tscn" id="1_8gph6"]
+[ext_resource type="Script" path="res://Scripts/Resources/weapon_stats.gd" id="2_w4cxl"]
+
+[resource]
+script = ExtResource("2_w4cxl")
+projectile_damage = 5
+rate_of_fire = 10
+clip_size = 5
+bullet_type = ExtResource("1_8gph6")
+debug_name = "Shotgun"
