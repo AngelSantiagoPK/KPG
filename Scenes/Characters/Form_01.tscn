@@ -1,8 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://0v7oppt2d3q4"]
+[gd_scene load_steps=29 format=3 uid="uid://c346pdsapopnn"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_1.gd" id="1_p8eyj"]
-[ext_resource type="Resource" uid="uid://c3rimvfa8b25k" path="res://Data/Movement Data/Form_1.tres" id="2_s5ise"]
-[ext_resource type="Resource" uid="uid://bhj5x1p368ng5" path="res://Data/Stats/Form_1_Stats.tres" id="3_alqre"]
+[ext_resource type="Resource" path="res://Data/Movement Data/Form_1.tres" id="2_y3svm"]
+[ext_resource type="Resource" path="res://Data/Stats/Form_1_Stats.tres" id="3_3l53u"]
 [ext_resource type="PackedScene" path="res://Scenes/Components/wallclimb_box.tscn" id="4_ownlq"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="5_kg6ca"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="6_dyw3d"]
@@ -307,8 +307,8 @@ _data = {
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_p8eyj")
-movement_data = ExtResource("2_s5ise")
-stats = ExtResource("3_alqre")
+movement_data = ExtResource("2_y3svm")
+stats = ExtResource("3_3l53u")
 
 [node name="wallclimb_box" parent="." instance=ExtResource("4_ownlq")]
 
@@ -317,6 +317,10 @@ material = SubResource("ShaderMaterial_nbr8w")
 sprite_frames = SubResource("SpriteFrames_bx4yl")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="Polygon2D" type="Polygon2D" parent="AnimatedSprite2D"]
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(-7, -14, 4, -12, 6, -8, 4, -5, -4, -5, -4, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -356,14 +360,6 @@ libraries = {
 "": SubResource("AnimationLibrary_hl060")
 }
 autoplay = "Normal"
-
-[node name="provisional_id_label" type="Label" parent="."]
-offset_left = 4.0
-offset_top = -25.0
-offset_right = 58.0
-offset_bottom = -2.0
-scale = Vector2(0.678104, 0.690917)
-text = "Form 1"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false

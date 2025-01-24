@@ -1,8 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://cywb36cd3dsqb"]
+[gd_scene load_steps=29 format=3 uid="uid://dg4etu8go2bfu"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
-[ext_resource type="Resource" uid="uid://bpqco137xcy6p" path="res://Data/Movement Data/NPC_Movement_Data.tres" id="2_oau2w"]
-[ext_resource type="Resource" uid="uid://bkc4vhmxili37" path="res://Data/Stats/Form_2_Stats.tres" id="3_o40tt"]
+[ext_resource type="Resource" path="res://Data/Movement Data/template_player.tres" id="2_niton"]
+[ext_resource type="Resource" uid="uid://cq40rbqk36c5a" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_tvf5k"]
@@ -338,8 +338,8 @@ _data = {
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_i8duy")
-movement_data = ExtResource("2_oau2w")
-stats = ExtResource("3_o40tt")
+movement_data = ExtResource("2_niton")
+stats = ExtResource("3_1a5h7")
 shot_size = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -347,6 +347,10 @@ material = SubResource("ShaderMaterial_nbr8w")
 sprite_frames = SubResource("SpriteFrames_bx4yl")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="Polygon2D" type="Polygon2D" parent="AnimatedSprite2D"]
+color = Color(1, 0.129412, 0, 1)
+polygon = PackedVector2Array(-7, -3, -3, -6, -1, -5, 0, -4, 2, -4, 3, -4, 4, -5, 5, -4, 5, -3, 3, -3, 1, -3, -1, -4, -3, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -386,14 +390,6 @@ libraries = {
 "": SubResource("AnimationLibrary_hl060")
 }
 autoplay = "Normal"
-
-[node name="provisional_id_label" type="Label" parent="."]
-offset_left = 4.0
-offset_top = -25.0
-offset_right = 58.0
-offset_bottom = -2.0
-scale = Vector2(0.678104, 0.690917)
-text = "Form 2"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false

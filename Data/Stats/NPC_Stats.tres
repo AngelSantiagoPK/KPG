@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://di8hrfibjt4t2"]
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://begns4ptaj643"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="1_xtwjb"]
 

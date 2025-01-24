@@ -11,7 +11,7 @@ var target_in_range = null
 func can_see_player():
 	return player != null
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if owner.short_vision.player:
 		player = null
 		return
@@ -36,6 +36,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(body: Node2D) -> void:
-	long_ray.enabled = false
-	target_in_range = null
-	player = null
+	if body.is_in_group("Player"):
+		long_ray.enabled = false
+		target_in_range = null
+		player = null

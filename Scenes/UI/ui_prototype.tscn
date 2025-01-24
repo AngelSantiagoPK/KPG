@@ -1,0 +1,294 @@
+[gd_scene load_steps=14 format=3 uid="uid://cbcrnnlkxatpy"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ui_container.gd" id="1_2aipp"]
+[ext_resource type="PackedScene" uid="uid://2b2xfq1mesyu" path="res://Scenes/UI/bullet_ui.tscn" id="1_6uvug"]
+[ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="2_uklrn"]
+[ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="3_d8smw"]
+[ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="4_hhywj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4c4s"]
+bg_color = Color(1, 0.341088, 0.295625, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2mss"]
+bg_color = Color(0, 0.721655, 0.300748, 1)
+
+[sub_resource type="Theme" id="Theme_t1fdf"]
+ProgressBar/font_sizes/font_size = 13
+ProgressBar/styles/background = SubResource("StyleBoxFlat_i4c4s")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_p2mss")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyct"]
+shader = ExtResource("3_d8smw")
+shader_parameter/r_displacement = Vector2(6, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ox8l"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx8cg"]
+bg_color = Color(0.6, 0.6, 0.6, 0.627451)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjb65"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6dbr0"]
+bg_color = Color(0.6, 0.6, 0.6, 0.313726)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_2aipp")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Ammo_group" type="Control" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 191.0
+offset_top = -21.0
+offset_right = 191.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ammo_panel" type="Panel" parent="NinePatchRect/Ammo_group"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = 1.0
+offset_right = 129.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Ammo" type="Label" parent="NinePatchRect/Ammo_group/ammo_panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 67.0
+offset_bottom = 29.0
+scale = Vector2(0.276478, 0.276478)
+text = "Ammo:"
+
+[node name="BulletUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 47.0
+offset_top = -135.0
+offset_right = 47.0
+offset_bottom = 165.0
+scale = Vector2(1, 1)
+
+[node name="Bullet_rifleUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
+modulate = Color(1, 0.270588, 0, 1)
+layout_direction = 2
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 67.0
+offset_top = -135.0
+offset_right = 67.0
+offset_bottom = 165.0
+scale = Vector2(1, 1)
+
+[node name="ShellsUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
+modulate = Color(0, 0.541176, 1, 1)
+layout_direction = 2
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 89.0
+offset_top = -135.0
+offset_right = 89.0
+offset_bottom = 165.0
+scale = Vector2(1, 1)
+
+[node name="Tank_BulletUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
+layout_direction = 2
+layout_mode = 2
+anchors_preset = 0
+offset_left = 54.0
+offset_top = 6.0
+offset_right = 54.0
+offset_bottom = 6.0
+
+[node name="DronesUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
+layout_direction = 2
+layout_mode = 2
+anchors_preset = 0
+offset_left = 74.0
+offset_top = 6.0
+offset_right = 74.0
+offset_bottom = 6.0
+
+[node name="Filament_group" type="Control" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -91.0
+offset_right = 1.0
+offset_bottom = 269.0
+grow_vertical = 0
+size_flags_horizontal = 0
+
+[node name="filament_panel" type="Panel" parent="NinePatchRect/Filament_group"]
+layout_mode = 0
+offset_right = 39.0
+offset_bottom = 90.0
+scale = Vector2(1.18796, 1.00619)
+
+[node name="filament_progress_status" type="ProgressBar" parent="NinePatchRect/Filament_group"]
+layout_mode = 0
+offset_left = 5.51213
+offset_top = 38.5849
+offset_right = 12.5121
+offset_bottom = 77.5849
+scale = Vector2(4.88666, 1.18536)
+size_flags_vertical = 3
+theme = SubResource("Theme_t1fdf")
+step = 1.0
+value = 90.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Printing_progress" type="Label" parent="NinePatchRect/Filament_group"]
+layout_mode = 0
+offset_left = 5.51213
+offset_top = 27.5606
+offset_right = 126.512
+offset_bottom = 50.5606
+scale = Vector2(0.276478, 0.276478)
+text = "Printing status"
+
+[node name="Filament" type="Label" parent="NinePatchRect/Filament_group"]
+layout_mode = 0
+offset_left = 5.51213
+offset_top = 4.1341
+offset_right = 126.512
+offset_bottom = 27.1341
+scale = Vector2(0.276478, 0.276478)
+text = "Filament left: "
+
+[node name="Healthbar_group" type="Control" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 8.0
+offset_right = 648.0
+offset_bottom = 360.0
+
+[node name="Healthbar_panel" type="Panel" parent="NinePatchRect/Healthbar_group"]
+layout_mode = 0
+offset_right = 79.0
+offset_bottom = 22.0
+
+[node name="HealthBar" parent="NinePatchRect/Healthbar_group" instance=ExtResource("2_uklrn")]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 3.0
+scale = Vector2(0.37867, 0.37867)
+
+[node name="Score_group" type="Control" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 1.0
+offset_right = -80.0
+offset_bottom = 361.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+
+[node name="Score_panel" type="Panel" parent="NinePatchRect/Score_group"]
+layout_mode = 0
+offset_right = 79.0
+offset_bottom = 22.0
+metadata/_edit_lock_ = true
+
+[node name="Score" type="Label" parent="NinePatchRect/Score_group"]
+layout_mode = 0
+offset_left = 9.00003
+offset_top = 6.0
+offset_right = 130.0
+offset_bottom = 29.0
+scale = Vector2(0.276478, 0.276478)
+text = "Total Score:"
+
+[node name="ChromaticAbberation" type="ColorRect" parent="NinePatchRect"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_xqyct")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="Button" parent="NinePatchRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -30.0
+offset_right = 115.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_hhywj")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/focus = SubResource("StyleBoxFlat_0ox8l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jx8cg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yjb65")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6dbr0")
+text = "Main Menu"
+
+[connection signal="button_up" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_button_up"]
+[connection signal="mouse_entered" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_mouse_entered"]

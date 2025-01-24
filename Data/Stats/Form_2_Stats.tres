@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://bkc4vhmxili37"]
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://cq40rbqk36c5a"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="1_djisa"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_djisa")
 max_health = 10

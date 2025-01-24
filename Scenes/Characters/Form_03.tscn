@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjhsifphtlmrq"]
+[gd_scene load_steps=9 format=3 uid="uid://cgicyr516mwt7"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_r56uj"]
-[ext_resource type="Resource" uid="uid://7g1r3pabyaj1" path="res://Data/Movement Data/Form_3.tres" id="2_pq5n8"]
-[ext_resource type="Resource" uid="uid://dvb3gjwjg75ht" path="res://Data/Stats/Form_3_Stats.tres" id="3_xl8j4"]
+[ext_resource type="Resource" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
+[ext_resource type="Resource" uid="uid://b12etqlr7188t" path="res://Data/Stats/Form_3_Stats.tres" id="3_2knpp"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uk43i"]
 [ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="5_oesr5"]
 [ext_resource type="AudioStream" uid="uid://dxwi3v4rp7roj" path="res://Audio/Sounds/sx_int_tank_move.ogg" id="6_aliae"]
@@ -20,8 +20,8 @@ stream_1/volume = -60.0
 [node name="Form_03" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_r56uj")
-movement_data = ExtResource("2_pq5n8")
-stats = ExtResource("3_xl8j4")
+movement_data = ExtResource("2_e2wnv")
+stats = ExtResource("3_2knpp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
