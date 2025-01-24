@@ -8,7 +8,8 @@ extends CharacterBody2D
 #Refrences
 @onready var start_position : Vector2 = global_position
 @onready var target_position : Vector2 = global_position
-@onready var player_detection_zone : Area2D = $PlayerDetectionZone
+@onready var long_vision: Area2D = $LongVision
+@onready var short_vision: Area2D = $ShortVision
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox : Area2D = $Hitbox
 @onready var hit_animator : AnimationPlayer = $HitAnimationPlayer
@@ -18,11 +19,12 @@ extends CharacterBody2D
 @onready var health_bar : TextureProgressBar = $HealthBar
 @onready var health_bar_timer : Timer = $HealthBar/HealthBarTimer
 @onready var sprite_poly: Node2D = $SpritePoly
+@onready var label: Label = $Label
 
 func _ready():
 	stats.health = stats.max_health
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	hitbox.knockback_vector = velocity.normalized() #Updating the knockback vector
 	move_and_slide()
 

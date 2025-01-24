@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c5cckeifafyhy"]
+[gd_scene load_steps=40 format=3 uid="uid://c5cckeifafyhy"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc.gd" id="1_2pthx"]
 [ext_resource type="Resource" uid="uid://bpqco137xcy6p" path="res://Data/Movement Data/NPC_Movement_Data.tres" id="2_ncj6b"]
@@ -8,14 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://ck6k0r0tymmak" path="res://Textures/UI/Emote.png" id="6_tvidh"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="7_g5exc"]
 [ext_resource type="PackedScene" uid="uid://bkp0gna2taagk" path="res://Scenes/Components/hitbox.tscn" id="8_8nuhm"]
-[ext_resource type="PackedScene" uid="uid://ivuenv50bi35" path="res://Scenes/Components/player_detection_zone.tscn" id="9_lo4tl"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/short_vision.gd" id="10_gqt3k"]
 [ext_resource type="Texture2D" uid="uid://6jebehbxdvj3" path="res://Textures/UI/Bat Health Bar Empty.png" id="10_urbue"]
 [ext_resource type="Texture2D" uid="uid://e7mb2pjdc27o" path="res://Textures/UI/Bat Health Bar.png" id="11_q56f7"]
 [ext_resource type="Script" path="res://Scripts/Components/state_machine.gd" id="12_l3v10"]
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_idle.gd" id="13_cmjk1"]
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_wander.gd" id="14_jtsd4"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_chase.gd" id="15_abrbh"]
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_attack.gd" id="15_lledl"]
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_death.gd" id="16_ti3h8"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_vision_long.gd" id="17_8d3af"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajkoe"]
 shader = ExtResource("4_csr7g")
@@ -79,8 +81,11 @@ size = Vector2(8, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oh2mm"]
 size = Vector2(8, 19)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wr5v4"]
-radius = 41.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3idx"]
+radius = 253.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7a38q"]
+radius = 141.057
 
 [sub_resource type="Gradient" id="Gradient_s1rbn"]
 colors = PackedColorArray(0.0742188, 0.0742188, 0.0742188, 1, 0, 0, 0, 0)
@@ -287,12 +292,39 @@ visible = false
 position = Vector2(-1, -9.5)
 shape = SubResource("RectangleShape2D_oh2mm")
 
-[node name="PlayerDetectionZone" parent="." instance=ExtResource("9_lo4tl")]
+[node name="LongVision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("17_8d3af")
 
-[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LongVision"]
 visible = false
-position = Vector2(0, -17)
-shape = SubResource("CircleShape2D_wr5v4")
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_a3idx")
+
+[node name="LongRay" type="RayCast2D" parent="LongVision"]
+position = Vector2(0, -15)
+enabled = false
+target_position = Vector2(250, 0)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="ShortVision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("10_gqt3k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShortVision"]
+visible = false
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_7a38q")
+
+[node name="ShortRay" type="RayCast2D" parent="ShortVision"]
+position = Vector2(0, -15)
+enabled = false
+target_position = Vector2(142, 0)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="BlackDeathParticle" type="GPUParticles2D" parent="."]
 emitting = false
@@ -304,9 +336,9 @@ explosiveness = 1.0
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 visible = false
 offset_left = -4.0
-offset_top = -8.0
+offset_top = -27.0
 offset_right = 36.0
-offset_bottom = 32.0
+offset_bottom = 13.0
 max_value = 3.0
 value = 3.0
 texture_under = ExtResource("10_urbue")
@@ -337,11 +369,21 @@ process_callback = 0
 wait_time = 0.5
 one_shot = true
 
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("15_abrbh")
+
+[node name="Timer" type="Timer" parent="StateMachine/Chase"]
+wait_time = 2.0
+
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("15_lledl")
 
 [node name="Timer" type="Timer" parent="StateMachine/Attack"]
 process_callback = 0
+one_shot = true
+
+[node name="GunDelay" type="Timer" parent="StateMachine/Attack"]
+wait_time = 0.5
 one_shot = true
 
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("black_death_particle")]
@@ -358,13 +400,24 @@ libraries = {
 }
 autoplay = "Normal"
 
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -45.0
+offset_right = 20.0
+offset_bottom = -22.0
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="LongVision" to="LongVision" method="_on_body_entered"]
+[connection signal="body_exited" from="LongVision" to="LongVision" method="_on_body_exited"]
+[connection signal="body_entered" from="ShortVision" to="ShortVision" method="_on_body_entered"]
+[connection signal="body_exited" from="ShortVision" to="ShortVision" method="_on_body_exited"]
 [connection signal="timeout" from="HealthBar/HealthBarTimer" to="." method="_on_health_bar_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Wander/Timer" to="StateMachine/Wander" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Chase/Timer" to="StateMachine/Chase" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Attack/Timer" to="StateMachine/Attack" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Attack/GunDelay" to="StateMachine/Attack" method="_on_gun_delay_timeout"]
 [connection signal="timeout" from="StateMachine/Death/Timer" to="StateMachine/Death" method="_on_timer_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]
-[editable path="PlayerDetectionZone"]
