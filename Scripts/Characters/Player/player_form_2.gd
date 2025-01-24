@@ -6,6 +6,7 @@ var bullets_amount : int = 50
 var shells_amount : int = 20
 
 @export var movement_data : MovementData
+@export var fillament_data: FillamentData
 @export var stats : Stats
 var active: bool = true
 var can_shoot: bool = true
@@ -181,8 +182,7 @@ func die():
 	var death_particle = death_particle_load.instantiate()
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
-	EventManager.player_died.emit()
-	queue_free()
+	EventManager.form_destroyed.emit()
 
 func _on_rifle_delay_timeout() -> void:
 	can_shoot = true

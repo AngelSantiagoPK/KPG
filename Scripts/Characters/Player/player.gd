@@ -24,7 +24,7 @@ var bullets_amount : int = 30
 @onready var death_particle_load : PackedScene = preload("res://Scenes/Particles/player_death_particle.tscn")
 
 func _ready():
-	#stats.health = stats.max_health
+	stats.health = stats.max_health
 	EventManager.bullets_amount = bullets_amount
 	EventManager.update_bullet_ui.emit()
 
@@ -124,8 +124,7 @@ func die():
 	var death_particle = death_particle_load.instantiate()
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
-	EventManager.player_died.emit()
-	queue_free()
+	EventManager.form_destroyed.emit()
 
 func active_camera(activation: bool) -> void:
 	if activation:

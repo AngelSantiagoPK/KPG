@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbcrnnlkxatpy"]
+[gd_scene load_steps=15 format=3 uid="uid://cbcrnnlkxatpy"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_container.gd" id="1_2aipp"]
 [ext_resource type="PackedScene" uid="uid://2b2xfq1mesyu" path="res://Scenes/UI/bullet_ui.tscn" id="1_6uvug"]
@@ -16,6 +16,16 @@ bg_color = Color(0, 0.721655, 0.300748, 1)
 ProgressBar/font_sizes/font_size = 13
 ProgressBar/styles/background = SubResource("StyleBoxFlat_i4c4s")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_p2mss")
+
+[sub_resource type="GDScript" id="GDScript_i3mh6"]
+script/source = "extends Label
+
+func _ready() -> void:
+	EventManager.update_fillament_ui.connect(on_update_fillament_ui)
+	
+func on_update_fillament_ui() -> void:
+	self.text = str(EventManager.fillament_amount)
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyct"]
 shader = ExtResource("3_d8smw")
@@ -47,6 +57,7 @@ border_width_right = 2
 border_width_bottom = 2
 
 [node name="UI" type="CanvasLayer"]
+layer = 0
 script = ExtResource("1_2aipp")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -206,6 +217,16 @@ offset_right = 126.512
 offset_bottom = 27.1341
 scale = Vector2(0.276478, 0.276478)
 text = "Filament left: "
+
+[node name="FilamentNumber" type="Label" parent="NinePatchRect/Filament_group"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 15.0
+offset_right = 127.0
+offset_bottom = 38.0
+scale = Vector2(0.276478, 0.276478)
+text = "0"
+script = SubResource("GDScript_i3mh6")
 
 [node name="Healthbar_group" type="Control" parent="NinePatchRect"]
 layout_mode = 1

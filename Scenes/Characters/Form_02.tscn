@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://dg4etu8go2bfu"]
+[gd_scene load_steps=30 format=3 uid="uid://dg4etu8go2bfu"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
 [ext_resource type="Resource" path="res://Data/Movement Data/template_player.tres" id="2_niton"]
 [ext_resource type="Resource" uid="uid://cq40rbqk36c5a" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
+[ext_resource type="Resource" uid="uid://dgvi5sx4i7sao" path="res://Data/Fillament Data/Form_02_Fillament_Data.tres" id="3_gqp4l"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_tvf5k"]
@@ -339,6 +340,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_i8duy")
 movement_data = ExtResource("2_niton")
+fillament_data = ExtResource("3_gqp4l")
 stats = ExtResource("3_1a5h7")
 shot_size = 8
 

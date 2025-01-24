@@ -4,6 +4,7 @@ extends CharacterBody2D
 #Data
 var bullets_amount : int = 30
 @export var movement_data : MovementData
+@export var fillament_data: FillamentData
 @export var stats : Stats
 
 # Variables
@@ -125,7 +126,7 @@ func animate(input_vector):
 				animator.play("Jump")
 
 func _on_hurtbox_area_entered(_area):
-	hit_animator.play("Hit")
+	hit_animator.set_deferred("play", "Hit")
 	EventManager.update_health_ui.emit()
 	if stats.health <= 0:
 		die()
@@ -138,5 +139,4 @@ func die():
 	var death_particle = death_particle_load.instantiate()
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
-	EventManager.player_died.emit()
-	queue_free()
+	EventManager.form_destroyed.emit()

@@ -16,6 +16,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		interactible = true
 		object = body
+		EventManager.last_printer = self
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -25,7 +26,7 @@ func _on_body_exited(body: Node2D) -> void:
 func print_form(form_number: int) -> void:
 	if not form_number is int:
 		return
-
+	
 	var form
 	match form_number:
 		1:
@@ -37,15 +38,33 @@ func print_form(form_number: int) -> void:
 	
 	form.global_position = printer_spawn_marker.global_position
 	get_tree().current_scene.add_child(form)
+	EventManager.current_form.queue_free()
 	form.active_camera(true)
-	object.active_camera(false)
-	object.queue_free()
+	EventManager.current_form = form
 
 func _on_form_01_pressed() -> void:
-	print_form(1)
+	const FORM_DATA = preload("res://Data/Fillament Data/Form_01_Fillament_Data.tres")
+	var cost = FORM_DATA.cost
+	if paid_fillament(cost) == true:
+		print_form(1)
 	
 func _on_form_02_pressed() -> void:
-	print_form(2)
+	const FORM_DATA = preload("res://Data/Fillament Data/Form_02_Fillament_Data.tres")
+	var cost = FORM_DATA.cost
+	if paid_fillament(cost) == true:
+		print_form(2)
 
 func _on_form_03_pressed() -> void:
-	print_form(3)
+	const FORM_DATA = preload("res://Data/Fillament Data/Form_03_Fillament_Data.tres")
+	var cost = FORM_DATA.cost
+	if paid_fillament(cost) == true:
+		print_form(3)
+
+func paid_fillament(cost: int) -> bool:
+	if EventManager.fillament_amount < cost:
+		return false
+
+	AudioManager.play_sound(AudioManager.MENU_CLICK)
+	EventManager.fillament_amount -= cost
+	EventManager.update_fillament_ui.emit()
+	return true

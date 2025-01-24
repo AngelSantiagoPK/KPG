@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FillamentData" load_steps=2 format=3 uid="uid://d36ewhelj2adx"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/fillament_data.gd" id="1_0a5bv"]
+
+[resource]
+script = ExtResource("1_0a5bv")
+cost = 0
+print_time = 60
+id = 3

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgicyr516mwt7"]
+[gd_scene load_steps=10 format=3 uid="uid://cgicyr516mwt7"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_r56uj"]
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
 [ext_resource type="Resource" uid="uid://b12etqlr7188t" path="res://Data/Stats/Form_3_Stats.tres" id="3_2knpp"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uk43i"]
+[ext_resource type="Resource" uid="uid://d36ewhelj2adx" path="res://Data/Fillament Data/Form_03_Fillament_Data.tres" id="4_x0fl5"]
 [ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="5_oesr5"]
 [ext_resource type="AudioStream" uid="uid://dxwi3v4rp7roj" path="res://Audio/Sounds/sx_int_tank_move.ogg" id="6_aliae"]
 
@@ -22,6 +23,7 @@ collision_layer = 2
 script = ExtResource("1_r56uj")
 movement_data = ExtResource("2_e2wnv")
 stats = ExtResource("3_2knpp")
+fillament_data = ExtResource("4_x0fl5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
