@@ -3,13 +3,12 @@
 class_name Form_03
 extends CharacterBody2D
 
-# Signals
-signal tank_died
-
 # Variables
 var bullets_amount : int = 50
 @export var movement_data : MovementData
 @export var stats : Stats
+@export var fillament_data: FillamentData
+
 @export var active: bool = true
 var can_shoot: bool = true
 var drone_ready: bool = true
@@ -152,8 +151,7 @@ func die() -> void:
 	var death_particle = death_particle_load.instantiate()
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
-	tank_died.emit()
-	queue_free()
+	EventManager.form_destroyed.emit()
 
 # Label Functions
 func overheat_message() -> void:
