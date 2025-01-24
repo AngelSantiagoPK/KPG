@@ -14,6 +14,7 @@ var bullets_amount : int = 50
 var can_shoot: bool = true
 var drone_ready: bool = true
 var overheated: bool = false
+@export var camera: Camera2D
 
 # References
 @onready var gun: Node2D = $Gun
@@ -130,6 +131,7 @@ func deploy_drone() -> void:
 func active_camera(activation: bool) -> void:
 	if activation:
 		remote.remote_path = camera_ref
+		camera = get_tree().current_scene.find_child("Camera", false, false)
 	else:
 		remote.remote_path = ""
 
@@ -139,6 +141,11 @@ func back_to_tank(drone: Node) -> void:
 	
 	drone.active = false
 	self.active = true
+
+func small_shake():
+	if not camera:
+		return
+	camera.small_shake()
 
 func die() -> void:
 	AudioManager.play_sound(AudioManager.DEATH)

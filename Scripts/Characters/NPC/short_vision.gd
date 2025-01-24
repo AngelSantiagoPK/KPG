@@ -12,7 +12,7 @@ var target_in_range = null
 func can_shoot_player():
 	return player != null
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if target_in_range != null:
 		check_ray()
 
@@ -33,6 +33,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(body: Node2D) -> void:
-	short_ray.enabled = false
-	target_in_range = null
-	player = null
+	if body.is_in_group("Player"):
+		short_ray.enabled = false
+		target_in_range = null
+		player = null
+	else:
+		return

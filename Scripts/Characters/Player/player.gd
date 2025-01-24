@@ -24,7 +24,7 @@ var bullets_amount : int = 30
 @onready var death_particle_load : PackedScene = preload("res://Scenes/Particles/player_death_particle.tscn")
 
 func _ready():
-	stats.health = stats.max_health
+	#stats.health = stats.max_health
 	EventManager.bullets_amount = bullets_amount
 	EventManager.update_bullet_ui.emit()
 

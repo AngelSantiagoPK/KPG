@@ -89,8 +89,10 @@ func shoot():
 	get_tree().current_scene.add_child(bullet)
 	AudioManager.play_sound(AudioManager.SHOOT)
 
-#func small_shake():
-#	camera.small_shake()
+func small_shake():
+	if not camera:
+		return
+	camera.small_shake()
 
 func active_camera(activation: bool) -> void:
 	if activation:

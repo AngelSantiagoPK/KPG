@@ -9,6 +9,7 @@ var shells_amount : int = 20
 @export var stats : Stats
 var active: bool = true
 var can_shoot: bool = true
+@export var camera: Camera2D
 
 @export_group("Shotgun Props")
 @export var shot_size: int = 6
@@ -109,7 +110,6 @@ func shoot():
 	get_tree().current_scene.add_child(bullet)
 	AudioManager.play_sound(AudioManager.SHOOT)
 
-
 func shoot_shell():
 	shells_amount -= 1
 	EventManager.shells_amount -= 1
@@ -132,8 +132,10 @@ func shoot_shell():
 	
 	AudioManager.play_sound(AudioManager.SHOOT)
 
-#func small_shake():
-#	camera.small_shake()
+func small_shake():
+	if not camera:
+		return
+	camera.small_shake()
 
 func animate(input_vector):
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
@@ -181,7 +183,6 @@ func die():
 	get_tree().current_scene.add_child(death_particle)
 	EventManager.player_died.emit()
 	queue_free()
-
 
 func _on_rifle_delay_timeout() -> void:
 	can_shoot = true
