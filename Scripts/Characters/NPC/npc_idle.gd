@@ -7,6 +7,7 @@ var target_range : int = 4
 @onready var timer : Timer = $Timer
 
 func enter(_msg := {}):
+	owner.label.text = "Idle"
 	start_timer()
 
 func physics_update(delta: float) -> void:
@@ -31,9 +32,12 @@ func accelerate_towards_point(point, delta):
 	owner.animator.flip_h = owner.velocity.x > 0
 
 func seek_player(): #Looks for player
-	if owner.player_detection_zone.can_see_player():
+	if owner.short_vision.can_shoot_player():
 		state_machine.transition_to("Attack")
-		pass
+		return
+	if owner.long_vision.can_see_player():
+		state_machine.transition_to("Chase")
+		return
 
 func start_timer():
 	timer.wait_time = randi_range(1, 5)

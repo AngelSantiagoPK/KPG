@@ -8,6 +8,7 @@ var wander_target_range : int = 4
 @onready var timer : Timer = $Timer
 
 func enter(_msg := {}):
+	owner.label.text = "Wander"
 	update_target_position()
 
 func physics_update(delta: float) -> void:
@@ -28,13 +29,15 @@ func apply_friction(delta):
 
 func update_target_position(): #Picks a random position to move to
 	var target_vector : Vector2 = Vector2(randi_range(-wander_range, wander_range), 0)
-	var target_pos = owner.global_position + target_vector
-	owner.target_position = target_pos
+	owner.target_position += target_vector
 
 func seek_player():
-	if owner.player_detection_zone.can_see_player():
+	if owner.short_vision.can_shoot_player():
 		state_machine.transition_to("Attack")
-		pass
+		return
+	if owner.long_vision.can_see_player():
+		state_machine.transition_to("Chase")
+		return
 
 func accelerate_towards_point(point, delta):
 	#Moving while wandering
@@ -46,7 +49,7 @@ func accelerate_towards_point(point, delta):
 	owner.animator.flip_h = owner.velocity.x > 0
 
 func start_timer():
-	timer.wait_time = randi_range(1, 5)
+	timer.wait_time = randi_range(1, 3)
 	timer.start()
 
 func _on_timer_timeout(): #Goes back to idle

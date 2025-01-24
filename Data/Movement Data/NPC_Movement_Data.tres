@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_e2h20")
-max_speed = 100
-acceleration = 500
-friction = 500
+max_speed = 60
+acceleration = 200
+friction = 1000
 gravity_scale = 1.0
 jump_strength = 250
 knockback_force = 50

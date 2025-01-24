@@ -1,42 +1,57 @@
 extends State
 
 #Data
-var target_position : Vector2
-var launch : bool = false
 var target_range : int = 4
+var target_position: Vector2
+var shooting: bool = true
 
 #Refrences
-@onready var timer : Timer = $Timer
+@onready var timer: Timer = $Timer
+@onready var gun_delay: Timer = $GunDelay
+@onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
+@onready var bullet_load : PackedScene = preload("res://Scenes/Props/bullet.tscn")
 
 func enter(_msg := {}):
-	owner.emote.visible = true
-	timer.start()
+	owner.label.text = "Attack"
+	start_timer()
 
 func physics_update(delta: float) -> void:
 	seek_player()
-	
-	if launch:
-		if owner.global_position.distance_to(target_position) <= target_range:
-			owner.emote.visible = true
-			if timer.is_stopped():
-				timer.start()
-			apply_friction(delta)
-		else:
-			accelerate_towards_point(target_position, delta)
-	else:
-		apply_friction(delta)
-		
+	apply_friction(delta)
+	if shooting:
+		shooting = false
+		gun_delay.start()
+		shoot()
 	owner.add_gravity(delta)
 
+func shoot():
+	var muzzle = muzzle_load.instantiate()
+	var bullet = bullet_load.instantiate()
+	add_child(muzzle)
+	if owner.short_vision.target_in_range == null:
+		return
+
+	var player_position = owner.short_vision.target_in_range.global_position
+	bullet.global_position = owner.global_position
+	bullet.global_position.y -= 30
+	bullet.target_vector = player_position.normalized()
+	bullet.look_at(player_position)
+	get_tree().current_scene.add_child(bullet)
+	AudioManager.play_sound(AudioManager.SHOOT)
+
+func start_timer():
+	timer.wait_time = randi_range(1, 2)
+	timer.start()
+
 func seek_player():
-	if not owner.player_detection_zone.can_see_player():
-		launch = false
+	if not owner.short_vision.can_shoot_player():
 		state_machine.transition_to("Idle")
+		return
 
 func accelerate_towards_point(point, delta):
 	#Moving to the start position
 	var direction = owner.global_position.direction_to(point).normalized()
-	owner.velocity = owner.velocity.move_toward(direction * (owner.movement_data.max_speed * 4), owner.movement_data.acceleration * delta)
+	owner.velocity = owner.velocity.move_toward(direction * owner.movement_data.max_speed, owner.movement_data.acceleration * delta)
 	
 	#Look where moving
 	owner.animator.flip_h = owner.velocity.x > 0
@@ -46,6 +61,10 @@ func apply_friction(delta):
 
 func _on_timer_timeout():
 	owner.emote.visible = false
-	if owner.player_detection_zone.player != null:
-		target_position = owner.player_detection_zone.player.global_position
-		launch = true
+	if owner.short_vision.player != null:
+		target_position = owner.short_vision.player.global_position
+		shooting = true
+
+
+func _on_gun_delay_timeout() -> void:
+	shooting = true

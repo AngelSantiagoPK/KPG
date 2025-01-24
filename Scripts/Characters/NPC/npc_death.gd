@@ -9,6 +9,7 @@ func enter(_msg := {}):
 	owner.collision.disabled = true
 	owner.animator.visible = false
 	owner.sprite_poly.visible = false
+	owner.label.hide()
 	black_death_particle.emitting = true
 	timer.start()
 	AudioManager.play_sound(AudioManager.DEATH)
