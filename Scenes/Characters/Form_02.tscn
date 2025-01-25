@@ -342,7 +342,6 @@ script = ExtResource("1_i8duy")
 movement_data = ExtResource("2_niton")
 fillament_data = ExtResource("3_gqp4l")
 stats = ExtResource("3_1a5h7")
-shot_size = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_nbr8w")
@@ -370,7 +369,6 @@ region_enabled = true
 region_rect = Rect2(160, 64, 16, 16)
 
 [node name="PistolBulletMarker" type="Marker2D" parent="Hand/Pivot/Pistol"]
-visible = false
 position = Vector2(6, -2)
 gizmo_extents = 2.0
 
@@ -393,13 +391,13 @@ libraries = {
 }
 autoplay = "Normal"
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-update_rotation = false
-update_scale = false
-
 [node name="RifleDelay" type="Timer" parent="."]
 wait_time = 0.14
 one_shot = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+update_rotation = false
+update_scale = false
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="RifleDelay" to="." method="_on_rifle_delay_timeout"]

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_khgc3")
-cost = 0
+cost = 10
 print_time = 25
 id = 1

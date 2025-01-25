@@ -62,10 +62,6 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-update_rotation = false
-update_scale = false
-
 [node name="Status" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
@@ -81,6 +77,10 @@ metadata/_edit_use_anchors_ = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_lsmpd")
 autoplay = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+update_rotation = false
+update_scale = false
 
 [connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]

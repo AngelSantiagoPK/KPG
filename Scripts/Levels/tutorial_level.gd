@@ -11,22 +11,20 @@ const MOUSE_OFFSET : Vector2 = Vector2(0, 0)
 # Functions
 func _ready() -> void:
 	EventManager.current_form = get_tree().get_first_node_in_group("Player")
-	EventManager.form_destroyed.connect(on_form_destroyed)
-	EventManager.player_died.connect(player_died)
+	EventManager._form_destroyed.connect(on_form_destroyed)
+	EventManager._player_died.connect(player_died)
 	EventManager.frame_freeze.connect(frame_freeze)
-	EventManager.current_form.active_camera(true)
 
 func on_form_destroyed() -> void:
 	var cost: int = EventManager.current_form.fillament_data.cost
-	if EventManager.last_printer and EventManager.fillament_amount >= cost:
-		EventManager.last_printer.print_form(EventManager.current_form.fillament_data.id)
-		# BUG: Fix this issue not changing the actual amount
-		EventManager.fillament_amount -= cost
-		EventManager.update_fillament_ui.emit()
+	if EventManager.last_printer and EventManager.backup_form:
+		EventManager._use_fillament(cost)
+		EventManager.swap_to_backup_form()
 	else:
 		player_died()
 
 func player_died():
+	EventManager.current_form.queue_free()
 	ui.layer = 1
 	ui.main_menu.set_deferred("visible", true)
 	DisplayServer.cursor_set_custom_image(MOUSE, DisplayServer.CURSOR_ARROW, MOUSE_OFFSET)

@@ -905,7 +905,6 @@ position = Vector2(6.99826, -482)
 shape = SubResource("RectangleShape2D_g3y1q")
 
 [node name="UI" parent="." instance=ExtResource("12_h28hu")]
-layer = 0
 
 [node name="Destructibles" type="Node2D" parent="."]
 

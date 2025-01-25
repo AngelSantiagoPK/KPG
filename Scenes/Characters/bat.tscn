@@ -188,6 +188,7 @@ _data = {
 
 [node name="Bat" type="CharacterBody2D" groups=["Bat"]]
 collision_layer = 4
+collision_priority = 2.0
 script = ExtResource("1_wokr1")
 movement_data = ExtResource("2_fpdmh")
 stats = ExtResource("3_b2bgq")

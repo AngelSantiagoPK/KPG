@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbcrnnlkxatpy"]
+[gd_scene load_steps=18 format=3 uid="uid://cbcrnnlkxatpy"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_container.gd" id="1_2aipp"]
 [ext_resource type="PackedScene" uid="uid://2b2xfq1mesyu" path="res://Scenes/UI/bullet_ui.tscn" id="1_6uvug"]
@@ -17,11 +17,42 @@ ProgressBar/font_sizes/font_size = 13
 ProgressBar/styles/background = SubResource("StyleBoxFlat_i4c4s")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_p2mss")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otpiv"]
+bg_color = Color(1, 1, 1, 0.0941176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81nx3"]
+bg_color = Color(3.27289e-06, 0.663468, 0.826942, 1)
+
+[sub_resource type="GDScript" id="GDScript_5o8ew"]
+script/source = "class_name FilamentProgressBar
+extends ProgressBar
+
+var limit_reached: bool = false
+
+func _physics_process(delta: float) -> void:
+	update_progress()
+
+func update_progress() -> void:
+	if not EventManager.backup_form:
+		value = 0
+		max_value = 100
+		return
+
+	var cost = EventManager.backup_form.fillament_data.cost
+	var wallet = EventManager.fillament_amount
+	max_value = cost
+	value = wallet
+	
+	if value >= max_value and not limit_reached:
+		limit_reached = true
+		AudioManager.play_sound(AudioManager.MENU_CLICK)
+"
+
 [sub_resource type="GDScript" id="GDScript_i3mh6"]
 script/source = "extends Label
 
 func _ready() -> void:
-	EventManager.update_fillament_ui.connect(on_update_fillament_ui)
+	EventManager._update_fillament_ui.connect(on_update_fillament_ui)
 	
 func on_update_fillament_ui() -> void:
 	self.text = str(EventManager.fillament_amount)
@@ -188,17 +219,21 @@ scale = Vector2(1.18796, 1.00619)
 
 [node name="filament_progress_status" type="ProgressBar" parent="NinePatchRect/Filament_group"]
 layout_mode = 0
-offset_left = 5.51213
-offset_top = 38.5849
-offset_right = 12.5121
-offset_bottom = 77.5849
+offset_left = 6.0
+offset_top = 38.0
+offset_right = 13.0
+offset_bottom = 77.0
 scale = Vector2(4.88666, 1.18536)
 size_flags_vertical = 3
 theme = SubResource("Theme_t1fdf")
+theme_override_styles/background = SubResource("StyleBoxFlat_otpiv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_81nx3")
+max_value = 10.0
 step = 1.0
-value = 90.0
+value = 5.0
 fill_mode = 3
 show_percentage = false
+script = SubResource("GDScript_5o8ew")
 
 [node name="Printing_progress" type="Label" parent="NinePatchRect/Filament_group"]
 layout_mode = 0
@@ -207,7 +242,7 @@ offset_top = 27.5606
 offset_right = 126.512
 offset_bottom = 50.5606
 scale = Vector2(0.276478, 0.276478)
-text = "Printing status"
+text = "Status"
 
 [node name="Filament" type="Label" parent="NinePatchRect/Filament_group"]
 layout_mode = 0
@@ -216,7 +251,7 @@ offset_top = 4.1341
 offset_right = 126.512
 offset_bottom = 27.1341
 scale = Vector2(0.276478, 0.276478)
-text = "Filament left: "
+text = "Filament: "
 
 [node name="FilamentNumber" type="Label" parent="NinePatchRect/Filament_group"]
 layout_mode = 0

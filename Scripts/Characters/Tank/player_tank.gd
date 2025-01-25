@@ -5,15 +5,15 @@ extends CharacterBody2D
 
 # Variables
 var bullets_amount : int = 50
+@export var camera: Camera2D
 @export var movement_data : MovementData
 @export var stats : Stats
 @export var fillament_data: FillamentData
 
-@export var active: bool = true
+@export var active: bool = false
 var can_shoot: bool = true
 var drone_ready: bool = true
 var overheated: bool = false
-@export var camera: Camera2D
 
 # References
 @onready var gun: Node2D = $Gun
@@ -124,20 +124,25 @@ func deploy_drone() -> void:
 	drone.active = true
 	drone.drone_exit.connect(func (): back_to_tank(drone))
 	drone.destroyed.connect(func (): back_to_tank(drone))
-	self.active_camera(false)
-	drone.active_camera(true)
 
-func active_camera(activation: bool) -> void:
-	if activation:
-		remote.remote_path = camera_ref
-		camera = get_tree().current_scene.find_child("Camera", false, false)
+func check_for_active_camera() -> void:
+	# Ensure get_tree() is valid (check if it exists)
+	var tree = get_tree()
+	if tree:
+		# Only attempt to access the camera if tree is valid
+		if active:
+			var camera = tree.get_first_node_in_group("Camera")
+			if camera:
+				remote.remote_path = camera.get_path()
+			else:
+				remote.remote_path = ""  # No camera in the group
+		else:
+			remote.remote_path = ""  # If not active, clear the path
 	else:
-		remote.remote_path = ""
+		# Handle the case where get_tree() is invalid
+		print("Error: Scene tree is not available.")
 
 func back_to_tank(drone: Node) -> void:
-	active_camera(true)
-	drone.remote.remote_path = ""
-	
 	drone.active = false
 	self.active = true
 
@@ -151,7 +156,7 @@ func die() -> void:
 	var death_particle = death_particle_load.instantiate()
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
-	EventManager.form_destroyed.emit()
+	EventManager._form_destroyed.emit()
 
 # Label Functions
 func overheat_message() -> void:
