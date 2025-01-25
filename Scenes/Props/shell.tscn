@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy8iosx0y0j3s"]
+[gd_scene load_steps=11 format=3 uid="uid://bncigqohdy43c"]
 
 [ext_resource type="Script" path="res://Scripts/Props/shell.gd" id="1_wt15w"]
 [ext_resource type="Texture2D" uid="uid://bjg5fygfb0yvm" path="res://Textures/Props/Bullet.png" id="2_g1jtw"]
@@ -43,7 +43,7 @@ color_ramp = SubResource("GradientTexture1D_ihv35")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bca47"]
 size = Vector2(2, 1)
 
-[node name="Shell" type="Area2D"]
+[node name="Shell" type="Area2D" groups=["Shell"]]
 collision_mask = 5
 script = ExtResource("1_wt15w")
 

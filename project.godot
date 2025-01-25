@@ -32,10 +32,6 @@ window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://Textures/UI/Mouse.png"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
-
 [global_group]
 
 Player=""
@@ -116,3 +112,4 @@ two={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

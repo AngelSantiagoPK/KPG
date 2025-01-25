@@ -20,8 +20,13 @@ func reduce_integrity(damage: int) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Bullet"):
+		self.reduce_integrity(2)
+		area.queue_free()
+	
+	if area.is_in_group("Shell"):
 		self.reduce_integrity(1)
 		area.queue_free()
+
 	if area.is_in_group("Explosion"):
 		self.reduce_integrity(area.damage)
 	

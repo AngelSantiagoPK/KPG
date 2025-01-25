@@ -3,14 +3,14 @@ extends CharacterBody2D
 
 #Data
 var bullets_amount : int = 30
+@export var camera : Camera2D
 @export var movement_data : MovementData
 @export var fillament_data: FillamentData
 @export var stats : Stats
 
 # Variables
-var active: bool = true
+@export var active: bool = false
 var wallclimb: bool = false
-@export var camera : Camera2D
 
 # Refrences
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D
@@ -26,13 +26,12 @@ var wallclimb: bool = false
 @onready var death_particle_load : PackedScene = preload("res://Scenes/Particles/player_death_particle.tscn")
 
 @onready var remote: RemoteTransform2D = $RemoteTransform2D
-@onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
 
 
 func _ready():
 	stats.health = stats.max_health
 	EventManager.bullets_amount = bullets_amount
-	EventManager.update_bullet_ui.emit()
+	EventManager._update_bullet_ui.emit()
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -79,7 +78,7 @@ func jump():
 func shoot():
 	bullets_amount -= 1
 	EventManager.bullets_amount -= 1
-	EventManager.update_bullet_ui.emit()
+	EventManager._update_bullet_ui.emit()
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
 	var muzzle = muzzle_load.instantiate()
 	var bullet = bullet_load.instantiate()
@@ -90,16 +89,27 @@ func shoot():
 	get_tree().current_scene.add_child(bullet)
 	AudioManager.play_sound(AudioManager.SHOOT)
 
+func check_for_active_camera() -> void:
+	# Ensure get_tree() is valid (check if it exists)
+	var tree = await get_tree()
+	if tree:
+		# Only attempt to access the camera if tree is valid
+		if active:
+			var camera = tree.get_first_node_in_group("Camera")
+			if camera:
+				remote.remote_path = camera.get_path()
+			else:
+				remote.remote_path = ""  # No camera in the group
+		else:
+			remote.remote_path = ""  # If not active, clear the path
+	else:
+		# Handle the case where get_tree() is invalid
+		print("Error: Scene tree is not available.")
+
 func small_shake():
 	if not camera:
 		return
 	camera.small_shake()
-
-func active_camera(activation: bool) -> void:
-	if activation:
-		remote.remote_path = camera_ref
-	else:
-		remote.remote_path = ""
 
 func animate(input_vector):
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
@@ -127,7 +137,7 @@ func animate(input_vector):
 
 func _on_hurtbox_area_entered(_area):
 	hit_animator.set_deferred("play", "Hit")
-	EventManager.update_health_ui.emit()
+	EventManager._update_health_ui.emit()
 	if stats.health <= 0:
 		die()
 	else:
@@ -139,4 +149,4 @@ func die():
 	var death_particle = death_particle_load.instantiate()
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
-	EventManager.form_destroyed.emit()
+	EventManager._form_destroyed.emit()

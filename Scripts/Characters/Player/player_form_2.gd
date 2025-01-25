@@ -5,12 +5,12 @@ extends CharacterBody2D
 var bullets_amount : int = 50
 var shells_amount : int = 20
 
+@export var camera : Camera2D
 @export var movement_data : MovementData
 @export var fillament_data: FillamentData
 @export var stats : Stats
-var active: bool = true
+@export var active: bool = false
 var can_shoot: bool = true
-@export var camera: Camera2D
 
 @export_group("Shotgun Props")
 @export var shot_size: int = 6
@@ -25,8 +25,7 @@ var can_shoot: bool = true
 @onready var pistol : Sprite2D = $Hand/Pivot/Pistol
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
 @onready var rifle_delay: Timer = $RifleDelay
-
-#@export var camera : Camera2D
+@onready var remote: RemoteTransform2D = $RemoteTransform2D
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -34,15 +33,13 @@ var can_shoot: bool = true
 @onready var shell_load : PackedScene = preload("res://Scenes/Props/shell.tscn")
 @onready var death_particle_load : PackedScene = preload("res://Scenes/Particles/player_death_particle.tscn")
 
-@onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
-@onready var remote: RemoteTransform2D = $RemoteTransform2D
-
 
 func _ready():
 	stats.health = stats.max_health
 	EventManager.bullets_amount = bullets_amount
 	EventManager.shells_amount = shells_amount
-	EventManager.update_bullet_ui.emit()
+	EventManager._update_bullet_ui.emit()
+	self.check_for_active_camera()
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -72,10 +69,10 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("interact"):
 		bullets_amount = 30
-		shells_amount = 50
+		shells_amount = 30
 		EventManager.bullets_amount = bullets_amount
 		EventManager.shells_amount = shells_amount
-		EventManager.update_bullet_ui.emit()
+		EventManager._update_bullet_ui.emit()
 
 	move_and_slide()
 	animate(input_vector)
@@ -100,7 +97,7 @@ func jump():
 func shoot():
 	bullets_amount -= 1
 	EventManager.bullets_amount -= 1
-	EventManager.update_bullet_ui.emit()
+	EventManager._update_bullet_ui.emit()
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
 	var muzzle = muzzle_load.instantiate()
 	var bullet = bullet_load.instantiate()
@@ -112,9 +109,9 @@ func shoot():
 	AudioManager.play_sound(AudioManager.SHOOT)
 
 func shoot_shell():
-	shells_amount -= 1
+	shells_amount -= shot_size
 	EventManager.shells_amount -= 1
-	EventManager.update_bullet_ui.emit()
+	EventManager._update_bullet_ui.emit()
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
 	var muzzle = muzzle_load.instantiate()
 	muzzle.global_position = pistol_bullet_marker.global_position
@@ -137,6 +134,23 @@ func small_shake():
 	if not camera:
 		return
 	camera.small_shake()
+
+func check_for_active_camera() -> void:
+	# Ensure get_tree() is valid (check if it exists)
+	var tree = get_tree()
+	if tree:
+		# Only attempt to access the camera if tree is valid
+		if active:
+			var camera = tree.get_first_node_in_group("Camera")
+			if camera:
+				remote.remote_path = camera.get_path()
+			else:
+				remote.remote_path = ""  # No camera in the group
+		else:
+			remote.remote_path = ""  # If not active, clear the path
+	else:
+		# Handle the case where get_tree() is invalid
+		print("Error: Scene tree is not available.")
 
 func animate(input_vector):
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
@@ -162,15 +176,9 @@ func animate(input_vector):
 		else:
 				animator.play("Jump")
 
-func active_camera(activation: bool) -> void:
-	if activation:
-		remote.remote_path = camera_ref
-	else:
-		remote.remote_path = ""
-
 func _on_hurtbox_area_entered(_area):
 	hit_animator.set_deferred("play", "Hit")
-	EventManager.update_health_ui.emit()
+	EventManager._update_health_ui.emit()
 	if stats.health <= 0:
 		die()
 	else:
@@ -182,7 +190,7 @@ func die():
 	var death_particle = death_particle_load.instantiate()
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
-	EventManager.form_destroyed.emit()
+	EventManager._form_destroyed.emit()
 
 func _on_rifle_delay_timeout() -> void:
 	can_shoot = true
