@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cgicyr516mwt7"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_r56uj"]
-[ext_resource type="Resource" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
+[ext_resource type="Resource" uid="uid://7g1r3pabyaj1" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
 [ext_resource type="Resource" uid="uid://b12etqlr7188t" path="res://Data/Stats/Form_3_Stats.tres" id="3_2knpp"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uk43i"]
 [ext_resource type="Resource" uid="uid://d36ewhelj2adx" path="res://Data/Fillament Data/Form_03_Fillament_Data.tres" id="4_x0fl5"]
@@ -13,10 +13,10 @@ size = Vector2(44, 24)
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_lsmpd"]
 stream_count = 2
-stream_0/stream = ExtResource("5_oesr5")
-stream_0/volume = -6.0
-stream_1/stream = ExtResource("6_aliae")
-stream_1/volume = -60.0
+stream_0/stream = ExtResource("6_aliae")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("5_oesr5")
+stream_1/volume = -10.0
 
 [node name="Form_03" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
@@ -77,6 +77,7 @@ metadata/_edit_use_anchors_ = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_lsmpd")
 autoplay = true
+bus = &"SFX"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false

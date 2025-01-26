@@ -50,11 +50,11 @@ func _physics_process(delta):
 	if input_vector != 0:
 		apply_acceleration(input_vector, delta)
 		# Increasing volume of tank move sfx layer
-		audio_stream_sync.set_sync_stream_volume(1 ,-10)
+		audio_stream_sync.set_sync_stream_volume(0 ,-14)
 	else:
 		apply_friction(delta)
 		# Lower the volume of the movement layer
-		audio_stream_sync.set_sync_stream_volume(1, -80)  # Mute or reduce volume
+		audio_stream_sync.set_sync_stream_volume(0, -80)  # Mute or reduce volume
 		
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()
