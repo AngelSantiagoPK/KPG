@@ -27,7 +27,6 @@ var overheated: bool = false
 @onready var status: Label = $Status
 @onready var audio_streamEngine: AudioStreamPlayer = $AudioStreamPlayerEngine
 @onready var audio_stream_sync: AudioStreamSynchronized = audio_streamEngine.stream as AudioStreamSynchronized
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
 # Load Scenes

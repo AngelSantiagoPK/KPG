@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_3.gd" id="1_r56uj"]
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
-[ext_resource type="Script" path="res://Scripts/Characters/Tank/player_tank.gd" id="1_r56uj"]
-[ext_resource type="Resource" uid="uid://7g1r3pabyaj1" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
 [ext_resource type="Resource" uid="uid://b12etqlr7188t" path="res://Data/Stats/Form_3_Stats.tres" id="3_2knpp"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uk43i"]
 [ext_resource type="Resource" uid="uid://d36ewhelj2adx" path="res://Data/Fillament Data/Form_03_Fillament_Data.tres" id="4_x0fl5"]
