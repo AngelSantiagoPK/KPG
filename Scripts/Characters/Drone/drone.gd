@@ -12,6 +12,7 @@ signal drone_exit
 @export var stats: Stats
 @export var energy: float = 100.0
 @export var active: bool = false
+@export var camera: Camera2D
 
 # Constants
 const EXPLOSION = preload("res://Scenes/Components/explosion_area.tscn")
@@ -64,11 +65,22 @@ func explode() -> void:
 	destroyed.emit()
 	queue_free()
 
-func active_camera(activation: bool) -> void:
-	if activation:
-		remote.remote_path = camera_ref
+func check_for_active_camera() -> void:
+	# Ensure get_tree() is valid (check if it exists)
+	var tree = get_tree()
+	if tree:
+		# Only attempt to access the camera if tree is valid
+		if active:
+			var camera = tree.get_first_node_in_group("Camera")
+			if camera:
+				remote.remote_path = camera.get_path()
+			else:
+				remote.remote_path = ""  # No camera in the group
+		else:
+			remote.remote_path = ""  # If not active, clear the path
 	else:
-		remote.remote_path = ""
+		# Handle the case where get_tree() is invalid
+		print("Error: Scene tree is not available.")
 
 func _on_activation_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

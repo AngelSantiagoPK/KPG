@@ -3,6 +3,7 @@ extends Area2D
 func _on_area_entered(area):
 	if owner.is_in_group("Player"):
 		owner.knockback(area.knockback_vector)
+		owner.stats.health -= area.damage
 		return
 	
 	if owner.is_in_group("Drone"):

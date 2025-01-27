@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=3 uid="uid://dg4etu8go2bfu"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
-[ext_resource type="Resource" path="res://Data/Movement Data/template_player.tres" id="2_niton"]
+[ext_resource type="Resource" uid="uid://bvast80iosmev" path="res://Data/Movement Data/Form_2.tres" id="2_niton"]
 [ext_resource type="Resource" uid="uid://cq40rbqk36c5a" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
 [ext_resource type="Resource" uid="uid://dgvi5sx4i7sao" path="res://Data/Fillament Data/Form_02_Fillament_Data.tres" id="3_gqp4l"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]

@@ -6,22 +6,13 @@ const MOUSE : CompressedTexture2D = preload("res://Textures/UI/Mouse.png")
 const MOUSE_OFFSET : Vector2 = Vector2(0, 0)
 
 # References
-@onready var ui: PlayerUIContainer = $UI
+@export var ui: PlayerUIContainer
 
 # Functions
 func _ready() -> void:
-	EventManager.current_form = get_tree().get_first_node_in_group("Player")
-	EventManager._form_destroyed.connect(on_form_destroyed)
+	EventManager._spawn.emit()
 	EventManager._player_died.connect(player_died)
 	EventManager.frame_freeze.connect(frame_freeze)
-
-func on_form_destroyed() -> void:
-	var cost: int = EventManager.current_form.fillament_data.cost
-	if EventManager.last_printer and EventManager.backup_form:
-		EventManager._use_fillament(cost)
-		EventManager.swap_to_backup_form()
-	else:
-		player_died()
 
 func player_died():
 	EventManager.current_form.queue_free()
