@@ -26,6 +26,8 @@ var can_shoot: bool = true
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
 @onready var rifle_delay: Timer = $RifleDelay
 @onready var remote: RemoteTransform2D = $RemoteTransform2D
+@onready var audio_stream_primary: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var audio_stream_secondary: AudioStreamPlayer2D = $AudioStreamSecondary
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -106,7 +108,12 @@ func shoot():
 	bullet.target_vector = mouse_position
 	bullet.rotation = mouse_position.angle()
 	get_tree().current_scene.add_child(bullet)
-	AudioManager.play_sound(AudioManager.SHOOT)
+
+	#Using AudioStreamPlayer from the form's scene
+	audio_stream_primary.play()
+
+	#Using Audio Manager
+	#AudioManager.play_sound(AudioManager.SHOOT)
 
 func shoot_shell():
 	shells_amount -= shot_size
@@ -128,7 +135,11 @@ func shoot_shell():
 	for i in shells:
 		get_tree().current_scene.add_child(i)
 	
-	AudioManager.play_sound(AudioManager.SHOOT)
+	#Using AudioStreamPlayer from the form's scene
+	audio_stream_secondary.play()
+
+	#Using Audio Manager
+	#AudioManager.play_sound(AudioManager.SHOOT)
 
 func small_shake():
 	if not camera:

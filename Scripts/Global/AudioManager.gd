@@ -13,9 +13,11 @@ const MENU_HOVER : AudioStreamWAV = preload("res://Audio/Sounds/Menu Hover.wav")
 const SPLASH_CLICK : AudioStreamWAV = preload("res://Audio/Sounds/Splash Click.wav")
 const SPLASH_GLITCH : AudioStreamWAV = preload("res://Audio/Sounds/Splash Glitch.wav")
 
+
 #Refrences
 @onready var music_players = $Music.get_children()
 @onready var sound_players = $Sounds.get_children()
+@onready var sound_players_rdm = $RandomSounds.get_children()
 
 func play_music(music):
 	for player in music_players:
@@ -28,5 +30,11 @@ func play_sound(sound):
 	for player in sound_players:
 		if not player.playing:
 			player.stream = sound
+			player.play()
+			break
+
+func play_random():
+	for player in sound_players_rdm:
+		if not player.playing:
 			player.play()
 			break

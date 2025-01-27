@@ -26,7 +26,7 @@ func _use_fillament(amount: int):
 
 func destroy_current_form() -> void:
 	current_form.active = false
-	#current_form.check_for_active_camera()
+	current_form.check_for_active_camera()
 	current_form.queue_free()
 
 func build_new_form(form: CharacterBody2D) -> void:

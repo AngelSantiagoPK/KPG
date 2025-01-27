@@ -25,19 +25,7 @@ func physics_update(delta: float) -> void:
 	owner.add_gravity(delta)
 
 func shoot():
-	var muzzle = muzzle_load.instantiate()
-	var bullet = bullet_load.instantiate()
-	add_child(muzzle)
-	if owner.short_vision.target_in_range == null:
-		return
-
-	var player_position = owner.short_vision.target_in_range.global_position
-	bullet.global_position = owner.global_position
-	bullet.global_position.y -= 30
-	bullet.target_vector = player_position.normalized()
-	bullet.look_at(player_position)
-	get_tree().current_scene.add_child(bullet)
-	AudioManager.play_sound(AudioManager.SHOOT)
+	owner.shoot()
 
 func start_timer():
 	timer.wait_time = randi_range(1, 2)
@@ -64,7 +52,6 @@ func _on_timer_timeout():
 	if owner.short_vision.player != null:
 		target_position = owner.short_vision.player.global_position
 		shooting = true
-
 
 func _on_gun_delay_timeout() -> void:
 	shooting = true

@@ -4,6 +4,7 @@ extends Area2D
 var speed : int = 320
 var target_vector : Vector2
 var destroyed : bool = false
+var damage: int = 2
 
 #Refrences
 @onready var sprite : Sprite2D = $Sprite2D
@@ -12,6 +13,7 @@ var destroyed : bool = false
 @onready var no_collision_timer : Timer = $NoCollisionTimer
 @onready var hitbox : Area2D = $Hitbox
 @onready var hitbox_collision : CollisionShape2D = $Hitbox/CollisionShape2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready():
 	hitbox.knockback_vector = target_vector #Updating the knockback vector
@@ -36,5 +38,8 @@ func _on_no_collision_timer_timeout():
 func _on_body_entered(_body):
 	die()
 	if not destroyed:
-		AudioManager.play_sound(AudioManager.BULLET)
+		#Using Audio Manager
+		#AudioManager.play_sound(AudioManager.BULLET)
+		#Using the scene's audio stream player
+		audio_stream_player_2d.play()
 		destroyed = true

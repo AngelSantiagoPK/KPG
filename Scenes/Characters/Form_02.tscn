@@ -1,12 +1,18 @@
-[gd_scene load_steps=30 format=3 uid="uid://dg4etu8go2bfu"]
+[gd_scene load_steps=38 format=3 uid="uid://dg4etu8go2bfu"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
-[ext_resource type="Resource" path="res://Data/Movement Data/template_player.tres" id="2_niton"]
+[ext_resource type="Resource" uid="uid://bvast80iosmev" path="res://Data/Movement Data/template_player.tres" id="2_niton"]
 [ext_resource type="Resource" uid="uid://cq40rbqk36c5a" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
 [ext_resource type="Resource" uid="uid://dgvi5sx4i7sao" path="res://Data/Fillament Data/Form_02_Fillament_Data.tres" id="3_gqp4l"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_tvf5k"]
+[ext_resource type="AudioStream" uid="uid://bfcmace7xd7vo" path="res://Audio/Sounds/sx_int_pistol_fire_1.ogg" id="8_u1n34"]
+[ext_resource type="AudioStream" uid="uid://onsj4rkpdeij" path="res://Audio/Sounds/sx_int_pistol_fire_2.ogg" id="9_pbmrk"]
+[ext_resource type="AudioStream" uid="uid://dydgebr0fsmk0" path="res://Audio/Sounds/sx_int_pistol_fire_3.ogg" id="10_06of1"]
+[ext_resource type="AudioStream" uid="uid://bpw43r1gtpgdc" path="res://Audio/Sounds/sx_int_pistol_fire_secondary_1.ogg" id="11_276sh"]
+[ext_resource type="AudioStream" uid="uid://ltkpo53rw04b" path="res://Audio/Sounds/sx_int_pistol_fire_secondary_2.ogg" id="12_uje7s"]
+[ext_resource type="AudioStream" uid="uid://dwnvxopsw5ybg" path="res://Audio/Sounds/sx_int_pistol_fire_secondary_3.ogg" id="13_d4v30"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nbr8w"]
 shader = ExtResource("4_dt6bj")
@@ -335,18 +341,36 @@ _data = {
 "RESET": SubResource("Animation_ubivd")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yamvr"]
+playback_mode = 1
+random_pitch = 1.25
+random_volume_offset_db = 0.4
+streams_count = 3
+stream_0/stream = ExtResource("8_u1n34")
+stream_1/stream = ExtResource("9_pbmrk")
+stream_2/stream = ExtResource("10_06of1")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0oacy"]
+playback_mode = 1
+random_pitch = 1.25
+random_volume_offset_db = 0.4
+streams_count = 3
+stream_0/stream = ExtResource("11_276sh")
+stream_1/stream = ExtResource("12_uje7s")
+stream_2/stream = ExtResource("13_d4v30")
+
 [node name="Form-02" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_i8duy")
 movement_data = ExtResource("2_niton")
 fillament_data = ExtResource("3_gqp4l")
 stats = ExtResource("3_1a5h7")
+shot_size = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_nbr8w")
 sprite_frames = SubResource("SpriteFrames_bx4yl")
-animation = &"Idle"
+animation = &"Run"
 autoplay = "Idle"
 
 [node name="Polygon2D" type="Polygon2D" parent="AnimatedSprite2D"]
@@ -398,6 +422,17 @@ one_shot = true
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false
 update_scale = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_yamvr")
+volume_db = 2.0
+bus = &"SFX"
+
+[node name="AudioStreamSecondary" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_0oacy")
+volume_db = 2.0
+pitch_scale = 1.59
+bus = &"SFX"
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="RifleDelay" to="." method="_on_rifle_delay_timeout"]

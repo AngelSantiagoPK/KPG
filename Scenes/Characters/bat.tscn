@@ -186,7 +186,7 @@ _data = {
 "RESET": SubResource("Animation_gaykw")
 }
 
-[node name="Bat" type="CharacterBody2D" groups=["Bat"]]
+[node name="Bat" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
 collision_priority = 2.0
 script = ExtResource("1_wokr1")

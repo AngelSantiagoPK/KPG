@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://bu6uygafddc1o"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/shotgun_enemy/shotgun_enemy.gd" id="1_a4agt"]
+[ext_resource type="PackedScene" uid="uid://bkp0gna2taagk" path="res://Scenes/Components/hitbox.tscn" id="1_xw22e"]
+[ext_resource type="Resource" uid="uid://cgosi6g8w45g2" path="res://Data/Movement Data/Shotgun_Enemy_Movement_Data.tres" id="2_2cyjy"]
+[ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="2_a2ga3"]
+[ext_resource type="Resource" uid="uid://h8ovvney0yxw" path="res://Data/Stats/Shotgun_Enemy_Stats.tres" id="3_s0g4o"]
+[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="6_uyeb1"]
+[ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="7_ttog7"]
+[ext_resource type="Texture2D" uid="uid://6jebehbxdvj3" path="res://Textures/UI/Bat Health Bar Empty.png" id="8_mxuhd"]
+[ext_resource type="Texture2D" uid="uid://e7mb2pjdc27o" path="res://Textures/UI/Bat Health Bar.png" id="9_702ru"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4i3yk"]
+size = Vector2(17, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70xcn"]
+size = Vector2(17, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h6pn"]
+size = Vector2(17, 23)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtuey"]
+shader = ExtResource("6_uyeb1")
+shader_parameter/active = false
+
+[node name="ShotgunEnemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 4
+script = ExtResource("1_a4agt")
+movement_data = ExtResource("2_2cyjy")
+stats = ExtResource("3_s0g4o")
+shot_size = 4
+shot_spread_in_deg = 90
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0.376623, -0.150002)
+scale = Vector2(0.246753, 0.15)
+polygon = PackedVector2Array(-24, -117, 2, -159, 26, -116, 39, -48, 25, 1, 5, -30, -17, 1, -38, -43)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -11.5)
+shape = SubResource("RectangleShape2D_4i3yk")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_a2ga3")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0.5, -11.5)
+shape = SubResource("RectangleShape2D_70xcn")
+
+[node name="Hitbox" parent="." instance=ExtResource("1_xw22e")]
+damage = 1
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0.5, -11.5)
+shape = SubResource("RectangleShape2D_7h6pn")
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(0, -10)
+
+[node name="Pivot" type="Node2D" parent="Hand"]
+
+[node name="Pistol" type="Sprite2D" parent="Hand/Pivot"]
+material = SubResource("ShaderMaterial_jtuey")
+position = Vector2(12, -2)
+texture = ExtResource("7_ttog7")
+region_enabled = true
+region_rect = Rect2(160, 64, 16, 16)
+
+[node name="PistolBulletMarker" type="Marker2D" parent="Hand/Pivot/Pistol"]
+position = Vector2(6, -2)
+gizmo_extents = 2.0
+
+[node name="ShotDelay" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -8.0
+offset_top = -30.0
+offset_right = 32.0
+offset_bottom = 10.0
+texture_under = ExtResource("8_mxuhd")
+texture_progress = ExtResource("9_702ru")
+
+[node name="HealthBarTimer" type="Timer" parent="HealthBar"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="ShotDelay" to="." method="_on_shot_delay_timeout"]
+[connection signal="timeout" from="HealthBar/HealthBarTimer" to="." method="_on_health_bar_timer_timeout"]
