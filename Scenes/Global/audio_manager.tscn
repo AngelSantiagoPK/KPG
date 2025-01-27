@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnskevf2cuqlm"]
+[gd_scene load_steps=6 format=3 uid="uid://dnskevf2cuqlm"]
 
 [ext_resource type="Script" path="res://Scripts/Global/AudioManager.gd" id="1_yrjnd"]
+[ext_resource type="AudioStream" uid="uid://btcqpjqifq5tq" path="res://Audio/Sounds/sx_int_tank_fire_1.ogg" id="2_fkkax"]
+[ext_resource type="AudioStream" uid="uid://comcm7s73xiwq" path="res://Audio/Sounds/sx_int_tank_fire_2.ogg" id="3_4yjkd"]
+[ext_resource type="AudioStream" uid="uid://dogvoqahissli" path="res://Audio/Sounds/sx_int_tank_fire_3.ogg" id="4_wpm70"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hq717"]
+random_pitch = 1.2
+random_volume_offset_db = 0.2
+streams_count = 3
+stream_0/stream = ExtResource("2_fkkax")
+stream_1/stream = ExtResource("3_4yjkd")
+stream_2/stream = ExtResource("4_wpm70")
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_yrjnd")
@@ -35,54 +46,124 @@ bus = &"Music"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer11" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer12" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer13" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer14" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer15" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer16" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer17" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayer18" type="AudioStreamPlayer" parent="Sounds"]
 volume_db = -6.0
+bus = &"SFX"
+
+[node name="RandomSounds" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="RandomSounds"]
+stream = SubResource("AudioStreamRandomizer_hq717")
+volume_db = -15.0
+bus = &"SFX"

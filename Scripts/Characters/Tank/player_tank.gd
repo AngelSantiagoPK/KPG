@@ -25,8 +25,10 @@ var overheated: bool = false
 @onready var drone_cooldown: Timer = $DroneCooldown
 @onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
 @onready var status: Label = $Status
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var audio_stream_sync: AudioStreamSynchronized = audio_stream_player.stream as AudioStreamSynchronized
+@onready var audio_streamEngine: AudioStreamPlayer = $AudioStreamPlayerEngine
+@onready var audio_stream_sync: AudioStreamSynchronized = audio_streamEngine.stream as AudioStreamSynchronized
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 # Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -114,7 +116,10 @@ func shoot() -> void:
 	bullet.target_vector = mouse_position
 	bullet.rotation = mouse_position.angle()
 	get_tree().current_scene.add_child(bullet)
-	AudioManager.play_sound(AudioManager.SHOOT)
+	#Using Audio Manager
+	AudioManager.play_random()
+	#AudioManager.play_sound(AudioManager.SHOOT)
+	
 
 func deploy_drone() -> void:
 	var drone = drone_load.instantiate()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6dl8ag8yhskq"]
+[gd_scene load_steps=12 format=3 uid="uid://c6dl8ag8yhskq"]
 
 [ext_resource type="Texture2D" uid="uid://bjg5fygfb0yvm" path="res://Textures/Props/Bullet.png" id="1_5a6n0"]
 [ext_resource type="Script" path="res://Scripts/Props/bullet.gd" id="1_r7pj2"]
 [ext_resource type="PackedScene" uid="uid://bkp0gna2taagk" path="res://Scenes/Components/hitbox.tscn" id="3_5214q"]
+[ext_resource type="AudioStream" uid="uid://7f5d4c7dsdta" path="res://Audio/Sounds/Bullet.wav" id="4_1el45"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81kun"]
 size = Vector2(4, 1)
@@ -80,6 +81,10 @@ damage = 1
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false
 shape = SubResource("RectangleShape2D_bca47")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1el45")
+attenuation = 10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]
