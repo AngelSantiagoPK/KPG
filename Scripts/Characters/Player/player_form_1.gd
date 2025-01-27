@@ -19,6 +19,8 @@ var wallclimb: bool = false
 @onready var hand : Node2D = $Hand
 @onready var pistol : Sprite2D = $Hand/Pivot/Pistol
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -87,7 +89,11 @@ func shoot():
 	bullet.target_vector = mouse_position
 	bullet.rotation = mouse_position.angle()
 	get_tree().current_scene.add_child(bullet)
-	AudioManager.play_sound(AudioManager.SHOOT)
+	#Using AudioStreamPlayer from the form's scene
+	audio_stream_player_2d.play()
+
+	#Using Audio Manager
+	#AudioManager.play_sound(AudioManager.SHOOT)
 
 func check_for_active_camera() -> void:
 	# Ensure get_tree() is valid (check if it exists)
