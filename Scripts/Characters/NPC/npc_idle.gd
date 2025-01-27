@@ -17,7 +17,6 @@ func physics_update(delta: float) -> void:
 		apply_friction(delta)
 	else:
 		accelerate_towards_point(owner.start_position, delta)
-		
 	owner.add_gravity(delta)
 
 func apply_friction(delta):

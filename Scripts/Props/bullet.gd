@@ -4,6 +4,7 @@ extends Area2D
 var speed : int = 320
 var target_vector : Vector2
 var destroyed : bool = false
+var damage: int = 2
 
 #Refrences
 @onready var sprite : Sprite2D = $Sprite2D

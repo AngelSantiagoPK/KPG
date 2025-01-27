@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://h8ovvney0yxw"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="1_nk404"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_nk404")
+max_health = 10

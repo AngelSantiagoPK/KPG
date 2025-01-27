@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://pmq45thp1ua4"]
+[gd_scene load_steps=42 format=3 uid="uid://pmq45thp1ua4"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc.gd" id="1_2pthx"]
 [ext_resource type="Resource" path="res://Data/Movement Data/NPC_Movement_Data.tres" id="2_liuv6"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_attack.gd" id="15_lledl"]
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_death.gd" id="16_ti3h8"]
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc_vision_long.gd" id="17_8d3af"]
+[ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="19_s1yn1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajkoe"]
 shader = ExtResource("4_csr7g")
@@ -231,11 +232,16 @@ _data = {
 "RESET": SubResource("Animation_gaykw")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vkrb"]
+shader = ExtResource("4_csr7g")
+shader_parameter/active = false
+
 [node name="NPC" type="CharacterBody2D" groups=["Bat", "Enemy", "NPC"]]
 collision_layer = 4
 script = ExtResource("1_2pthx")
 movement_data = ExtResource("2_liuv6")
 stats = ExtResource("3_h060f")
+shot_size = 3
 
 [node name="SpritePoly" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_ajkoe")
@@ -294,11 +300,10 @@ shape = SubResource("RectangleShape2D_oh2mm")
 
 [node name="LongVision" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("17_8d3af")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LongVision"]
-visible = false
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_a3idx")
 
@@ -311,7 +316,7 @@ collide_with_areas = true
 
 [node name="ShortVision" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("10_gqt3k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShortVision"]
@@ -334,7 +339,6 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-visible = false
 offset_left = -4.0
 offset_top = -27.0
 offset_right = 36.0
@@ -405,6 +409,22 @@ offset_left = -20.0
 offset_top = -45.0
 offset_right = 20.0
 offset_bottom = -22.0
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(0, -10)
+
+[node name="Pivot" type="Node2D" parent="Hand"]
+
+[node name="Pistol" type="Sprite2D" parent="Hand/Pivot"]
+material = SubResource("ShaderMaterial_1vkrb")
+position = Vector2(12, -2)
+texture = ExtResource("19_s1yn1")
+region_enabled = true
+region_rect = Rect2(160, 64, 16, 16)
+
+[node name="PistolBulletMarker" type="Marker2D" parent="Hand/Pivot/Pistol"]
+position = Vector2(6, -2)
+gizmo_extents = 2.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="LongVision" to="LongVision" method="_on_body_entered"]

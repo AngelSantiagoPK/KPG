@@ -4,6 +4,8 @@ extends CharacterBody2D
 #Data
 @export var movement_data : MovementData
 @export var stats : Stats
+@export var shot_size: int = 1
+@export var shot_spread_in_deg: int = 30.0
 
 #Refrences
 @onready var start_position : Vector2 = global_position
@@ -20,6 +22,15 @@ extends CharacterBody2D
 @onready var health_bar_timer : Timer = $HealthBar/HealthBarTimer
 @onready var sprite_poly: Node2D = $SpritePoly
 @onready var label: Label = $Label
+@onready var hand: Node2D = $Hand
+@onready var pivot: Node2D = $Hand/Pivot
+@onready var pistol_bullet_marker: Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
+
+
+#Load Scenes
+@onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
+@onready var shell_load : PackedScene = preload("res://Scenes/Props/enemy_shell.tscn")
+
 
 func _ready():
 	stats.health = stats.max_health
@@ -33,6 +44,23 @@ func knockback(vector):
 
 func add_gravity(delta: float) -> void:
 	velocity.y += movement_data.gravity * movement_data.gravity_scale * delta
+
+func shoot():
+	var target_position : Vector2 = (EventManager.current_form.global_position - global_position).normalized()
+	var muzzle = muzzle_load.instantiate()
+	var bullet = shell_load.instantiate()
+	if EventManager.current_form.global_position.x < global_position.x:
+		hand.scale.x = -1
+	else:
+		hand.scale.x = 1
+	pivot.look_at(EventManager.current_form.global_position)
+	pistol_bullet_marker.add_child(muzzle)
+	bullet.global_position = pistol_bullet_marker.global_position
+	bullet.target_vector =target_position
+	bullet.rotation = target_position.angle()
+	get_tree().current_scene.add_child(bullet)
+	AudioManager.play_sound(AudioManager.SHOOT)
+
 
 func _on_hurtbox_area_entered(area):
 	if not area.is_in_group("Bat") and not area.is_in_group("Enemy"):

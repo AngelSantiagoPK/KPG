@@ -91,7 +91,7 @@ func shoot():
 
 func check_for_active_camera() -> void:
 	# Ensure get_tree() is valid (check if it exists)
-	var tree = await get_tree()
+	var tree = get_tree()
 	if tree:
 		# Only attempt to access the camera if tree is valid
 		if active:
