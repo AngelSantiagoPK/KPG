@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgicyr516mwt7"]
+[gd_scene load_steps=11 format=3 uid="uid://cgicyr516mwt7"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_3.gd" id="1_r56uj"]
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
@@ -10,6 +10,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su20v"]
 size = Vector2(44, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlgf8"]
+size = Vector2(36, 30)
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_lsmpd"]
 stream_count = 2
@@ -34,6 +37,9 @@ scale = Vector2(2.2, 1.9)
 polygon = PackedVector2Array(-5, -8.94737, 4.09091, -8.94737, 10, -4.21053, 10, 5.26316, 5.90909, 8.42105, -5, 8.42105, -10, 5.26316, -10, -3.15789)
 
 [node name="Hurtbox" parent="." groups=["Tank"] instance=ExtResource("4_uk43i")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_hlgf8")
 
 [node name="Gun" type="Node2D" parent="."]
 

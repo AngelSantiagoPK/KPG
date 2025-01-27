@@ -38,12 +38,7 @@ func print_form(form_number: int) -> void:
 		3:
 			form = form_03_loaded.instantiate()
 	
-	form.global_position = printer_spawn_marker.global_position
-	get_tree().root.add_child(form)
-	if EventManager.current_form:
-		EventManager.current_form.queue_free()
-	EventManager.build_new_form(form)
-	form.check_for_active_camera()
+	EventManager._print_spawn.emit(form)
 
 func queue_backup_form(form_number: int) -> void:
 	if not form_number is int:
@@ -58,54 +53,33 @@ func queue_backup_form(form_number: int) -> void:
 		3:
 			form = form_03_loaded.instantiate()
 	
-	EventManager.backup_form = form
+	EventManager.set_backup_form(form)
 
-func print_backup_form(form_number: int) -> void:
-	if not form_number is int:
-		return
-	
-	var form
-	match form_number:
-		1:
-			form = form_01_loaded.instantiate()
-		2:
-			form = form_02_loaded.instantiate()
-		3:
-			form = form_03_loaded.instantiate()
-	
-	form.global_position = EventManager.current_form.global_position
-	EventManager.destroy_current_form()
-	get_tree().current_scene.call_deferred("add_child", form)
-	EventManager.build_new_form(form)
-	
-
-func paid_fillament(cost: int) -> bool:
-	if EventManager.fillament_amount < cost:
-		return false
-
+func pay_for_print(cost: int) -> void:
 	AudioManager.play_sound(AudioManager.MENU_CLICK)
-	EventManager._use_fillament(cost)
+	EventManager.use_fillament(cost)
 	EventManager._update_fillament_ui.emit()
-	return true
-
 
 # Form Button Functions
 func _on_form_01_pressed() -> void:
 	const FORM_DATA = preload("res://Data/Fillament Data/Form_01_Fillament_Data.tres")
 	var cost = FORM_DATA.cost
-	if paid_fillament(cost) == true:
+	if EventManager.has_required_fillament(cost):
+		pay_for_print(cost)
 		print_form(1)
 	
 func _on_form_02_pressed() -> void:
 	const FORM_DATA = preload("res://Data/Fillament Data/Form_02_Fillament_Data.tres")
 	var cost = FORM_DATA.cost
-	if paid_fillament(cost) == true:
+	if EventManager.has_required_fillament(cost):
+		pay_for_print(cost)
 		print_form(2)
 
 func _on_form_03_pressed() -> void:
 	const FORM_DATA = preload("res://Data/Fillament Data/Form_03_Fillament_Data.tres")
 	var cost = FORM_DATA.cost
-	if paid_fillament(cost) == true:
+	if EventManager.has_required_fillament(cost):
+		pay_for_print(cost)
 		print_form(3)
 
 # Backup Form Buttons Functions

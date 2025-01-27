@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d17fsjc5137n"]
+
+[ext_resource type="Script" path="res://Scripts/Components/player_spawner.gd" id="1_tlyym"]
+
+[node name="PlayerSpawner" type="Node2D"]
+script = ExtResource("1_tlyym")
+
+[node name="SpawnMarker" type="Marker2D" parent="."]

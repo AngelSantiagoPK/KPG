@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://1h1oodukx488"]
+[gd_scene load_steps=22 format=4 uid="uid://1h1oodukx488"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/tutorial_level.gd" id="1_nh04m"]
 [ext_resource type="TileSet" uid="uid://vhn0gfvbjoq4" path="res://Scripts/Resources/tileset_001.tres" id="2_7i35l"]
@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://daotvtptr6kby" path="res://Scenes/Characters/bat.tscn" id="5_4c2sf"]
 [ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="6_d2y22"]
 [ext_resource type="PackedScene" uid="uid://pmq45thp1ua4" path="res://Scenes/Characters/npc.tscn" id="7_7y27l"]
-[ext_resource type="PackedScene" uid="uid://dg4etu8go2bfu" path="res://Scenes/Characters/Form_02.tscn" id="8_04r1l"]
 [ext_resource type="PackedScene" uid="uid://c8uoj2x1ebbnd" path="res://Scenes/Props/filament_pickup.tscn" id="9_45hh0"]
 [ext_resource type="PackedScene" uid="uid://cbcrnnlkxatpy" path="res://Scenes/UI/ui_prototype.tscn" id="11_oqa1w"]
 [ext_resource type="AudioStream" uid="uid://bqvq2j1w6hy80" path="res://Audio/Music/KPG_L1_Loop.ogg" id="11_y60ng"]
+[ext_resource type="PackedScene" uid="uid://d17fsjc5137n" path="res://Scenes/Components/player_spawner.tscn" id="12_23d1b"]
 
 [sub_resource type="Resource" id="Resource_2vipp"]
 resource_local_to_scene = true
@@ -62,13 +62,9 @@ resource_local_to_scene = true
 script = ExtResource("6_d2y22")
 max_health = 15
 
-[sub_resource type="Resource" id="Resource_t3c2q"]
-resource_local_to_scene = true
-script = ExtResource("6_d2y22")
-max_health = 10
-
-[node name="TutorialLevel" type="Node2D"]
+[node name="TutorialLevel" type="Node2D" node_paths=PackedStringArray("ui")]
 script = ExtResource("1_nh04m")
+ui = NodePath("UI")
 
 [node name="UI" parent="." instance=ExtResource("11_oqa1w")]
 
@@ -250,8 +246,4 @@ position = Vector2(1660, -41)
 [node name="Filament_pickup12" parent="Pickups" instance=ExtResource("9_45hh0")]
 position = Vector2(1756, -8)
 
-[node name="Form-02" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("8_04r1l")]
-position = Vector2(22, 4)
-camera = NodePath("../Camera2D")
-stats = SubResource("Resource_t3c2q")
-active = true
+[node name="PlayerSpawner" parent="." instance=ExtResource("12_23d1b")]

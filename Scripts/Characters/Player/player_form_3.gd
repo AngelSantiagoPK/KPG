@@ -126,6 +126,8 @@ func deploy_drone() -> void:
 	get_tree().current_scene.add_child(drone)
 	self.active = false
 	drone.active = true
+	self.check_for_active_camera()
+	drone.check_for_active_camera()
 	drone.drone_exit.connect(func (): back_to_tank(drone))
 	drone.destroyed.connect(func (): back_to_tank(drone))
 
@@ -149,6 +151,8 @@ func check_for_active_camera() -> void:
 func back_to_tank(drone: Node) -> void:
 	drone.active = false
 	self.active = true
+	drone.check_for_active_camera()
+	self.check_for_active_camera()
 
 func small_shake():
 	if not camera:

@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_ssov2")
-max_health = 3
+max_health = 2
