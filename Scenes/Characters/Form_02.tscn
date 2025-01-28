@@ -278,7 +278,6 @@ script = ExtResource("1_i8duy")
 movement_data = ExtResource("2_niton")
 fillament_data = ExtResource("3_gqp4l")
 stats = ExtResource("3_1a5h7")
-shot_size = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_nbr8w")
@@ -313,10 +312,6 @@ libraries = {
 }
 autoplay = "Normal"
 
-[node name="RifleDelay" type="Timer" parent="."]
-wait_time = 0.14
-one_shot = true
-
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false
 update_scale = false
@@ -336,6 +331,5 @@ bus = &"SFX"
 current_type = 1
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="timeout" from="RifleDelay" to="." method="_on_rifle_delay_timeout"]
 
 [editable path="Hurtbox"]

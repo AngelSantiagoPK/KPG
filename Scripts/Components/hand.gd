@@ -97,7 +97,7 @@ func shoot():
 	AudioManager.play_sound(AudioManager.SHOOT)
 
 func shoot_shell():
-	bullets -= data.mag_size
+	bullets -= 1
 	EventManager._update_bullet_ui.emit(bullets)
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
 	var muzzle = muzzle_load.instantiate()
@@ -105,7 +105,7 @@ func shoot_shell():
 	pistol_bullet_marker.add_child(muzzle)
 	
 	var shells: Array[Shell] = []
-	for i in data.mag_size:
+	for i in data.shot_size:
 		var shell: Shell = shell_load.instantiate()
 		var offset = (i - (data.mag_size / 2)) * (data.shot_spread / data.mag_size)
 		shell.global_position = pistol_bullet_marker.global_position

@@ -200,6 +200,7 @@ offset_bottom = 3.0
 scale = Vector2(0.37867, 0.37867)
 
 [node name="Score_group" type="Control" parent="NinePatchRect"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
