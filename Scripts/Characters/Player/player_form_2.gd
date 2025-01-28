@@ -31,16 +31,11 @@ var can_shoot: bool = true
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
-@onready var bullet_load : PackedScene = preload("res://Scenes/Props/bullet.tscn")
-@onready var shell_load : PackedScene = preload("res://Scenes/Props/shell.tscn")
 @onready var death_particle_load : PackedScene = preload("res://Scenes/Particles/player_death_particle.tscn")
 
 
 func _ready():
 	stats.health = stats.max_health
-	EventManager.bullets_amount = bullets_amount
-	EventManager.shells_amount = shells_amount
-	EventManager._update_bullet_ui.emit()
 	self.check_for_active_camera()
 
 func _physics_process(delta):
@@ -57,24 +52,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()
-		
-	
-	if Input.is_action_pressed("shoot"):
-		if bullets_amount > 0 and can_shoot:
-			can_shoot = false
-			rifle_delay.start()
-			guns_animator.play("Shoot")
-	
-	if Input.is_action_just_pressed("secondary_weapon"):
-		if shells_amount > 0:
-			guns_animator.play("Shoot_shell")
-	
-	if Input.is_action_just_pressed("interact"):
-		bullets_amount = 30
-		shells_amount = 30
-		EventManager.bullets_amount = bullets_amount
-		EventManager.shells_amount = shells_amount
-		EventManager._update_bullet_ui.emit()
 
 	move_and_slide()
 	animate(input_vector)
@@ -95,51 +72,6 @@ func knockback(vector):
 func jump():
 	velocity.y = -movement_data.jump_strength
 	AudioManager.play_sound(AudioManager.JUMP)
-
-func shoot():
-	bullets_amount -= 1
-	EventManager.bullets_amount -= 1
-	EventManager._update_bullet_ui.emit()
-	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
-	var muzzle = muzzle_load.instantiate()
-	var bullet = bullet_load.instantiate()
-	pistol_bullet_marker.add_child(muzzle)
-	bullet.global_position = pistol_bullet_marker.global_position
-	bullet.target_vector = mouse_position
-	bullet.rotation = mouse_position.angle()
-	get_tree().current_scene.add_child(bullet)
-
-	#Using AudioStreamPlayer from the form's scene
-	audio_stream_primary.play()
-
-	#Using Audio Manager
-	#AudioManager.play_sound(AudioManager.SHOOT)
-
-func shoot_shell():
-	shells_amount -= shot_size
-	EventManager.shells_amount -= 1
-	EventManager._update_bullet_ui.emit()
-	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
-	var muzzle = muzzle_load.instantiate()
-	muzzle.global_position = pistol_bullet_marker.global_position
-	pistol_bullet_marker.add_child(muzzle)
-	
-	var shells: Array[Shell] = []
-	for i in shot_size:
-		var shell: Shell = shell_load.instantiate()
-		var offset = (i - (shot_size / 2)) * (shot_spread_in_deg / shot_size)
-		shell.global_position = pistol_bullet_marker.global_position
-		shell.target_vector = mouse_position.rotated(deg_to_rad(offset))
-		shells.append(shell)
-	
-	for i in shells:
-		get_tree().current_scene.add_child(i)
-	
-	#Using AudioStreamPlayer from the form's scene
-	audio_stream_secondary.play()
-
-	#Using Audio Manager
-	#AudioManager.play_sound(AudioManager.SHOOT)
 
 func small_shake():
 	if not camera:
@@ -202,6 +134,3 @@ func die():
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
 	EventManager._form_destroyed.emit()
-
-func _on_rifle_delay_timeout() -> void:
-	can_shoot = true

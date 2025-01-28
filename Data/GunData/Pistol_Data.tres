@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bekg68lyvwhje"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/gun_data.gd" id="1_ykgup"]
+
+[resource]
+script = ExtResource("1_ykgup")
+name = "Blaster"
+mag_size = 6
+reserve_ammo = 60
+gun_delay = 0.5
+reload_delay = 1.0
+infinite_ammo = false
