@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgicyr516mwt7"]
+[gd_scene load_steps=12 format=3 uid="uid://cgicyr516mwt7"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_3.gd" id="1_r56uj"]
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://d36ewhelj2adx" path="res://Data/Fillament Data/Form_03_Fillament_Data.tres" id="4_x0fl5"]
 [ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="5_oesr5"]
 [ext_resource type="AudioStream" uid="uid://dxwi3v4rp7roj" path="res://Audio/Sounds/sx_int_tank_move.ogg" id="6_aliae"]
+[ext_resource type="PackedScene" uid="uid://bnue5rfo1toh8" path="res://Scenes/Components/hand.tscn" id="8_867s2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su20v"]
 size = Vector2(44, 24)
@@ -40,16 +41,6 @@ polygon = PackedVector2Array(-5, -8.94737, 4.09091, -8.94737, 10, -4.21053, 10, 
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_hlgf8")
-
-[node name="Gun" type="Node2D" parent="."]
-
-[node name="Pivot" type="Node2D" parent="Gun"]
-
-[node name="Barrel" type="Polygon2D" parent="Gun/Pivot"]
-polygon = PackedVector2Array(10, -3, 36, -3, 36, 1, 10, 1)
-
-[node name="TankBulletMarker" type="Marker2D" parent="Gun/Pivot/Barrel"]
-position = Vector2(36, -1)
 
 [node name="Launcher" type="Node2D" parent="."]
 
@@ -88,6 +79,10 @@ bus = &"SFX"
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false
 update_scale = false
+
+[node name="Hand" parent="." instance=ExtResource("8_867s2")]
+position = Vector2(0, -14)
+current_type = 3
 
 [connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]

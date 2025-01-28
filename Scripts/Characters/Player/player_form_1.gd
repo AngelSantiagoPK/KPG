@@ -16,7 +16,7 @@ var wallclimb: bool = false
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D
 @onready var guns_animator : AnimationPlayer = $ShootingAnimationPlayer
 @onready var hit_animator : AnimationPlayer = $HitAnimationPlayer
-@onready var hand : Node2D = $Hand
+@onready var hand: Hand = $Hand
 @onready var pistol : Sprite2D = $Hand/Pivot/Pistol
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
@@ -32,8 +32,6 @@ var wallclimb: bool = false
 
 func _ready():
 	stats.health = stats.max_health
-	EventManager.bullets_amount = bullets_amount
-	EventManager._update_bullet_ui.emit()
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -53,9 +51,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and wallclimb:
 		jump()
 	
-	if Input.is_action_just_pressed("shoot"):
-		if bullets_amount > 0:
-			guns_animator.play("Shoot")
+	if Input.is_action_just_pressed("interact"):
+		hand.reload()
+			#guns_animator.play("Shoot")
 	
 	move_and_slide()
 	animate(input_vector)
@@ -77,23 +75,6 @@ func jump():
 	velocity.y = -movement_data.jump_strength
 	AudioManager.play_sound(AudioManager.JUMP)
 
-func shoot():
-	bullets_amount -= 1
-	EventManager.bullets_amount -= 1
-	EventManager._update_bullet_ui.emit()
-	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
-	var muzzle = muzzle_load.instantiate()
-	var bullet = bullet_load.instantiate()
-	pistol_bullet_marker.add_child(muzzle)
-	bullet.global_position = pistol_bullet_marker.global_position
-	bullet.target_vector = mouse_position
-	bullet.rotation = mouse_position.angle()
-	get_tree().current_scene.add_child(bullet)
-	#Using AudioStreamPlayer from the form's scene
-	audio_stream_player_2d.play()
-
-	#Using Audio Manager
-	#AudioManager.play_sound(AudioManager.SHOOT)
 
 func check_for_active_camera() -> void:
 	# Ensure get_tree() is valid (check if it exists)

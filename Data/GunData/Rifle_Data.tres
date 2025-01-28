@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cg83upwit5p5s"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/gun_data.gd" id="1_ekqls"]
+
+[resource]
+script = ExtResource("1_ekqls")
+name = "Assault Rifle"
+mag_size = 30
+reserve_ammo = 90
+gun_delay = 0.15
+reload_delay = 2.0
+infinite_ammo = false

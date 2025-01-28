@@ -11,7 +11,8 @@ signal _spawn
 signal _print_spawn(form: CharacterBody2D)
 
 # UI Signals
-signal _update_bullet_ui
+signal _update_bullet_ui(count: int)
+signal _update_reserve_ammo_ui(count: int)
 signal _update_health_ui
 signal _update_fillament_ui
 

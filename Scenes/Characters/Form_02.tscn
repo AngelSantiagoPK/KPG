@@ -7,6 +7,7 @@
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_tvf5k"]
+[ext_resource type="PackedScene" uid="uid://bnue5rfo1toh8" path="res://Scenes/Components/hand.tscn" id="7_x2h50"]
 [ext_resource type="AudioStream" uid="uid://bfcmace7xd7vo" path="res://Audio/Sounds/sx_int_pistol_fire_1.ogg" id="8_u1n34"]
 [ext_resource type="AudioStream" uid="uid://onsj4rkpdeij" path="res://Audio/Sounds/sx_int_pistol_fire_2.ogg" id="9_pbmrk"]
 [ext_resource type="AudioStream" uid="uid://dydgebr0fsmk0" path="res://Audio/Sounds/sx_int_pistol_fire_3.ogg" id="10_06of1"]
@@ -107,51 +108,23 @@ animations = [{
 radius = 3.0
 height = 24.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbnn4"]
-shader = ExtResource("4_dt6bj")
-shader_parameter/active = false
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gpe5m"]
 size = Vector2(6, 24)
 
 [sub_resource type="Animation" id="Animation_mlu16"]
 length = 1.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand/Pivot/Pistol:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(10, -4)]
-}
 
 [sub_resource type="Animation" id="Animation_creca"]
 resource_name = "Shoot"
 length = 0.2
 step = 0.05
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hand/Pivot/Pistol:position")
-tracks/0/interp = 2
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(10, -4), Vector2(4, -4), Vector2(10, -4)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -164,25 +137,13 @@ tracks/1/keys = {
 resource_name = "Shoot_shell"
 length = 0.2
 step = 0.05
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hand/Pivot/Pistol:position")
-tracks/0/interp = 2
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(10, -4), Vector2(4, -4), Vector2(10, -4)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -194,18 +155,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_8vmw1"]
 resource_name = "normal"
 length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand/Pivot/Pistol:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(10, -4)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x67tq"]
 _data = {
@@ -233,22 +182,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand/Pivot/Pistol:material:shader_parameter/active")
+tracks/1/path = NodePath("Hurtbox:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false, true, false, true, false, true, false, true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Hurtbox:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -273,22 +210,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand/Pivot/Pistol:material:shader_parameter/active")
+tracks/1/path = NodePath("Hurtbox:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Hurtbox:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -312,22 +237,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand/Pivot/Pistol:material:shader_parameter/active")
+tracks/1/path = NodePath("Hurtbox:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Hurtbox:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -381,21 +294,6 @@ polygon = PackedVector2Array(-7, -3, -3, -6, -1, -5, 0, -4, 2, -4, 3, -4, 4, -5,
 visible = false
 shape = SubResource("CapsuleShape2D_k161k")
 
-[node name="Hand" type="Node2D" parent="."]
-
-[node name="Pivot" type="Node2D" parent="Hand"]
-
-[node name="Pistol" type="Sprite2D" parent="Hand/Pivot"]
-material = SubResource("ShaderMaterial_dbnn4")
-position = Vector2(10, -4)
-texture = ExtResource("5_j0pni")
-region_enabled = true
-region_rect = Rect2(160, 64, 16, 16)
-
-[node name="PistolBulletMarker" type="Marker2D" parent="Hand/Pivot/Pistol"]
-position = Vector2(6, -2)
-gizmo_extents = 2.0
-
 [node name="Hurtbox" parent="." instance=ExtResource("6_tvf5k")]
 monitoring = false
 
@@ -433,6 +331,9 @@ stream = SubResource("AudioStreamRandomizer_0oacy")
 volume_db = 2.0
 pitch_scale = 1.59
 bus = &"SFX"
+
+[node name="Hand" parent="." instance=ExtResource("7_x2h50")]
+current_type = 1
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="RifleDelay" to="." method="_on_rifle_delay_timeout"]

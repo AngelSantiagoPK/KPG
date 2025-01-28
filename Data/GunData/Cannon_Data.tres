@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b28p07idu7yii"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/gun_data.gd" id="1_w00x7"]
+
+[resource]
+script = ExtResource("1_w00x7")
+name = "LaserCannon"
+mag_size = 50
+reserve_ammo = 90
+gun_delay = 0.1
+reload_delay = 5.0
+infinite_ammo = true
