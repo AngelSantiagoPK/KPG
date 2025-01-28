@@ -1,21 +1,12 @@
 class_name Form_02
 extends CharacterBody2D
 
-#Data
-var bullets_amount : int = 50
-var shells_amount : int = 20
-
 @export var camera : Camera2D
 @export var movement_data : MovementData
 @export var fillament_data: FillamentData
 @export var stats : Stats
 @export var active: bool = false
 var can_shoot: bool = true
-
-@export_group("Shotgun Props")
-@export var shot_size: int = 6
-@export var shot_spread_in_deg: float = 30
-
 
 #Refrences
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D

@@ -50,19 +50,19 @@ text = "Instant Form"
 [node name="Form01" type="Button" parent="UI Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Agility Form"
+text = "Agility Form - 10"
 alignment = 0
 
 [node name="Form02" type="Button" parent="UI Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Balanced Form"
+text = "Balanced Form - 25"
 alignment = 0
 
 [node name="Form03" type="Button" parent="UI Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Heavy Form"
+text = "Heavy Form - 60"
 alignment = 0
 
 [node name="BackupContainer" type="VBoxContainer" parent="."]

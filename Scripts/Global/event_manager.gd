@@ -31,6 +31,12 @@ func use_fillament(amount: int):
 func has_required_fillament(amount: int) -> bool:
 	return amount <= fillament_amount
 
+func has_current_form() -> bool:
+	return current_form != null
+
+func has_backup_form() -> bool:
+	return backup_form != null
+
 func set_current_form(form: CharacterBody2D) -> void:
 	current_form = form
 

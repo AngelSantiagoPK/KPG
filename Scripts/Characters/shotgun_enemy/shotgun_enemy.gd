@@ -44,6 +44,9 @@ func add_muzzle_flash() -> void:
 	pistol_bullet_marker.add_child(muzzle)
 
 func shoot_shell():
+	if not EventManager.has_current_form():
+		return
+	
 	var target_position : Vector2 = EventManager.current_form.global_position
 	var bullet_direction : Vector2 = update_gun_direction(target_position)
 	await get_tree().create_timer(1.0).timeout

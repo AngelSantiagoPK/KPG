@@ -8,3 +8,4 @@ extends Resource
 @export var reload_delay: float = 1.0
 @export var infinite_ammo: bool = false
 @export var shot_spread: int = 1
+@export var shot_size: int = 1
