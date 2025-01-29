@@ -38,8 +38,5 @@ func _on_no_collision_timer_timeout():
 func _on_body_entered(_body):
 	die()
 	if not destroyed:
-		#Using Audio Manager
-		#AudioManager.play_sound(AudioManager.BULLET)
-		#Using the scene's audio stream player
 		audio_stream_player_2d.play()
 		destroyed = true

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="2_uklrn"]
 [ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="3_d8smw"]
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="4_hhywj"]
-[ext_resource type="Script" path="res://Scenes/UI/reserve.gd" id="5_4ol1e"]
+[ext_resource type="Script" path="res://Scripts/UI/reserve.gd" id="5_tglc1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4c4s"]
 bg_color = Color(1, 0.341088, 0.295625, 1)
@@ -311,7 +311,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 8
 text = "90
 "
-script = ExtResource("5_4ol1e")
+script = ExtResource("5_tglc1")
 
 [connection signal="button_up" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_button_up"]
 [connection signal="mouse_entered" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_mouse_entered"]

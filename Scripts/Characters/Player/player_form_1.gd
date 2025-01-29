@@ -13,14 +13,11 @@ var bullets_amount : int = 30
 var wallclimb: bool = false
 
 # Refrences
-@onready var animator : AnimatedSprite2D = $AnimatedSprite2D
 @onready var guns_animator : AnimationPlayer = $ShootingAnimationPlayer
 @onready var hit_animator : AnimationPlayer = $HitAnimationPlayer
-@onready var hand: Hand = $Hand
-@onready var pistol : Sprite2D = $Hand/Pivot/Pistol
-@onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
+@onready var hand: Hand = $Form_1_Gun
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -100,10 +97,10 @@ func small_shake():
 
 func animate(input_vector):
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
-	if mouse_position.x > 0 and animator.flip_h:
-		animator.flip_h = false
-	elif mouse_position.x < 0 and not animator.flip_h:
-		animator.flip_h = true
+	if mouse_position.x > 0 and sprite.flip_h:
+		sprite.flip_h = false
+	elif mouse_position.x < 0 and not sprite.flip_h:
+		sprite.flip_h = true
 	
 	hand.rotation = mouse_position.angle()
 	if hand.scale.y == 1 and mouse_position.x < 0:
@@ -111,16 +108,16 @@ func animate(input_vector):
 	elif hand.scale.y == -1 and mouse_position.x > 0:
 		hand.scale.y = 1
 	
-	if is_on_floor():
-		if input_vector != 0:
-			animator.play("Run")
-		else:
-			animator.play("Idle")
-	else:
-		if velocity.y > 0:
-				animator.play("Fall")
-		else:
-				animator.play("Jump")
+	#if is_on_floor():
+		#if input_vector != 0:
+			#animator.play("Run")
+		#else:
+			#animator.play("Idle")
+	#else:
+		#if velocity.y > 0:
+				#animator.play("Fall")
+		#else:
+				#animator.play("Jump")
 
 func _on_hurtbox_area_entered(_area):
 	hit_animator.set_deferred("play", "Hit")
