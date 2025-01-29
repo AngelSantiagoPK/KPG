@@ -172,7 +172,7 @@ _data = {
 "RESET": SubResource("Animation_1gg70")
 }
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d2yjo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vnbx1"]
 texture = ExtResource("4_1pvgr")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -331,7 +331,7 @@ texture = ExtResource("4_1pvgr")
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:3/0/terrains_peering_bit/left_side = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_73hj8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lhuo1"]
 texture = ExtResource("5_p2vrr")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -470,7 +470,7 @@ texture = ExtResource("5_p2vrr")
 5:1/0/terrains_peering_bit/top_side = 1
 5:1/0/terrains_peering_bit/top_right_corner = 1
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sihnw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trkvs"]
 resource_name = "Cave Ceiling"
 texture = ExtResource("6_1vknt")
 0:0/0 = 0
@@ -640,9 +640,9 @@ terrain_set_0/terrain_1/name = "Cave"
 terrain_set_0/terrain_1/color = Color(0.823529, 0, 0.203922, 1)
 terrain_set_0/terrain_2/name = "Cave Ceiling"
 terrain_set_0/terrain_2/color = Color(0.882353, 0, 0.258824, 1)
-sources/0 = SubResource("TileSetAtlasSource_d2yjo")
-sources/1 = SubResource("TileSetAtlasSource_73hj8")
-sources/2 = SubResource("TileSetAtlasSource_sihnw")
+sources/0 = SubResource("TileSetAtlasSource_vnbx1")
+sources/1 = SubResource("TileSetAtlasSource_lhuo1")
+sources/2 = SubResource("TileSetAtlasSource_trkvs")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufdag"]
 resource_name = "Nature"
@@ -720,8 +720,9 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[node name="Prototype" type="Node2D"]
+[node name="Prototype" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_p5tg8")
+player = NodePath("Player_f2")
 
 [node name="Waterfall" type="AnimatedSprite2D" parent="."]
 position = Vector2(335, 192)
@@ -883,7 +884,7 @@ stats = SubResource("Resource_4sy4q")
 position = Vector2(208, 55)
 stats = SubResource("Resource_1ng3s")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 position = Vector2(61, 83)
 process_callback = 0
 position_smoothing_enabled = true
