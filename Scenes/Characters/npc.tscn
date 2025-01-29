@@ -311,7 +311,7 @@ position = Vector2(-1, -9.5)
 shape = SubResource("RectangleShape2D_oh2mm")
 
 [node name="LongVision" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 2
 script = ExtResource("17_8d3af")
 
@@ -327,7 +327,7 @@ collision_mask = 3
 collide_with_areas = true
 
 [node name="ShortVision" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 2
 script = ExtResource("10_gqt3k")
 

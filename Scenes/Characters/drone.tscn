@@ -69,6 +69,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_iq44y"]
 radius = 34.0
 
+<<<<<<< HEAD
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_gq63j"]
 stream_count = 2
 stream_0/stream = ExtResource("7_qi556")
@@ -77,6 +78,9 @@ stream_1/stream = ExtResource("8_m5ry3")
 stream_1/volume = -10.0
 
 [node name="Drone" type="CharacterBody2D" groups=["Drone"]]
+=======
+[node name="Drone" type="CharacterBody2D" groups=["Drone", "Player"]]
+>>>>>>> origin/main
 script = ExtResource("1_eohl6")
 movement_data = ExtResource("2_v7eu0")
 stats = ExtResource("3_jeffn")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GunData" load_steps=2 format=3 uid="uid://c8d7i6u3wjpxr"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/gun_data.gd" id="1_c2s5o"]
+
+[resource]
+script = ExtResource("1_c2s5o")
+name = "Shattergun"
+mag_size = 6
+reserve_ammo = 20
+gun_delay = 0.5
+reload_delay = 1.0
+infinite_ammo = false
+shot_spread = 20
+shot_size = 3

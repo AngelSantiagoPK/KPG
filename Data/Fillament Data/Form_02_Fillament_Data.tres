@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_385qt")
-cost = 20
+cost = 25
 print_time = 10
 id = 2

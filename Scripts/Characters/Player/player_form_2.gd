@@ -1,21 +1,12 @@
 class_name Form_02
 extends CharacterBody2D
 
-#Data
-var bullets_amount : int = 50
-var shells_amount : int = 20
-
 @export var camera : Camera2D
 @export var movement_data : MovementData
 @export var fillament_data: FillamentData
 @export var stats : Stats
 @export var active: bool = false
 var can_shoot: bool = true
-
-@export_group("Shotgun Props")
-@export var shot_size: int = 6
-@export var shot_spread_in_deg: float = 30
-
 
 #Refrences
 @onready var animator : AnimatedSprite2D = $AnimatedSprite2D
@@ -31,16 +22,11 @@ var can_shoot: bool = true
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
-@onready var bullet_load : PackedScene = preload("res://Scenes/Props/bullet.tscn")
-@onready var shell_load : PackedScene = preload("res://Scenes/Props/shell.tscn")
 @onready var death_particle_load : PackedScene = preload("res://Scenes/Particles/player_death_particle.tscn")
 
 
 func _ready():
 	stats.health = stats.max_health
-	EventManager.bullets_amount = bullets_amount
-	EventManager.shells_amount = shells_amount
-	EventManager._update_bullet_ui.emit()
 	self.check_for_active_camera()
 
 func _physics_process(delta):
@@ -57,24 +43,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()
-		
-	
-	if Input.is_action_pressed("shoot"):
-		if bullets_amount > 0 and can_shoot:
-			can_shoot = false
-			rifle_delay.start()
-			guns_animator.play("Shoot")
-	
-	if Input.is_action_just_pressed("secondary_weapon"):
-		if shells_amount > 0:
-			guns_animator.play("Shoot_shell")
-	
-	if Input.is_action_just_pressed("interact"):
-		bullets_amount = 30
-		shells_amount = 30
-		EventManager.bullets_amount = bullets_amount
-		EventManager.shells_amount = shells_amount
-		EventManager._update_bullet_ui.emit()
 
 	move_and_slide()
 	animate(input_vector)
@@ -96,6 +64,7 @@ func jump():
 	velocity.y = -movement_data.jump_strength
 	AudioManager.play_sound(AudioManager.JUMP)
 
+<<<<<<< HEAD
 func shoot():
 	bullets_amount -= 1
 	EventManager.bullets_amount -= 1
@@ -137,6 +106,8 @@ func shoot_shell():
 	#Using Audio Manager
 	#AudioManager.play_sound(AudioManager.SHOOT)
 
+=======
+>>>>>>> origin/main
 func small_shake():
 	if not camera:
 		return
@@ -198,6 +169,3 @@ func die():
 	death_particle.global_position = global_position
 	get_tree().current_scene.add_child(death_particle)
 	EventManager._form_destroyed.emit()
-
-func _on_rifle_delay_timeout() -> void:
-	can_shoot = true

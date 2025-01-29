@@ -20,7 +20,7 @@ func spawn_player() -> void:
 		spawn_marker.global_position = curr_form.global_position
 		curr_form.queue_free()
 	
-	var form = FORM_01.instantiate()
+	var form = FORM_02.instantiate()
 	EventManager.set_current_form(form)
 	form.global_position = spawn_marker.global_position
 	form.active = true
@@ -28,7 +28,7 @@ func spawn_player() -> void:
 	form.check_for_active_camera()
 
 func respawn_player() -> void:
-	if not has_backup():
+	if not EventManager.has_backup_form():
 		EventManager._player_died.emit()
 		return
 	
@@ -44,7 +44,7 @@ func respawn_player() -> void:
 	EventManager.set_current_form(form)
 	form.global_position = spawn_marker.global_position
 	form.active = true
-	add_child(form)
+	self.call_deferred("add_child", form)
 	EventManager.set_backup_form(null)
 	form.check_for_active_camera()
 
@@ -56,8 +56,6 @@ func print_spawn_player(form: CharacterBody2D) -> void:
 	form.active = true
 	add_child(form)
 	form.check_for_active_camera()
-
-func has_backup(): return EventManager.backup_form != null
 
 func pay_for_respawn(cost: int) -> void:
 	AudioManager.play_sound(AudioManager.MENU_CLICK)

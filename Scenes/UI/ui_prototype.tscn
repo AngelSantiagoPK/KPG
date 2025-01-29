@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://g6ua55ckmage"]
+[gd_scene load_steps=19 format=3 uid="uid://cbcrnnlkxatpy"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_container.gd" id="1_2aipp"]
 [ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="2_uklrn"]
 [ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="3_d8smw"]
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="4_hhywj"]
-[ext_resource type="Script" path="res://Scripts/UI/reserve.gd" id="5_4ol1e"]
+[ext_resource type="Script" path="res://Scenes/UI/reserve.gd" id="5_4ol1e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4c4s"]
 bg_color = Color(1, 0.341088, 0.295625, 1)

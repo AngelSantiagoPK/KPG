@@ -11,7 +11,8 @@ signal _spawn
 signal _print_spawn(form: CharacterBody2D)
 
 # UI Signals
-signal _update_bullet_ui
+signal _update_bullet_ui(count: int)
+signal _update_reserve_ammo_ui(count: int)
 signal _update_health_ui
 signal _update_fillament_ui
 signal _update_reserve_ammo_ui(count: int)
@@ -30,6 +31,12 @@ func use_fillament(amount: int):
 
 func has_required_fillament(amount: int) -> bool:
 	return amount <= fillament_amount
+
+func has_current_form() -> bool:
+	return current_form != null
+
+func has_backup_form() -> bool:
+	return backup_form != null
 
 func set_current_form(form: CharacterBody2D) -> void:
 	current_form = form

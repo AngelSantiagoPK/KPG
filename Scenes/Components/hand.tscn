@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnue5rfo1toh8"]
+
+[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="1_gw6qk"]
+[ext_resource type="Script" path="res://Scripts/Components/hand.gd" id="1_hr15q"]
+[ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="2_j0r81"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbnn4"]
+shader = ExtResource("1_gw6qk")
+shader_parameter/active = false
+
+[node name="Hand" type="Node2D"]
+script = ExtResource("1_hr15q")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Pistol" type="Sprite2D" parent="Pivot"]
+material = SubResource("ShaderMaterial_dbnn4")
+position = Vector2(10, -4)
+texture = ExtResource("2_j0r81")
+region_enabled = true
+region_rect = Rect2(160, 64, 16, 16)
+
+[node name="PistolBulletMarker" type="Marker2D" parent="Pivot/Pistol"]
+position = Vector2(6, -2)
+gizmo_extents = 2.0
+
+[node name="GunDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="GunReload" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]
+[connection signal="timeout" from="GunReload" to="." method="_on_gun_reload_timeout"]

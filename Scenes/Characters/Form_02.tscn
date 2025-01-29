@@ -7,7 +7,7 @@
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_tvf5k"]
-[ext_resource type="PackedScene" path="res://Scenes/Components/hand.tscn" id="7_x2h50"]
+[ext_resource type="PackedScene" uid="uid://bnue5rfo1toh8" path="res://Scenes/Components/hand.tscn" id="7_x2h50"]
 [ext_resource type="AudioStream" uid="uid://bfcmace7xd7vo" path="res://Audio/Sounds/sx_int_pistol_fire_1.ogg" id="8_u1n34"]
 [ext_resource type="AudioStream" uid="uid://onsj4rkpdeij" path="res://Audio/Sounds/sx_int_pistol_fire_2.ogg" id="9_pbmrk"]
 [ext_resource type="AudioStream" uid="uid://dydgebr0fsmk0" path="res://Audio/Sounds/sx_int_pistol_fire_3.ogg" id="10_06of1"]
@@ -324,6 +324,9 @@ volume_db = 2.0
 stream = SubResource("AudioStreamRandomizer_0oacy")
 volume_db = 2.0
 pitch_scale = 1.59
+
+[node name="Hand" parent="." instance=ExtResource("7_x2h50")]
+current_type = 1
 
 [node name="Hand" parent="." instance=ExtResource("7_x2h50")]
 current_type = 1
