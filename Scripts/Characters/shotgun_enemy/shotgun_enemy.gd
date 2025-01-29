@@ -52,16 +52,12 @@ func shoot_shell():
 	await get_tree().create_timer(1.0).timeout
 	add_muzzle_flash()
 	
-	var shells: Array[Shell] = []
 	for i in shot_size:
-		var shell: Shell = shell_load.instantiate()
+		var shell= shell_load.instantiate()
 		var offset = (i - (shot_size / 2)) * (shot_spread_in_deg / shot_size)
 		shell.global_position = pistol_bullet_marker.global_position
 		shell.target_vector = bullet_direction.rotated(deg_to_rad(offset))
-		shells.append(shell)
-	
-	for i in shells:
-		get_tree().current_scene.add_child(i)
+		get_tree().current_scene.add_child(shell)
 	
 	AudioManager.play_sound(AudioManager.SHOOT)
 

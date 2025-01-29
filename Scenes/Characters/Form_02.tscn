@@ -328,7 +328,7 @@ pitch_scale = 1.59
 [node name="Hand" parent="." instance=ExtResource("7_x2h50")]
 current_type = 1
 
-[node name="Hand" parent="." instance=ExtResource("7_x2h50")]
+[node name="Hand2" parent="." instance=ExtResource("7_x2h50")]
 current_type = 1
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
