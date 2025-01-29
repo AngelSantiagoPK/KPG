@@ -1,10 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cbcrnnlkxatpy"]
+[gd_scene load_steps=19 format=3 uid="uid://g6ua55ckmage"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui_container.gd" id="1_2aipp"]
-[ext_resource type="PackedScene" uid="uid://2b2xfq1mesyu" path="res://Scenes/UI/bullet_ui.tscn" id="1_6uvug"]
 [ext_resource type="PackedScene" uid="uid://gjbo06qhflpe" path="res://Scenes/UI/health_bar.tscn" id="2_uklrn"]
 [ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="3_d8smw"]
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="4_hhywj"]
+[ext_resource type="Script" path="res://Scripts/UI/reserve.gd" id="5_4ol1e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4c4s"]
 bg_color = Color(1, 0.341088, 0.295625, 1)
@@ -87,6 +87,16 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
+[sub_resource type="GDScript" id="GDScript_k6oo5"]
+script/source = "extends Label
+
+func _ready() -> void:
+	EventManager._update_bullet_ui.connect(update_text.bind())
+
+func update_text(count: int) -> void:
+	self.text = str(count)
+"
+
 [node name="UI" type="CanvasLayer"]
 layer = 0
 script = ExtResource("1_2aipp")
@@ -104,100 +114,6 @@ patch_margin_right = 32
 patch_margin_bottom = 32
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-
-[node name="Ammo_group" type="Control" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 191.0
-offset_top = -21.0
-offset_right = 191.0
-offset_bottom = -21.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="ammo_panel" type="Panel" parent="NinePatchRect/Ammo_group"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -11.0
-offset_top = 1.0
-offset_right = 129.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Ammo" type="Label" parent="NinePatchRect/Ammo_group/ammo_panel"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 6.0
-offset_right = 67.0
-offset_bottom = 29.0
-scale = Vector2(0.276478, 0.276478)
-text = "Ammo:"
-
-[node name="BulletUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 47.0
-offset_top = -135.0
-offset_right = 47.0
-offset_bottom = 165.0
-scale = Vector2(1, 1)
-
-[node name="Bullet_rifleUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
-modulate = Color(1, 0.270588, 0, 1)
-layout_direction = 2
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 67.0
-offset_top = -135.0
-offset_right = 67.0
-offset_bottom = 165.0
-scale = Vector2(1, 1)
-
-[node name="ShellsUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
-modulate = Color(0, 0.541176, 1, 1)
-layout_direction = 2
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 89.0
-offset_top = -135.0
-offset_right = 89.0
-offset_bottom = 165.0
-scale = Vector2(1, 1)
-
-[node name="Tank_BulletUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
-layout_direction = 2
-layout_mode = 2
-anchors_preset = 0
-offset_left = 54.0
-offset_top = 6.0
-offset_right = 54.0
-offset_bottom = 6.0
-
-[node name="DronesUI" parent="NinePatchRect/Ammo_group/ammo_panel" instance=ExtResource("1_6uvug")]
-layout_direction = 2
-layout_mode = 2
-anchors_preset = 0
-offset_left = 74.0
-offset_top = 6.0
-offset_right = 74.0
-offset_bottom = 6.0
 
 [node name="Filament_group" type="Control" parent="NinePatchRect"]
 layout_mode = 1
@@ -284,6 +200,7 @@ offset_bottom = 3.0
 scale = Vector2(0.37867, 0.37867)
 
 [node name="Score_group" type="Control" parent="NinePatchRect"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -345,6 +262,56 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_jx8cg")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_yjb65")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6dbr0")
 text = "Main Menu"
+
+[node name="ammo_panel" type="Panel" parent="NinePatchRect"]
+layout_mode = 2
+offset_left = 553.0
+offset_top = 334.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/ammo_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/ammo_panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Ammo" type="Label" parent="NinePatchRect/ammo_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "Ammo:"
+
+[node name="Clip" type="Label" parent="NinePatchRect/ammo_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "30
+"
+script = SubResource("GDScript_k6oo5")
+
+[node name="Dash" type="Label" parent="NinePatchRect/ammo_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "/
+"
+
+[node name="Reserve" type="Label" parent="NinePatchRect/ammo_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "90
+"
+script = ExtResource("5_4ol1e")
 
 [connection signal="button_up" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_button_up"]
 [connection signal="mouse_entered" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_mouse_entered"]

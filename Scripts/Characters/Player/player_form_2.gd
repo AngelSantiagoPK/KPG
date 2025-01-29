@@ -124,16 +124,12 @@ func shoot_shell():
 	muzzle.global_position = pistol_bullet_marker.global_position
 	pistol_bullet_marker.add_child(muzzle)
 	
-	var shells: Array[Shell] = []
 	for i in shot_size:
-		var shell: Shell = shell_load.instantiate()
+		var shell = shell_load.instantiate()
 		var offset = (i - (shot_size / 2)) * (shot_spread_in_deg / shot_size)
 		shell.global_position = pistol_bullet_marker.global_position
 		shell.target_vector = mouse_position.rotated(deg_to_rad(offset))
-		shells.append(shell)
-	
-	for i in shells:
-		get_tree().current_scene.add_child(i)
+		get_tree().current_scene.add_child(shell)
 	
 	#Using AudioStreamPlayer from the form's scene
 	audio_stream_secondary.play()

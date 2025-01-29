@@ -1,8 +1,8 @@
 [gd_scene load_steps=46 format=3 uid="uid://pmq45thp1ua4"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/npc.gd" id="1_2pthx"]
-[ext_resource type="Resource" uid="uid://bpqco137xcy6p" path="res://Data/Movement Data/NPC_Movement_Data.tres" id="2_liuv6"]
-[ext_resource type="Resource" uid="uid://begns4ptaj643" path="res://Data/Stats/NPC_Stats.tres" id="3_h060f"]
+[ext_resource type="Resource" path="res://Data/Movement Data/NPC_Movement_Data.tres" id="2_87niv"]
+[ext_resource type="Resource" uid="uid://bb20e7c2x3pyl" path="res://Data/Stats/NPC_Stats.tres" id="3_h060f"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_csr7g"]
 [ext_resource type="Texture2D" uid="uid://c55u7w2c5tqcb" path="res://Textures/Characters/Bat.png" id="5_533go"]
 [ext_resource type="Texture2D" uid="uid://ck6k0r0tymmak" path="res://Textures/UI/Emote.png" id="6_tvidh"]
@@ -251,7 +251,7 @@ stream_2/stream = ExtResource("22_t2em5")
 [node name="NPC" type="CharacterBody2D" groups=["Bat", "Enemy", "NPC"]]
 collision_layer = 4
 script = ExtResource("1_2pthx")
-movement_data = ExtResource("2_liuv6")
+movement_data = ExtResource("2_87niv")
 stats = ExtResource("3_h060f")
 shot_size = 3
 

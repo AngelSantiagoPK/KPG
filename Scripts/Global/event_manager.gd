@@ -14,6 +14,7 @@ signal _print_spawn(form: CharacterBody2D)
 signal _update_bullet_ui
 signal _update_health_ui
 signal _update_fillament_ui
+signal _update_reserve_ammo_ui(count: int)
 
 # Effect Signals
 signal frame_freeze
