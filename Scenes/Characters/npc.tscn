@@ -399,7 +399,7 @@ process_callback = 0
 one_shot = true
 
 [node name="GunDelay" type="Timer" parent="StateMachine/Attack"]
-wait_time = 0.5
+wait_time = 3.0
 one_shot = true
 
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("black_death_particle")]

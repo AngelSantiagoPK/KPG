@@ -15,7 +15,6 @@ var can_shoot: bool = true
 @onready var hand : Node2D = $Hand
 @onready var pistol : Sprite2D = $Hand/Pivot/Pistol
 @onready var pistol_bullet_marker : Marker2D = $Hand/Pivot/Pistol/PistolBulletMarker
-@onready var rifle_delay: Timer = $RifleDelay
 @onready var remote: RemoteTransform2D = $RemoteTransform2D
 @onready var audio_stream_primary: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var audio_stream_secondary: AudioStreamPlayer2D = $AudioStreamSecondary
@@ -64,50 +63,6 @@ func jump():
 	velocity.y = -movement_data.jump_strength
 	AudioManager.play_sound(AudioManager.JUMP)
 
-<<<<<<< HEAD
-func shoot():
-	bullets_amount -= 1
-	EventManager.bullets_amount -= 1
-	EventManager._update_bullet_ui.emit()
-	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
-	var muzzle = muzzle_load.instantiate()
-	var bullet = bullet_load.instantiate()
-	pistol_bullet_marker.add_child(muzzle)
-	bullet.global_position = pistol_bullet_marker.global_position
-	bullet.target_vector = mouse_position
-	bullet.rotation = mouse_position.angle()
-	get_tree().current_scene.add_child(bullet)
-
-	#Using AudioStreamPlayer from the form's scene
-	audio_stream_primary.play()
-
-	#Using Audio Manager
-	#AudioManager.play_sound(AudioManager.SHOOT)
-
-func shoot_shell():
-	shells_amount -= shot_size
-	EventManager.shells_amount -= 1
-	EventManager._update_bullet_ui.emit()
-	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
-	var muzzle = muzzle_load.instantiate()
-	muzzle.global_position = pistol_bullet_marker.global_position
-	pistol_bullet_marker.add_child(muzzle)
-	
-	for i in shot_size:
-		var shell = shell_load.instantiate()
-		var offset = (i - (shot_size / 2)) * (shot_spread_in_deg / shot_size)
-		shell.global_position = pistol_bullet_marker.global_position
-		shell.target_vector = mouse_position.rotated(deg_to_rad(offset))
-		get_tree().current_scene.add_child(shell)
-	
-	#Using AudioStreamPlayer from the form's scene
-	audio_stream_secondary.play()
-
-	#Using Audio Manager
-	#AudioManager.play_sound(AudioManager.SHOOT)
-
-=======
->>>>>>> origin/main
 func small_shake():
 	if not camera:
 		return
