@@ -38,6 +38,7 @@ offset_bottom = 40.0
 texture = ExtResource("5_gbrg4")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 position = Vector2(11.976, -5.98802)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(-17.9641, 29.9401, 5.98802, -5.98802, 41.9162, 23.9521, 11.976, 59.8802)

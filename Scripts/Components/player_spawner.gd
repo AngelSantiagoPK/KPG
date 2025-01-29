@@ -36,17 +36,17 @@ func respawn_player() -> void:
 	if not EventManager.has_required_fillament(cost):
 		EventManager._player_died.emit()
 		return
-	
 	EventManager.use_fillament(cost)
-	var form = EventManager.get_backup_form()
+	
 	update_spawn_position(EventManager.get_current_form().global_position)
 	EventManager.get_current_form().queue_free()
+	var form = EventManager.get_backup_form()
 	EventManager.set_current_form(form)
+	EventManager.set_backup_form(null)
 	form.global_position = spawn_marker.global_position
 	form.active = true
 	self.call_deferred("add_child", form)
-	EventManager.set_backup_form(null)
-	form.check_for_active_camera()
+	form.call_deferred("check_for_active_camera")
 
 func print_spawn_player(form: CharacterBody2D) -> void:
 	update_spawn_position(EventManager.get_current_form().global_position)

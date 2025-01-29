@@ -25,6 +25,9 @@ func check_ray() -> void:
 			player = target_in_range
 
 func _on_body_entered(body: Node2D) -> void:
+	print_debug("Short Range Entered: ")
+	print(body.name)
+	print("")
 	if body.is_in_group("Player"):
 		target_in_range = body
 		short_ray.enabled = true
@@ -33,9 +36,10 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(body: Node2D) -> void:
+	print_debug("Short Range Exited: ")
+	print(body.name)
+	print("")
 	if body.is_in_group("Player"):
 		short_ray.enabled = false
 		target_in_range = null
 		player = null
-	else:
-		return
