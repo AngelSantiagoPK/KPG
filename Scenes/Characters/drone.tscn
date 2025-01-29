@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://3vqa0cl8knwk"]
+[gd_scene load_steps=16 format=3 uid="uid://3vqa0cl8knwk"]
 
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="1_5ojqh"]
 [ext_resource type="Script" path="res://Scripts/Characters/Drone/drone.gd" id="1_eohl6"]
@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://dyuynlilhpdpr" path="res://Data/Stats/Drone_Stats.tres" id="3_jeffn"]
 [ext_resource type="Texture2D" uid="uid://6jebehbxdvj3" path="res://Textures/UI/Bat Health Bar Empty.png" id="5_52e0i"]
 [ext_resource type="Texture2D" uid="uid://e7mb2pjdc27o" path="res://Textures/UI/Bat Health Bar.png" id="6_cuwue"]
+[ext_resource type="AudioStream" uid="uid://cqxwah66n6wv7" path="res://Audio/Sounds/sx_int_drone_move.ogg" id="7_qi556"]
+[ext_resource type="AudioStream" uid="uid://cfdep7gqltq18" path="res://Audio/Sounds/sx_int_drone_on.ogg" id="8_m5ry3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jce5w"]
 size = Vector2(20, 7)
@@ -67,7 +69,18 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_iq44y"]
 radius = 34.0
 
+<<<<<<< HEAD
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_gq63j"]
+stream_count = 2
+stream_0/stream = ExtResource("7_qi556")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("8_m5ry3")
+stream_1/volume = -10.0
+
+[node name="Drone" type="CharacterBody2D" groups=["Drone"]]
+=======
 [node name="Drone" type="CharacterBody2D" groups=["Drone", "Player"]]
+>>>>>>> origin/main
 script = ExtResource("1_eohl6")
 movement_data = ExtResource("2_v7eu0")
 stats = ExtResource("3_jeffn")
@@ -110,5 +123,11 @@ texture_under = ExtResource("5_52e0i")
 texture_progress = ExtResource("6_cuwue")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="AudioStreamPlayerEngine" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamSynchronized_gq63j")
+volume_db = 2.5
+autoplay = true
+bus = &"SFX"
 
 [connection signal="body_entered" from="ActivationArea" to="." method="_on_activation_area_body_entered"]

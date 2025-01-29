@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_3.gd" id="1_r56uj"]
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_3.tres" id="2_e2wnv"]
-[ext_resource type="Resource" uid="uid://b12etqlr7188t" path="res://Data/Stats/Form_3_Stats.tres" id="3_2knpp"]
+[ext_resource type="Resource" uid="uid://ch28kyub1ntrq" path="res://Data/Stats/Form_3_Stats.tres" id="3_2knpp"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="4_uk43i"]
 [ext_resource type="Resource" uid="uid://d36ewhelj2adx" path="res://Data/Fillament Data/Form_03_Fillament_Data.tres" id="4_x0fl5"]
 [ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="5_oesr5"]
@@ -15,7 +15,7 @@ size = Vector2(44, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlgf8"]
 size = Vector2(36, 30)
 
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_lsmpd"]
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_vt1fh"]
 stream_count = 2
 stream_0/stream = ExtResource("6_aliae")
 stream_0/volume = -60.0
@@ -71,10 +71,10 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="AudioStreamPlayerEngine" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamSynchronized_lsmpd")
+[node name="AudioStreamPlayerEngine" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamSynchronized_vt1fh")
+volume_db = 2.5
 autoplay = true
-bus = &"SFX"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 update_rotation = false

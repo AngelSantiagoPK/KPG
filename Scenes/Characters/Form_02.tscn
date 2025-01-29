@@ -1,8 +1,8 @@
-[gd_scene load_steps=38 format=3 uid="uid://dg4etu8go2bfu"]
+[gd_scene load_steps=38 format=3 uid="uid://c5pon6ytetm0q"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
-[ext_resource type="Resource" uid="uid://bvast80iosmev" path="res://Data/Movement Data/Form_2.tres" id="2_niton"]
-[ext_resource type="Resource" uid="uid://cq40rbqk36c5a" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
+[ext_resource type="Resource" path="res://Data/Movement Data/Form_2.tres" id="2_0rlqi"]
+[ext_resource type="Resource" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
 [ext_resource type="Resource" uid="uid://dgvi5sx4i7sao" path="res://Data/Fillament Data/Form_02_Fillament_Data.tres" id="3_gqp4l"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="4_dt6bj"]
 [ext_resource type="Texture2D" uid="uid://54furj5lgxfw" path="res://Textures/Characters/Player.png" id="5_j0pni"]
@@ -275,7 +275,7 @@ stream_2/stream = ExtResource("13_d4v30")
 [node name="Form-02" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_i8duy")
-movement_data = ExtResource("2_niton")
+movement_data = ExtResource("2_0rlqi")
 fillament_data = ExtResource("3_gqp4l")
 stats = ExtResource("3_1a5h7")
 
@@ -319,13 +319,14 @@ update_scale = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_yamvr")
 volume_db = 2.0
-bus = &"SFX"
 
 [node name="AudioStreamSecondary" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_0oacy")
 volume_db = 2.0
 pitch_scale = 1.59
-bus = &"SFX"
+
+[node name="Hand" parent="." instance=ExtResource("7_x2h50")]
+current_type = 1
 
 [node name="Hand" parent="." instance=ExtResource("7_x2h50")]
 current_type = 1

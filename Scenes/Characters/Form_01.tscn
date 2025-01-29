@@ -1,8 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://c346pdsapopnn"]
+[gd_scene load_steps=34 format=3 uid="uid://b54bcukid57p4"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_1.gd" id="1_p8eyj"]
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_1.tres" id="2_y3svm"]
-[ext_resource type="Resource" uid="uid://c4rfnihyiyg6j" path="res://Data/Stats/Form_1_Stats.tres" id="3_3l53u"]
+[ext_resource type="Resource" path="res://Data/Stats/Form_1_Stats.tres" id="3_3l53u"]
 [ext_resource type="Resource" uid="uid://bmjcgnbyfx68j" path="res://Data/Fillament Data/Form_01_Fillament_Data.tres" id="3_t7vbj"]
 [ext_resource type="PackedScene" path="res://Scenes/Components/wallclimb_box.tscn" id="4_ownlq"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="5_kg6ca"]
@@ -291,7 +291,6 @@ update_scale = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bhlfv")
 volume_db = 2.0
-bus = &"SFX"
 
 [node name="Hand" parent="." instance=ExtResource("12_84ru5")]
 current_type = 2

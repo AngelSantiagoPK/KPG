@@ -12,6 +12,8 @@ const MENU_CLICK : AudioStreamWAV = preload("res://Audio/Sounds/Menu Click.wav")
 const MENU_HOVER : AudioStreamWAV = preload("res://Audio/Sounds/Menu Hover.wav")
 const SPLASH_CLICK : AudioStreamWAV = preload("res://Audio/Sounds/Splash Click.wav")
 const SPLASH_GLITCH : AudioStreamWAV = preload("res://Audio/Sounds/Splash Glitch.wav")
+const EXPLOSION : AudioStreamOggVorbis = preload("res://Audio/Sounds/sx_int_drone_explosion.ogg")	
+
 
 
 #Refrences
