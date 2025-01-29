@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://0lk4rcj43pr0"]
+[gd_scene load_steps=3 format=3 uid="uid://ccdvw2v34lcn6"]
 
 [ext_resource type="Script" path="res://Scripts/Components/wallclimb_box.gd" id="1_g1y4s"]
 
