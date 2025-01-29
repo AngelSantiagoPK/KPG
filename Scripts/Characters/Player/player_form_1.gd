@@ -29,6 +29,7 @@ var wallclimb: bool = false
 
 func _ready():
 	stats.health = stats.max_health
+	EventManager._update_health_ui.emit(stats)
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -121,7 +122,7 @@ func animate(input_vector):
 
 func _on_hurtbox_area_entered(_area):
 	hit_animator.set_deferred("play", "Hit")
-	EventManager._update_health_ui.emit()
+	EventManager._decrease_health_bar.emit()
 	if stats.health <= 0:
 		die()
 	else:

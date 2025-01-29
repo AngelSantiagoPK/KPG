@@ -30,6 +30,7 @@ stats = ExtResource("3_2knpp")
 fillament_data = ExtResource("4_x0fl5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_su20v")
 
@@ -38,9 +39,11 @@ visible = false
 scale = Vector2(2.2, 1.9)
 polygon = PackedVector2Array(-5, -8.94737, 4.09091, -8.94737, 10, -4.21053, 10, 5.26316, 5.90909, 8.42105, -5, 8.42105, -10, 5.26316, -10, -3.15789)
 
-[node name="Hurtbox" parent="." groups=["Tank"] instance=ExtResource("4_uk43i")]
+[node name="Hurtbox" parent="." groups=["Player"] instance=ExtResource("4_uk43i")]
+monitoring = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
 shape = SubResource("RectangleShape2D_hlgf8")
 
 [node name="Launcher" type="Node2D" parent="."]
@@ -85,6 +88,7 @@ update_scale = false
 position = Vector2(0, -14)
 current_type = 3
 
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]
 [connection signal="timeout" from="DroneCooldown" to="." method="_on_drone_cooldown_timeout"]
