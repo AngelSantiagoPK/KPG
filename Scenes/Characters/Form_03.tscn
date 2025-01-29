@@ -14,7 +14,7 @@ size = Vector2(44, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlgf8"]
 size = Vector2(36, 30)
 
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_lsmpd"]
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_vt1fh"]
 stream_count = 2
 stream_0/stream = ExtResource("6_aliae")
 stream_0/volume = -60.0
@@ -80,8 +80,9 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="AudioStreamPlayerEngine" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamSynchronized_lsmpd")
+[node name="AudioStreamPlayerEngine" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamSynchronized_vt1fh")
+volume_db = 2.5
 autoplay = true
 bus = &"SFX"
 
