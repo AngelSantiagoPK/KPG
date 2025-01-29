@@ -28,14 +28,18 @@ func check_ray() -> void:
 			player = target_in_range
 
 func _on_body_entered(body: Node2D) -> void:
+	print_debug("Long Range Entered: ")
+	print(body.name)
+	print("")
 	if body.is_in_group("Player"):
 		target_in_range = body
 		long_ray.enabled = true
-	else:
-		player = null
 
 
 func _on_body_exited(body: Node2D) -> void:
+	print_debug("Long Range Exited: ")
+	print(body.name)
+	print("")
 	if body.is_in_group("Player"):
 		long_ray.enabled = false
 		target_in_range = null

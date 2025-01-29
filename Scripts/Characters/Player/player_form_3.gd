@@ -33,6 +33,7 @@ var overheated: bool = false
 
 func _ready():
 	stats.health = stats.max_health
+	EventManager._update_health_ui.emit(stats)
 	
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -129,6 +130,14 @@ func small_shake():
 	if not camera:
 		return
 	camera.small_shake()
+
+func _on_hurtbox_area_entered(_area):
+	EventManager._decrease_health_bar.emit()
+	if stats.health <= 0:
+		die()
+	else:
+		AudioManager.play_sound(AudioManager.HURT)
+		EventManager.frame_freeze.emit()
 
 func die() -> void:
 	AudioManager.play_sound(AudioManager.DEATH)

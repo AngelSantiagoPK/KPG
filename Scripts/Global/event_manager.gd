@@ -15,6 +15,7 @@ signal _update_bullet_ui(count: int)
 signal _update_reserve_ammo_ui(count: int)
 signal _update_health_ui
 signal _update_fillament_ui
+signal _decrease_health_bar
 
 # Effect Signals
 signal frame_freeze
