@@ -4,13 +4,13 @@
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_1.tres" id="2_y3svm"]
 [ext_resource type="Resource" path="res://Data/Stats/Form_1_Stats.tres" id="3_3l53u"]
 [ext_resource type="Resource" uid="uid://bmjcgnbyfx68j" path="res://Data/Fillament Data/Form_01_Fillament_Data.tres" id="3_t7vbj"]
-[ext_resource type="PackedScene" path="res://Scenes/Components/wallclimb_box.tscn" id="4_ownlq"]
+[ext_resource type="PackedScene" uid="uid://ccdvw2v34lcn6" path="res://Scenes/Components/wallclimb_box.tscn" id="4_ownlq"]
 [ext_resource type="Texture2D" uid="uid://dnvg3p0iiehtb" path="res://Textures/Characters/KPG-Dog.png" id="6_411ji"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="7_u2pat"]
 [ext_resource type="AudioStream" uid="uid://bfcmace7xd7vo" path="res://Audio/Sounds/sx_int_pistol_fire_1.ogg" id="9_s36nx"]
 [ext_resource type="AudioStream" uid="uid://onsj4rkpdeij" path="res://Audio/Sounds/sx_int_pistol_fire_2.ogg" id="10_pm6iy"]
 [ext_resource type="AudioStream" uid="uid://dydgebr0fsmk0" path="res://Audio/Sounds/sx_int_pistol_fire_3.ogg" id="11_v8kjm"]
-[ext_resource type="PackedScene" uid="uid://rnb7ivtgtxat" path="res://Scenes/Components/form_1_gun.tscn" id="13_3e0b1"]
+[ext_resource type="PackedScene" uid="uid://bm0gv0kec8ayt" path="res://Scenes/Components/form_1_gun.tscn" id="13_3e0b1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apoll"]
 size = Vector2(17, 14)

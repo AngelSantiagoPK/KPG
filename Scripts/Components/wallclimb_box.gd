@@ -14,10 +14,10 @@ func _process(_delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Climbable"):
 		owner.wallclimb = true
-		area.grow_size()
+		#area.grow_size()
 
 
 func _on_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Climbable"):
 		owner.wallclimb = false
-		area.return_size()
+		#area.return_size()

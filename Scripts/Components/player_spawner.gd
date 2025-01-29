@@ -20,7 +20,7 @@ func spawn_player() -> void:
 		spawn_marker.global_position = curr_form.global_position
 		curr_form.queue_free()
 	
-	var form = FORM_02.instantiate()
+	var form = FORM_01.instantiate()
 	EventManager.set_current_form(form)
 	form.global_position = spawn_marker.global_position
 	form.active = true

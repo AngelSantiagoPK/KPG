@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://1dr8p4h2g4ug"]
+
+[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="2_xcxwq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4g68"]
+shader = ExtResource("2_xcxwq")
+shader_parameter/active = false
+
+[node name="Enemy_weapon" type="Node2D"]
+position = Vector2(106, 116)
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Pistol" type="Sprite2D" parent="Pivot"]
+material = SubResource("ShaderMaterial_p4g68")
+position = Vector2(10, -4)
+region_rect = Rect2(160, 64, 16, 16)
+
+[node name="PistolBulletMarker" type="Marker2D" parent="Pivot/Pistol"]
+visible = false
+position = Vector2(6, -2)
+gizmo_extents = 2.0
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.532744, 0.532744)
