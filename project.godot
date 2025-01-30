@@ -12,7 +12,7 @@ config_version=5
 
 config/name="KillsPerGramDemo"
 config/tags=PackedStringArray("templates")
-run/main_scene="res://Scenes/Levels/tutorial_level.tscn"
+run/main_scene="res://Scenes/Levels/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://Textures/Splash Screens/Dark.png"
 config/icon="res://icon.svg"
@@ -37,6 +37,10 @@ mouse_cursor/custom_image="res://Textures/UI/Mouse.png"
 Player=""
 Enemy=""
 Camera=""
+
+[gui]
+
+theme/custom="res://Scripts/Resources/Theme/theme.tres"
 
 [input]
 

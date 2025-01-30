@@ -2,7 +2,7 @@ class_name Shell
 extends Area2D
 
 #Data
-var speed : int = 220
+var speed : int = 420
 var target_vector : Vector2
 var destroyed : bool = false
 var damage: int = 1

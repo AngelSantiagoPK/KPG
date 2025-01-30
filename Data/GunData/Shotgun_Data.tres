@@ -6,9 +6,9 @@
 script = ExtResource("1_c2s5o")
 name = "Shattergun"
 mag_size = 6
-reserve_ammo = 20
-gun_delay = 0.5
+reserve_ammo = 30
+gun_delay = 0.25
 reload_delay = 1.0
 infinite_ammo = false
 shot_spread = 20
-shot_size = 3
+shot_size = 5

@@ -14,6 +14,7 @@ var can_shoot: bool = false
 @onready var pivot: Node2D = $Hand/Pivot
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var health_bar_timer: Timer = $HealthBar/HealthBarTimer
+var filament: PackedScene = preload("res://Scenes/Props/filament_pickup.tscn")
 
 #Load Scenes
 @onready var muzzle_load : PackedScene = preload("res://Scenes/Particles/muzzle.tscn")
@@ -88,4 +89,11 @@ func _on_hurtbox_area_entered(area):
 		self.update_health_bar()
 		if stats.health <= 0:
 			health_bar.visible = false
+			drop()
 			queue_free()
+
+func drop() -> void:
+	var drop = filament.instantiate()
+	drop.global_position = owner.global_position
+	drop.value = randi_range(1, 5)
+	get_tree().current_scene.call_deferred("add_child", drop)

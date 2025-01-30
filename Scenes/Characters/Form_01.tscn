@@ -141,6 +141,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_411ji")
 
 [node name="Form_1_Gun" parent="." instance=ExtResource("13_3e0b1")]
+z_index = -1
 position = Vector2(0, -2)
 current_type = 2
 

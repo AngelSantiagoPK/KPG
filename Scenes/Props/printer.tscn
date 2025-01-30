@@ -29,83 +29,76 @@ polygon = PackedVector2Array(-31, -62, -68, -62, -78, -51, -78, 0, -31, 0)
 [node name="PrinterSpawnMarker" type="Marker2D" parent="."]
 position = Vector2(-84, -82)
 
-[node name="UI Container" type="VBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 52.0
-offset_top = -127.0
-offset_right = 168.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 56.6667
+offset_top = -123.333
+offset_right = 460.667
+offset_bottom = -35.3333
+columns = 2
+
+[node name="UI Container" type="VBoxContainer" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Name" type="Label" parent="UI Container"]
+[node name="Name" type="Label" parent="GridContainer/UI Container"]
 layout_mode = 2
 size_flags_vertical = 8
-text = "Instant Form"
+text = "Print Form"
 
-[node name="Form01" type="Button" parent="UI Container"]
+[node name="Form01" type="Button" parent="GridContainer/UI Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Agility Form - 10"
+text = "K9 Form - 10"
 alignment = 0
 
-[node name="Form02" type="Button" parent="UI Container"]
+[node name="Form02" type="Button" parent="GridContainer/UI Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Balanced Form - 25"
+text = "Assault Form - 25"
 alignment = 0
 
-[node name="Form03" type="Button" parent="UI Container"]
+[node name="Form03" type="Button" parent="GridContainer/UI Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Heavy Form - 60"
+text = "Mech Form - 60"
 alignment = 0
 
-[node name="BackupContainer" type="VBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 173.333
-offset_top = -126.667
-offset_right = 289.333
-offset_bottom = 1.33334
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BackupContainer" type="VBoxContainer" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Name" type="Label" parent="BackupContainer"]
+[node name="Name" type="Label" parent="GridContainer/BackupContainer"]
 layout_mode = 2
 size_flags_vertical = 8
-text = "Backup Form"
+text = "Set Backup"
 
-[node name="Form01Backup" type="Button" parent="BackupContainer"]
+[node name="Form01Backup" type="Button" parent="GridContainer/BackupContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Agility Form"
+text = "queue form"
 alignment = 0
 
-[node name="Form02Backup" type="Button" parent="BackupContainer"]
+[node name="Form02Backup" type="Button" parent="GridContainer/BackupContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Balanced Form"
+text = "queue form"
 alignment = 0
 
-[node name="Form03Backup" type="Button" parent="BackupContainer"]
+[node name="Form03Backup" type="Button" parent="GridContainer/BackupContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Heavy Form"
+text = "queue form"
 alignment = 0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
-[connection signal="pressed" from="UI Container/Form01" to="." method="_on_form_01_pressed"]
-[connection signal="pressed" from="UI Container/Form02" to="." method="_on_form_02_pressed"]
-[connection signal="pressed" from="UI Container/Form03" to="." method="_on_form_03_pressed"]
-[connection signal="button_up" from="BackupContainer/Form01Backup" to="." method="_on_form_01_backup_button_up"]
-[connection signal="button_up" from="BackupContainer/Form02Backup" to="." method="_on_form_02_backup_button_up"]
-[connection signal="button_up" from="BackupContainer/Form03Backup" to="." method="_on_form_03_backup_button_up"]
+[connection signal="pressed" from="GridContainer/UI Container/Form01" to="." method="_on_form_01_pressed"]
+[connection signal="pressed" from="GridContainer/UI Container/Form02" to="." method="_on_form_02_pressed"]
+[connection signal="pressed" from="GridContainer/UI Container/Form03" to="." method="_on_form_03_pressed"]
+[connection signal="button_up" from="GridContainer/BackupContainer/Form01Backup" to="." method="_on_form_01_backup_button_up"]
+[connection signal="button_up" from="GridContainer/BackupContainer/Form02Backup" to="." method="_on_form_02_backup_button_up"]
+[connection signal="button_up" from="GridContainer/BackupContainer/Form03Backup" to="." method="_on_form_03_backup_button_up"]

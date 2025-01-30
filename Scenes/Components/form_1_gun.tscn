@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://rnb7ivtgtxat"]
+[gd_scene load_steps=5 format=3 uid="uid://bm0gv0kec8ayt"]
 
 [ext_resource type="Script" path="res://Scripts/Components/hand.gd" id="1_1kyup"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="2_fav3c"]
@@ -16,12 +16,12 @@ script = ExtResource("1_1kyup")
 [node name="Pistol" type="Sprite2D" parent="Pivot"]
 material = SubResource("ShaderMaterial_dbnn4")
 position = Vector2(-2, 0)
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_0pev3")
 region_rect = Rect2(160, 64, 16, 16)
 
 [node name="PistolBulletMarker" type="Marker2D" parent="Pivot/Pistol"]
-position = Vector2(56, 0)
+position = Vector2(40, -2)
 gizmo_extents = 2.0
 
 [node name="GunDelay" type="Timer" parent="."]
