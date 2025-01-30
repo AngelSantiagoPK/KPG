@@ -60,7 +60,7 @@ func shoot_shell():
 		shell.target_vector = bullet_direction.rotated(deg_to_rad(offset))
 		get_tree().current_scene.add_child(shell)
 	
-	AudioManager.play_sound(AudioManager.SHOOT)
+	$AudioStreamPlayer2D.play()
 
 func apply_gravity(delta):
 	if not is_on_floor():
@@ -96,4 +96,4 @@ func drop() -> void:
 	var drop = filament.instantiate()
 	drop.global_position = owner.global_position
 	drop.value = randi_range(1, 5)
-	get_tree().current_scene.call_deferred("add_child", drop)
+	get_tree().current_scene.add_child(drop)

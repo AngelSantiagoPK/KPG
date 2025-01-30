@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/stats.gd" id="6_d2y22"]
 [ext_resource type="PackedScene" uid="uid://pmq45thp1ua4" path="res://Scenes/Characters/npc.tscn" id="7_7y27l"]
 [ext_resource type="PackedScene" uid="uid://c8uoj2x1ebbnd" path="res://Scenes/Props/filament_pickup.tscn" id="9_45hh0"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/shotgun_enemy.tscn" id="10_gxk8o"]
+[ext_resource type="PackedScene" uid="uid://bj16r7kwxy63y" path="res://Scenes/Characters/shotgun_enemy.tscn" id="10_gxk8o"]
 [ext_resource type="PackedScene" uid="uid://g6ua55ckmage" path="res://Scenes/UI/ui_prototype.tscn" id="11_oqa1w"]
 [ext_resource type="AudioStream" uid="uid://bqvq2j1w6hy80" path="res://Audio/Music/KPG_L1_Loop.ogg" id="11_y60ng"]
 [ext_resource type="PackedScene" uid="uid://d17fsjc5137n" path="res://Scenes/Components/player_spawner.tscn" id="12_23d1b"]

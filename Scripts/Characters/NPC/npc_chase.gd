@@ -51,5 +51,5 @@ func apply_friction(delta):
 func _on_timer_timeout():
 	owner.emote.visible = false
 	if owner.long_vision.player != null:
-		target_position = owner.long_vision.target_in_range.global_position
+		target_position = owner.long_vision.player.global_position
 		launch = true

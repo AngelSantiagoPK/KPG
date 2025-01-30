@@ -445,6 +445,7 @@ gizmo_extents = 2.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_gq74s")
+max_distance = 20.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="LongVision" to="LongVision" method="_on_body_entered"]

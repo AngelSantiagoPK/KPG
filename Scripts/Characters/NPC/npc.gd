@@ -56,10 +56,10 @@ func shoot():
 	pivot.look_at(EventManager.current_form.global_position)
 	pistol_bullet_marker.add_child(muzzle)
 	bullet.global_position = pistol_bullet_marker.global_position
-	bullet.target_vector =target_position
+	bullet.target_vector =target_position + Vector2(0, .1)
 	bullet.rotation = target_position.angle()
 	get_tree().current_scene.add_child(bullet)
-	AudioManager.play_sound(AudioManager.SHOOT)
+	$AudioStreamPlayer2D.play()
 
 
 func _on_hurtbox_area_entered(area):
