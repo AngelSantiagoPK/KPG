@@ -7,12 +7,14 @@ const MOUSE_OFFSET : Vector2 = Vector2(0, 0)
 
 # References
 @export var ui: PlayerUIContainer
+@onready var win_condition: Node2D = $WinCondition
 
 # Functions
 func _ready() -> void:
 	EventManager._spawn.emit()
 	EventManager._player_died.connect(player_died)
 	EventManager.frame_freeze.connect(frame_freeze)
+	win_condition.level_clear.connect(on_win)
 
 func player_died():
 	EventManager.current_form.queue_free()
@@ -32,3 +34,7 @@ func frame_freeze():
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("escape"):
 		get_tree().change_scene_to_file("res://Scenes/Levels/main_menu.tscn")
+
+func on_win() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Levels/credits.tscn")
+	pass

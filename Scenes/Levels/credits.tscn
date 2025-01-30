@@ -1,10 +1,40 @@
-[gd_scene load_steps=13 format=3 uid="uid://1nwvmn6wghcv"]
+[gd_scene load_steps=13 format=3 uid="uid://dksurota0as46"]
 
-[ext_resource type="Script" path="res://Scripts/Levels/main_menu.gd" id="1_1h8h1"]
-[ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="1_ycleq"]
-[ext_resource type="Texture2D" uid="uid://4o8qaf0upt7s" path="res://Textures/Background/bg.png" id="2_nl0mu"]
-[ext_resource type="Texture2D" uid="uid://boqptgt11olhn" path="res://Textures/Background/far-buildings.png" id="3_rl21o"]
-[ext_resource type="AudioStream" uid="uid://cer7kk1h5m3kk" path="res://Audio/Music/KPG-Main Theme.ogg" id="5_f37pt"]
+[ext_resource type="Texture2D" uid="uid://4o8qaf0upt7s" path="res://Textures/Background/bg.png" id="2_0uuk5"]
+[ext_resource type="Texture2D" uid="uid://boqptgt11olhn" path="res://Textures/Background/far-buildings.png" id="3_pqioc"]
+[ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="4_4aaqd"]
+[ext_resource type="AudioStream" uid="uid://cer7kk1h5m3kk" path="res://Audio/Music/KPG-Main Theme.ogg" id="5_31nqa"]
+
+[sub_resource type="GDScript" id="GDScript_opi5e"]
+script/source = "extends Control
+
+#Data
+const CROSSHAIR : CompressedTexture2D = preload(\"res://Textures/UI/Crosshair.png\")
+const MOUSE : CompressedTexture2D = preload(\"res://Textures/UI/Mouse.png\")
+const CROSSHAIR_OFFSET : Vector2 = Vector2(12, 12)
+const MOUSE_OFFSET : Vector2 = Vector2(0, 0)
+
+
+func _ready():
+	DisplayServer.cursor_set_custom_image(MOUSE, DisplayServer.CURSOR_ARROW, MOUSE_OFFSET)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_quit_mouse_entered():
+	AudioManager.play_sound(AudioManager.MENU_HOVER)
+
+func _on_quit_button_up():
+	AudioManager.play_sound(AudioManager.MENU_CLICK)
+	get_tree().quit()
+
+func _on_replay_button_up() -> void:
+	AudioManager.play_sound(AudioManager.MENU_CLICK)
+	DisplayServer.cursor_set_custom_image(CROSSHAIR, DisplayServer.CURSOR_ARROW, CROSSHAIR_OFFSET)
+	get_tree().change_scene_to_file(\"res://Scenes/Levels/tutorial_level.tscn\")
+
+func _on_replay_mouse_entered() -> void:
+	AudioManager.play_sound(AudioManager.MENU_HOVER)
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1smoh"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -78,7 +108,7 @@ _data = {
 "Transition": SubResource("Animation_hafqd")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="Credits" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,7 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-script = ExtResource("1_1h8h1")
+script = SubResource("GDScript_opi5e")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -95,7 +125,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_nl0mu")
+texture = ExtResource("2_0uuk5")
 expand_mode = 1
 
 [node name="Background2" type="TextureRect" parent="."]
@@ -105,7 +135,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_rl21o")
+texture = ExtResource("3_pqioc")
 expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -124,27 +154,74 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 42
-text = "KILLS PER GRAM"
+text = "CREDITS"
 
-[node name="Start" type="Button" parent="VBoxContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+split_offset = 8
+
+[node name="GameDirector" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Game Director: PK-Ninja"
+
+[node name="GameConcept" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Game Concept: TheStormAI"
+
+[node name="Sound Design" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Sound Design: Alainfigue"
+
+[node name="Game Art" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Character Art: Misha"
+
+[node name="Programmer" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Programmer: MarcoTriesDev"
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+split_offset = 8
+
+[node name="Thank You" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 42
+text = "THANK YOU!!!"
+
+[node name="Replay" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("1_ycleq")
+theme_override_fonts/font = ExtResource("4_4aaqd")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxFlat_1smoh")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tuls8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_dk1s2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s08f8")
-text = "Start"
+text = "Replay
+"
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("1_ycleq")
+theme_override_fonts/font = ExtResource("4_4aaqd")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxFlat_1smoh")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tuls8")
@@ -166,7 +243,7 @@ offset_bottom = 44.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("1_ycleq")
+theme_override_fonts/font = ExtResource("4_4aaqd")
 theme_override_font_sizes/font_size = 48
 text = "Kills Per Gram Team"
 horizontal_alignment = 2
@@ -190,12 +267,12 @@ libraries = {
 autoplay = "Transition"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_f37pt")
+stream = ExtResource("5_31nqa")
 volume_db = -16.701
 autoplay = true
 bus = &"Music"
 
-[connection signal="button_up" from="VBoxContainer/Start" to="." method="_on_start_button_up"]
-[connection signal="mouse_entered" from="VBoxContainer/Start" to="." method="_on_start_mouse_entered"]
+[connection signal="button_up" from="VBoxContainer/Replay" to="." method="_on_replay_button_up"]
+[connection signal="mouse_entered" from="VBoxContainer/Replay" to="." method="_on_replay_mouse_entered"]
 [connection signal="button_up" from="VBoxContainer/Quit" to="." method="_on_quit_button_up"]
 [connection signal="mouse_entered" from="VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]

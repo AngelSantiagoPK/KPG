@@ -312,15 +312,18 @@ position = Vector2(-1, -9.5)
 shape = SubResource("RectangleShape2D_oh2mm")
 
 [node name="LongVision" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("17_8d3af")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LongVision"]
+visible = false
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_a3idx")
 
 [node name="LongRay" type="RayCast2D" parent="LongVision"]
+visible = false
 position = Vector2(0, -15)
 enabled = false
 target_position = Vector2(250, 0)
@@ -328,6 +331,7 @@ collision_mask = 3
 collide_with_areas = true
 
 [node name="ShortVision" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("10_gqt3k")
@@ -441,6 +445,7 @@ gizmo_extents = 2.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_gq74s")
+max_distance = 20.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="LongVision" to="LongVision" method="_on_body_entered"]

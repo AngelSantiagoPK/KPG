@@ -68,7 +68,8 @@ func _physics_process(delta: float) -> void:
 					use_weapon()
 	
 	if Input.is_action_just_pressed("interact"):
-		reload()
+		if gun_reload.is_stopped():
+			reload()
 	
 func use_weapon() -> void:
 	if not can_shoot:

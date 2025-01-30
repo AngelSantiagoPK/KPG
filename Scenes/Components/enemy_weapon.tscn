@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://1dr8p4h2g4ug"]
+[gd_scene load_steps=4 format=3 uid="uid://1dr8p4h2g4ug"]
 
+[ext_resource type="Script" path="res://Scripts/Components/enemy_weapon.gd" id="1_wvefc"]
 [ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="2_xcxwq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p4g68"]
@@ -7,21 +8,33 @@ shader = ExtResource("2_xcxwq")
 shader_parameter/active = false
 
 [node name="Enemy_weapon" type="Node2D"]
-position = Vector2(106, 116)
+script = ExtResource("1_wvefc")
+current_type = 1
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Pistol" type="Sprite2D" parent="Pivot"]
+visible = false
 material = SubResource("ShaderMaterial_p4g68")
 position = Vector2(10, -4)
 region_rect = Rect2(160, 64, 16, 16)
 
-[node name="PistolBulletMarker" type="Marker2D" parent="Pivot/Pistol"]
-visible = false
-position = Vector2(6, -2)
+[node name="Polygon2D" type="Polygon2D" parent="Pivot"]
+position = Vector2(10, -4)
+polygon = PackedVector2Array(-11, 3, -5, -1, -1, -1, 0, -1, 0, 0, -2, 0, -3, 1, -4, 1, -5, 0, -9, 3, -9, 5, -10, 6, -11, 6)
+
+[node name="PistolBulletMarker" type="Marker2D" parent="Pivot/Polygon2D"]
+unique_name_in_owner = true
 gizmo_extents = 2.0
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 scale = Vector2(0.532744, 0.532744)
+
+[node name="GunDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]

@@ -79,7 +79,7 @@ radius = 3.0
 radius = 3.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wr5v4"]
-radius = 50.01
+radius = 117.004
 
 [sub_resource type="Gradient" id="Gradient_s1rbn"]
 colors = PackedColorArray(0.0742188, 0.0742188, 0.0742188, 1, 0, 0, 0, 0)
@@ -238,9 +238,9 @@ position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_5wouf")
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource("7_cv1r5")]
+visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-visible = false
 shape = SubResource("CircleShape2D_wr5v4")
 
 [node name="BlackDeathParticle" type="GPUParticles2D" parent="."]

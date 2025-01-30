@@ -1,8 +1,8 @@
 [gd_scene load_steps=27 format=3 uid="uid://c5pon6ytetm0q"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_2.gd" id="1_i8duy"]
-[ext_resource type="Resource" path="res://Data/Movement Data/Form_2.tres" id="2_0rlqi"]
-[ext_resource type="Resource" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
+[ext_resource type="Resource" uid="uid://dksqgr1wkhlx0" path="res://Data/Movement Data/Form_2.tres" id="2_0rlqi"]
+[ext_resource type="Resource" uid="uid://ceybym4ns8a6t" path="res://Data/Stats/Form_2_Stats.tres" id="3_1a5h7"]
 [ext_resource type="Resource" uid="uid://dgvi5sx4i7sao" path="res://Data/Fillament Data/Form_02_Fillament_Data.tres" id="3_gqp4l"]
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="6_tvf5k"]
 [ext_resource type="PackedScene" uid="uid://bnue5rfo1toh8" path="res://Scenes/Components/hand.tscn" id="7_x2h50"]

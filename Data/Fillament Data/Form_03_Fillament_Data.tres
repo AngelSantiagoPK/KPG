@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_0a5bv")
-cost = 60
+cost = 45
 print_time = 60
 id = 3

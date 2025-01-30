@@ -6,6 +6,16 @@
 [ext_resource type="FontFile" uid="uid://cdinhkbw5qcbu" path="res://Fonts/PixelifySans-Regular.ttf" id="4_hhywj"]
 [ext_resource type="Script" path="res://Scripts/UI/reserve.gd" id="5_tglc1"]
 
+[sub_resource type="GDScript" id="GDScript_i3mh6"]
+script/source = "extends Label
+
+func _ready() -> void:
+	EventManager._update_fillament_ui.connect(on_update_fillament_ui)
+	
+func on_update_fillament_ui() -> void:
+	self.text = str(EventManager.fillament_amount)
+"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4c4s"]
 bg_color = Color(1, 0.341088, 0.295625, 1)
 
@@ -46,16 +56,6 @@ func update_progress() -> void:
 	if value >= max_value and not limit_reached:
 		limit_reached = true
 		AudioManager.play_sound(AudioManager.MENU_CLICK)
-"
-
-[sub_resource type="GDScript" id="GDScript_i3mh6"]
-script/source = "extends Label
-
-func _ready() -> void:
-	EventManager._update_fillament_ui.connect(on_update_fillament_ui)
-	
-func on_update_fillament_ui() -> void:
-	self.text = str(EventManager.fillament_amount)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyct"]
@@ -115,31 +115,50 @@ patch_margin_bottom = 32
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="Filament_group" type="Control" parent="NinePatchRect"]
+[node name="FilamentContainer" type="PanelContainer" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -91.0
-offset_right = 1.0
-offset_bottom = 269.0
-grow_vertical = 0
-size_flags_horizontal = 0
-
-[node name="filament_panel" type="Panel" parent="NinePatchRect/Filament_group"]
-layout_mode = 0
-offset_right = 39.0
-offset_bottom = 90.0
-scale = Vector2(1.18796, 1.00619)
-
-[node name="filament_progress_status" type="ProgressBar" parent="NinePatchRect/Filament_group"]
-layout_mode = 0
 offset_left = 6.0
-offset_top = 38.0
-offset_right = 13.0
-offset_bottom = 77.0
-scale = Vector2(4.88666, 1.18536)
+offset_top = -94.0
+offset_right = 118.0
+offset_bottom = 82.0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/FilamentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/FilamentContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Filament" type="Label" parent="NinePatchRect/FilamentContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Filament: "
+
+[node name="FilamentNumber" type="Label" parent="NinePatchRect/FilamentContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "0"
+script = SubResource("GDScript_i3mh6")
+
+[node name="HSeparator" type="HSeparator" parent="NinePatchRect/FilamentContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Printing_progress" type="Label" parent="NinePatchRect/FilamentContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Status"
+
+[node name="filament_progress_status" type="ProgressBar" parent="NinePatchRect/FilamentContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_t1fdf")
 theme_override_styles/background = SubResource("StyleBoxFlat_otpiv")
@@ -150,54 +169,6 @@ value = 5.0
 fill_mode = 3
 show_percentage = false
 script = SubResource("GDScript_5o8ew")
-
-[node name="Printing_progress" type="Label" parent="NinePatchRect/Filament_group"]
-layout_mode = 0
-offset_left = 5.51213
-offset_top = 27.5606
-offset_right = 126.512
-offset_bottom = 50.5606
-scale = Vector2(0.276478, 0.276478)
-text = "Status"
-
-[node name="Filament" type="Label" parent="NinePatchRect/Filament_group"]
-layout_mode = 0
-offset_left = 5.51213
-offset_top = 4.1341
-offset_right = 126.512
-offset_bottom = 27.1341
-scale = Vector2(0.276478, 0.276478)
-text = "Filament: "
-
-[node name="FilamentNumber" type="Label" parent="NinePatchRect/Filament_group"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 15.0
-offset_right = 127.0
-offset_bottom = 38.0
-scale = Vector2(0.276478, 0.276478)
-text = "0"
-script = SubResource("GDScript_i3mh6")
-
-[node name="Healthbar_group" type="Control" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 0
-offset_left = 8.0
-offset_right = 648.0
-offset_bottom = 360.0
-
-[node name="Healthbar_panel" type="Panel" parent="NinePatchRect/Healthbar_group"]
-layout_mode = 0
-offset_right = 79.0
-offset_bottom = 22.0
-
-[node name="HealthBar" parent="NinePatchRect/Healthbar_group" instance=ExtResource("2_uklrn")]
-layout_mode = 1
-offset_left = 1.0
-offset_top = 3.0
-offset_right = 1.0
-offset_bottom = 3.0
-scale = Vector2(0.37867, 0.37867)
 
 [node name="Score_group" type="Control" parent="NinePatchRect"]
 visible = false
@@ -265,24 +236,32 @@ text = "Main Menu"
 
 [node name="ammo_panel" type="Panel" parent="NinePatchRect"]
 layout_mode = 2
-offset_left = 553.0
-offset_top = 334.0
-offset_right = 640.0
-offset_bottom = 360.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -36.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/ammo_panel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_right = 1.029
 anchor_bottom = 1.0
+offset_right = -2.523
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/ammo_panel/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="Ammo" type="Label" parent="NinePatchRect/ammo_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -312,6 +291,26 @@ theme_override_font_sizes/font_size = 8
 text = "90
 "
 script = ExtResource("5_tglc1")
+
+[node name="Healthbar_panel" type="Panel" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 179.0
+offset_bottom = 31.0
+grow_horizontal = 2
+
+[node name="HealthBar" parent="NinePatchRect/Healthbar_panel" instance=ExtResource("2_uklrn")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 22.0
+offset_top = 6.0
+offset_right = 22.0
+offset_bottom = 6.0
+scale = Vector2(1, 1)
 
 [connection signal="button_up" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_button_up"]
 [connection signal="mouse_entered" from="NinePatchRect/MainMenu" to="." method="_on_main_menu_mouse_entered"]

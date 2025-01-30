@@ -6,8 +6,8 @@ var object: Node2D = null
 var form_01_loaded: PackedScene = preload("res://Scenes/Characters/Form_01.tscn")
 var form_02_loaded: PackedScene = preload("res://Scenes/Characters/Form_02.tscn")
 var form_03_loaded: PackedScene = preload("res://Scenes/Characters/Form_03.tscn")
-@onready var ui_container: VBoxContainer = $"UI Container"
-@onready var backup_container: VBoxContainer = $BackupContainer
+@onready var backup_container: VBoxContainer = %BackupContainer
+@onready var ui_container: VBoxContainer = %"UI Container"
 @onready var printer_spawn_marker: Marker2D = $PrinterSpawnMarker
 
 func _physics_process(_delta: float) -> void:

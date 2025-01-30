@@ -1,27 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm0gv0kec8ayt"]
+[gd_scene load_steps=5 format=3 uid="uid://dk1m7whfv7g62"]
 
-[ext_resource type="Script" path="res://Scripts/Components/hand.gd" id="1_1kyup"]
-[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="2_fav3c"]
-[ext_resource type="Texture2D" uid="uid://b4v8md53jina0" path="res://Textures/Characters/KPG-Dog-Gun.png" id="3_0pev3"]
+[ext_resource type="Script" path="res://Scripts/Components/hand.gd" id="1_5mthn"]
+[ext_resource type="Shader" path="res://Shaders/Hit Flash.gdshader" id="2_jcha4"]
+[ext_resource type="Texture2D" uid="uid://w8woufhn5e50" path="res://Textures/Characters/KPG-Tank-Gun.png" id="3_lgn5m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dbnn4"]
-shader = ExtResource("2_fav3c")
+shader = ExtResource("2_jcha4")
 shader_parameter/active = false
 
-[node name="Form_1_Gun" type="Node2D"]
-script = ExtResource("1_1kyup")
+[node name="Form_3_Gun" type="Node2D"]
+script = ExtResource("1_5mthn")
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Pistol" type="Sprite2D" parent="Pivot"]
 material = SubResource("ShaderMaterial_dbnn4")
-position = Vector2(-2, 0)
+position = Vector2(5, -2)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_0pev3")
+texture = ExtResource("3_lgn5m")
 region_rect = Rect2(160, 64, 16, 16)
 
 [node name="PistolBulletMarker" type="Marker2D" parent="Pivot/Pistol"]
-position = Vector2(40, -2)
+position = Vector2(60, 4)
 gizmo_extents = 2.0
 
 [node name="GunDelay" type="Timer" parent="."]
