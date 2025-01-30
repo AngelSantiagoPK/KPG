@@ -22,8 +22,7 @@ const EXPLOSION = preload("res://Scenes/Components/explosion_area.tscn")
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var remote: RemoteTransform2D = $RemoteTransform2D
 @onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
-@onready var audio_streamEngine: AudioStreamPlayer = $AudioStreamPlayerEngine
-@onready var audio_stream_sync: AudioStreamSynchronized = audio_streamEngine.stream as AudioStreamSynchronized
+@onready var audio_stream_player_engine: AudioStreamPlayer2D = %AudioStreamPlayerEngine
 
 # Functions
 func _ready() -> void:
@@ -45,12 +44,8 @@ func get_input():
 		energy -= 1
 		velocity = velocity.move_toward(input_direction * movement_data.max_speed, movement_data.acceleration)
 		health_bar.value = energy
-		# Increasing volume of tank move sfx layer
-		audio_stream_sync.set_sync_stream_volume(0 ,-14)
 	else:
 		add_friction()
-		# Lower the volume of the movement layer
-		audio_stream_sync.set_sync_stream_volume(0, -80)  # Mute or reduce volume
 	
 	if Input.is_action_just_pressed("shoot"):
 		explode()

@@ -16,6 +16,7 @@ func enter(_msg := {}):
 	owner.hide()
 	black_death_particle.emitting = true
 	timer.start()
+	drop()
 	AudioManager.play_sound(AudioManager.DEATH)
 	#Using the Audiostreamplayer on our enemy's scene
 	audio_stream_player_2d.play()
@@ -23,7 +24,6 @@ func enter(_msg := {}):
 	#AudioManager.play_sound(AudioManager.DEATH)
 
 func _on_timer_timeout():
-	drop()
 	owner.queue_free()
 
 func drop() -> void:

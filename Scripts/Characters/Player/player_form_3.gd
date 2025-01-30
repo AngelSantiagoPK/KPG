@@ -16,7 +16,7 @@ var drone_ready: bool = true
 var overheated: bool = false
 
 # References
-@onready var hand: Hand = $Hand
+@onready var hand: Hand = $Form_3_Gun
 @onready var drone_launch_marker: Marker2D = $Launcher/DroneLaunchMarker
 @onready var drone_cooldown: Timer = $DroneCooldown
 @onready var camera_ref: String = get_tree().get_first_node_in_group("Camera").get_path()
@@ -91,6 +91,11 @@ func animate():
 		hand.scale.y = -1
 	elif hand.scale.y == -1 and mouse_position.x > 0:
 		hand.scale.y = 1
+		
+	if velocity.x > 0:
+		$Sprite2D.flip_h = false
+	if velocity.x < 0:
+		$Sprite2D.flip_h = true
 
 func deploy_drone() -> void:
 	var drone = drone_load.instantiate()

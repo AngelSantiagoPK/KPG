@@ -15,13 +15,13 @@ func enter(_msg := {}):
 	owner.animator.visible = false
 	black_death_particle.emitting = true
 	timer.start()
+	drop()
 	#Using the Audiostreamplayer on our enemy's scene
 	audio_stream_player_2d.play()
 	#Using audio manager
 	#AudioManager.play_sound(AudioManager.DEATH)
 
 func _on_timer_timeout():
-	drop()
 	owner.queue_free()
 
 func drop() -> void:

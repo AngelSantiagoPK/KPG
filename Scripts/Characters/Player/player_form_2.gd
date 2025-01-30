@@ -87,10 +87,10 @@ func check_for_active_camera() -> void:
 
 func animate(input_vector):
 	var mouse_position : Vector2 = (get_global_mouse_position() - global_position).normalized()
-	if mouse_position.x > 0 and sprite.flip_h:
-		sprite.flip_h = false
-	elif mouse_position.x < 0 and not sprite.flip_h:
-		sprite.flip_h = true
+	if velocity.x > 0:
+		$Sprite2D.flip_h = false
+	if velocity.x < 0:
+		$Sprite2D.flip_h = true
 	
 	hand.rotation = mouse_position.angle()
 	if hand.scale.y == 1 and mouse_position.x < 0:

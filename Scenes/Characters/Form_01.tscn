@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player_form_1.gd" id="1_p8eyj"]
 [ext_resource type="Resource" path="res://Data/Movement Data/Form_1.tres" id="2_y3svm"]
-[ext_resource type="Resource" path="res://Data/Stats/Form_1_Stats.tres" id="3_3l53u"]
+[ext_resource type="Resource" uid="uid://dwd1mg656rnr8" path="res://Data/Stats/Form_1_Stats.tres" id="3_3l53u"]
 [ext_resource type="Resource" uid="uid://bmjcgnbyfx68j" path="res://Data/Fillament Data/Form_01_Fillament_Data.tres" id="3_t7vbj"]
 [ext_resource type="PackedScene" uid="uid://ccdvw2v34lcn6" path="res://Scenes/Components/wallclimb_box.tscn" id="4_ownlq"]
 [ext_resource type="Texture2D" uid="uid://dnvg3p0iiehtb" path="res://Textures/Characters/KPG-Dog.png" id="6_411ji"]

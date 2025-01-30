@@ -95,5 +95,5 @@ func _on_hurtbox_area_entered(area):
 func drop() -> void:
 	var drop = filament.instantiate()
 	drop.global_position = owner.global_position
-	drop.value = randi_range(1, 5)
-	get_tree().current_scene.add_child(drop)
+	drop.value = randi_range(1, 10)
+	get_tree().current_scene.call_deferred("add_child", drop)

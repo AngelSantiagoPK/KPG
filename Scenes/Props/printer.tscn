@@ -62,7 +62,7 @@ alignment = 0
 [node name="Form03" type="Button" parent="GridContainer/UI Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Mech Form - 60"
+text = "Mech Form - 45"
 alignment = 0
 
 [node name="BackupContainer" type="VBoxContainer" parent="GridContainer"]

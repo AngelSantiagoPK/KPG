@@ -20,7 +20,7 @@ func _on_quit_mouse_entered():
 func _on_start_button_up():
 	AudioManager.play_sound(AudioManager.MENU_CLICK)
 	DisplayServer.cursor_set_custom_image(CROSSHAIR, DisplayServer.CURSOR_ARROW, CROSSHAIR_OFFSET)
-	get_tree().change_scene_to_file("res://Scenes/Levels/main_level_test1.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Levels/tutorial_level.tscn")
 
 func _on_quit_button_up():
 	AudioManager.play_sound(AudioManager.MENU_CLICK)

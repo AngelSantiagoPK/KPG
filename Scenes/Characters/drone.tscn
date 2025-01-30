@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://3vqa0cl8knwk"]
+[gd_scene load_steps=17 format=3 uid="uid://3vqa0cl8knwk"]
 
 [ext_resource type="PackedScene" uid="uid://bfmjbl00kj2vc" path="res://Scenes/Components/hurtbox.tscn" id="1_5ojqh"]
 [ext_resource type="Script" path="res://Scripts/Characters/Drone/drone.gd" id="1_eohl6"]
@@ -6,56 +6,23 @@
 [ext_resource type="Resource" uid="uid://dyuynlilhpdpr" path="res://Data/Stats/Drone_Stats.tres" id="3_jeffn"]
 [ext_resource type="Texture2D" uid="uid://6jebehbxdvj3" path="res://Textures/UI/Bat Health Bar Empty.png" id="5_52e0i"]
 [ext_resource type="Texture2D" uid="uid://e7mb2pjdc27o" path="res://Textures/UI/Bat Health Bar.png" id="6_cuwue"]
+[ext_resource type="Texture2D" uid="uid://1ojlnut1w7x6" path="res://Textures/Characters/KPG-Drone.png" id="7_sue7c"]
+[ext_resource type="AudioStream" uid="uid://dxwi3v4rp7roj" path="res://Audio/Sounds/sx_int_tank_move.ogg" id="8_s42vw"]
+[ext_resource type="AudioStream" uid="uid://f1hsy0bqyg37" path="res://Audio/Sounds/sx_int_tank_on.ogg" id="9_54j53"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jce5w"]
-size = Vector2(20, 7)
+size = Vector2(14, 7)
 
 [sub_resource type="Animation" id="Animation_sy7c1"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Polygon2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_sc6v8"]
 resource_name = "fly_left"
 length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Polygon2D:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -0.174533]
-}
 
 [sub_resource type="Animation" id="Animation_yu1nd"]
 resource_name = "fly_right"
 length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Polygon2D:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.174533]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ygq5k"]
 _data = {
@@ -67,17 +34,18 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_iq44y"]
 radius = 34.0
 
-[node name="Drone" type="CharacterBody2D" groups=["Drone"]]
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_ef0wr"]
+stream_count = 2
+stream_0/stream = ExtResource("8_s42vw")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("9_54j53")
+stream_1/volume = -10.0
+
+[node name="Drone" type="CharacterBody2D" groups=["Drone", "Player"]]
 script = ExtResource("1_eohl6")
 movement_data = ExtResource("2_v7eu0")
 stats = ExtResource("3_jeffn")
 energy = 9999.0
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(-2.58287e-07, -3.02045)
-scale = Vector2(0.333333, 0.2782)
-offset = Vector2(0.999999, 10.8571)
-polygon = PackedVector2Array(-31, -19, -1.00028, -19, 29, -19, 29, 0, -31, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -110,5 +78,16 @@ texture_under = ExtResource("5_52e0i")
 texture_progress = ExtResource("6_cuwue")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_sue7c")
+
+[node name="AudioStreamPlayerEngine" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamSynchronized_ef0wr")
+volume_db = 2.5
+autoplay = true
 
 [connection signal="body_entered" from="ActivationArea" to="." method="_on_activation_area_body_entered"]
